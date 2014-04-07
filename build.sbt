@@ -1,5 +1,11 @@
 uniform.project("parlour", "au.com.cba.omnia.parlour")
 
+resolvers ++= List(
+  "conjars"  at "http://conjars.org/repo",
+  "cloudera" at "https://repository.cloudera.com/cloudera/repo/"
+)
+
+
 libraryDependencies ++=
   depend.scaldingproject() ++
     depend.scalaz() ++ Seq(
