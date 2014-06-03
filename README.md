@@ -1,6 +1,9 @@
 Parlour
 =======
 
+[![Build Status](https://magnum.travis-ci.com/CommBank/parlour.svg?token=A3xq7fpHLyey1yCrNASy&branch=master)](https://magnum.travis-ci.com/CommBank/parlour)
+[![Gitter chat](https://badges.gitter.im/CommBank.png)](https://gitter.im/CommBank)
+
 > ***Parlour.*** *a place that sells scoops of ice-cream; a cascading-sqoop integration.*
 
 Parlour provides a basic Cascading/Scalding Sqoop integration allowing export from HDFS.
