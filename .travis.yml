@@ -6,7 +6,8 @@ cache:
   - $HOME/.ivy2
   - $HOME/.m2
 install:
-- git clone https://omnia-bamboo:$OMNIA_CI_PASSWORD@github.com/CommBank/ci.git
+- git clone https://github.com/CommBank/ci.git
+- chmod ugo+x ci/*
 - ci/sbt-setup.sh
 script:
 - sbt -Dsbt.global.base=$TRAVIS_BUILD_DIR/ci '; test; package; assembly'
@@ -15,5 +16,4 @@ after_script:
 - rm -rf ci
 env:
   global:
-  - secure: SmAIk/SVqLlBXiVZEz0u6tfyyzBr/kqZT/Yc23Nt4VtXjXu1lodrjxQfrPWWc3OSJl9TayThdyW17r5U2z+fs9tD15ih0LVi/C61MOr2FrjFccyTY+s2go2GQ33zbX/S2d2bRFuNuXkUFg8ofvw8/hoqwm8fBMMhIsV7FRPG2FE=
-  - secure: P5vmnFEfWs5ufBbTJQSvUa2zdcGDpzFR9y3LKegFF4E4EACAwrqFgV4h8Bw0Zg0ocSIwg8n6jUoUAU7P1Q3msMChMT+wuV3wjL7STn6ImNlS83vHO5mzPh29zrdfK/1WV6lfgmHgY+m8o9sV0gIKWJbkohetKbBfToCxiDMLJwE=
+    secure: crMQyJbG6tmKFoSV0WhVXY0h95CLdgAw5fGJx4xDWkeXvIbyr117bemPiRDv+t7DXxaqMqptmGyvI460hZ08c9l2VcavhYtwE7NVy2WVjUqHrI+7+gG3iPMWY7AUkmopaH3JSlJlKTKg6Ya7vKHTkv/dcSQGSF4Co3LJ9hFxXns=
