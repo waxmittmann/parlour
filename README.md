@@ -1,7 +1,7 @@
 Parlour
 =======
 
-[![Build Status](https://magnum.travis-ci.com/CommBank/parlour.svg?token=A3xq7fpHLyey1yCrNASy&branch=master)](https://magnum.travis-ci.com/CommBank/parlour)
+[![Build Status](https://travis-ci.org/CommBank/parlour.svg?branch=master)](https://travis-ci.org/CommBank/parlour)
 [![Gitter chat](https://badges.gitter.im/CommBank.png)](https://gitter.im/CommBank)
 
 > ***Parlour.*** *a place that sells scoops of ice-cream; a cascading-sqoop integration.*
