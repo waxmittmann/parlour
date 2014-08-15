@@ -35,8 +35,9 @@ object SqoopSyntax {
       options
     }
 
-    def teradata(method: TeradataMethod): SqoopOptions = {
+    def teradata(method: TeradataMethod, internalFastloadHostAdapter: Option[String]): SqoopOptions = {
       TeradataSqoopOptions.useTeradataDriver(options)
+      internalFastloadHostAdapter.foreach(TeradataSqoopOptions.setInternalFastloadHostAdapter(options, _))
       TeradataSqoopOptions.exportMethod(options, method match {
         case BatchInsert      => "batch.insert"
         case InternalFastload => "internal.fastload"
@@ -79,9 +80,21 @@ object TeradataSqoopOptions {
   }
 
   def exportMethod(options: SqoopOptions, method: String) = {
-    options.setExtraArgs(Array("--output-method", method))
+    val existing = options.getExtraArgs
+    options.setExtraArgs(existing ++ Array("--output-method", method))
+    options
+  }
+
+  /**
+   * Uses the provided hostname or ip address to bind for the Internal Fastload Master Manager.
+   *
+   * The internal fastload master manager binds to a socket on the machine that launches the
+   * Scalding job. The provided adapter/hostname must be accessible from the Hadoop Cluster
+   * nodes (specifically the mappers).
+   */
+  def setInternalFastloadHostAdapter(options: SqoopOptions, hostname: String) = {
+    val existing = options.getExtraArgs
+    options.setExtraArgs(existing ++ Array("--fastload-socket-hostname", hostname))
     options
   }
 }
-
-

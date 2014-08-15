@@ -19,7 +19,6 @@ resolvers ++= List(
   "cloudera" at "https://repository.cloudera.com/cloudera/repo/"
 )
 
-
 libraryDependencies ++=
   depend.scaldingproject() ++
     depend.scalaz() ++ Seq(

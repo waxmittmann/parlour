@@ -38,6 +38,7 @@ Parlour includes a sample job that can be invoked from the command-line:
         --input /data/on/hdfs/to/sqoop \
         --teradata \
         --teradata-method internal.fastload \
+        --teradata-internal-fastload-host-adapter myhostname1 \
         --connection-string "jdbc:teradata://database/database=test" \
         --table-name test \
         --username user1 \
@@ -45,4 +46,14 @@ Parlour includes a sample job that can be invoked from the command-line:
         --mappers 1 \
         --input-field-delimiter \| \
         --input-line-delimiter \n
+
+
+Teradata Fastload Support
+-------------------------
+
+Teradata Internal Fastload requires the use of a coordinating service that runs on the
+machine that launches the jobs.
+
+As a result - you may need to manually specify which  adapter the service should be bound to.
+ This is done using `sqoopOptions.teradata(InternalFastload, Some("myhostname"))`.
 
