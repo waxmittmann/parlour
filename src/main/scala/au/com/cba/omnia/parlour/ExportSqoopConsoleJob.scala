@@ -32,11 +32,15 @@ object ExportSqoopConsoleJob {
     options.setInputFieldsTerminatedBy(args.getOrElse("input-field-delimiter", "|").head)
     options.setInputLinesTerminatedBy(args.getOrElse("input-line-delimiter", "\n").head)
 
+    if (args.boolean("teradata")) TeradataSqoopOptions.useTeradataDriver(options)
+
     args.optional("teradata-method").foreach(method =>
       TeradataSqoopOptions.exportMethod(options, method)
     )
 
-    if (args.boolean("teradata")) TeradataSqoopOptions.useTeradataDriver(options)
+    args.optional("teradata-internal-fastload-host-adapter").foreach(hostname =>
+      TeradataSqoopOptions.setInternalFastloadHostAdapter(options, hostname)
+    )
 
     options
   }
