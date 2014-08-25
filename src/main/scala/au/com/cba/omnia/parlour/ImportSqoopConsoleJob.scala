@@ -17,15 +17,16 @@ package au.com.cba.omnia.parlour
 import com.cloudera.sqoop.SqoopOptions
 import com.twitter.scalding.{Args, NullTap}
 
-import SqoopSyntax.{ParlourExportDsl, TeradataParlourExportDsl}
+import SqoopSyntax.{ParlourImportDsl, TeradataParlourImportDsl}
 
-object ExportSqoopConsoleJob extends SqoopConsoleJob {
+object ImportSqoopConsoleJob extends SqoopConsoleJob {
   /** Configures a Sqoop Job by parsing command line arguments */
   def optionsFromArgs(args: Args): SqoopOptions = {
+    import SqoopSyntax._
     val scheme = jdbcScheme(args("connection-string"))
     val dsl = scheme match {
-      case "teradata" => TeradataParlourExportDsl()
-      case _          => ParlourExportDsl()
+      case "teradata" => TeradataParlourImportDsl()
+      case _          => ParlourImportDsl()
     }
     dsl.consoleArguments.setOptions(args).toSqoopOptions
   }
@@ -37,5 +38,6 @@ object ExportSqoopConsoleJob extends SqoopConsoleJob {
  * Note - this job should only be used for testing/debugging purposes.
  * It specifically has bad password handling.
  */
-class ExportSqoopConsoleJob(args: Args)
-  extends ExportSqoopJob(ExportSqoopConsoleJob.optionsFromArgs(args), new NullTap())(args)
+class ImportSqoopConsoleJob(args: Args)
+  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args), new NullTap(), new NullTap())(args)
+

@@ -12,8 +12,10 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-version in ThisBuild := "1.1.0"
+package au.com.cba.omnia.parlour
 
-uniqueVersionSettings
+import java.net.URI
 
-licenses := Seq("Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0.txt"))
+trait SqoopConsoleJob {
+  def jdbcScheme(connectionString: String) = URI.create(connectionString.substring(5)).getScheme()
+}

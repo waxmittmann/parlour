@@ -1,3 +1,5 @@
+package au.com.cba.omnia.parlour
+
 //   Copyright 2014 Commonwealth Bank of Australia
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,22 +14,20 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.parlour
-
+import cascading.tap.Tap
 import com.cloudera.sqoop.SqoopOptions
 import com.twitter.scalding._
-
-import cascading.tap.Tap
+import org.apache.sqoop.manager.SqlManager
 
 /**
- * Sqoop export Job that can be embedded within a Cascade
+ * Sqoop import Job that can be embedded within a Cascade
  *
  * See [[SqoopSyntax]] for an easy way to create a [[SqoopOptions]]
  */
-class ExportSqoopJob(
+class ImportSqoopJob(
   options: SqoopOptions,
-  source: Tap[_, _, _],
-  sink: Tap[_, _, _] = new NullTap()
+  source: Tap[_, _, _] = new NullTap(),
+  sink: Tap[_, _, _]
 )(args: Args) extends Job(args) {
 
   /** Helper constructor that allows easy usage from Scalding */
@@ -35,7 +35,7 @@ class ExportSqoopJob(
     this(options, source.createTap(Read), sink.createTap(Write))(args)
 
   override def buildFlow =
-    new ExportSqoopFlow("exporting to sqoop", options, source, sink)
+    new ImportSqoopFlow("exporting to sqoop", options, source, sink)
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()

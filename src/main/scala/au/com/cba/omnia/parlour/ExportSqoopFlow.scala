@@ -14,29 +14,31 @@
 
 package au.com.cba.omnia.parlour
 
+import scala.collection.JavaConverters.seqAsJavaListConverter
+
 import java.util.{Collection => JCollection}
 
-import scala.collection.JavaConverters._
+import com.cloudera.sqoop.SqoopOptions
+
+import org.apache.sqoop.tool.ExportTool
+
+import scalaz.Scalaz._
+import scalaz.{\/ => \/}
 
 import cascading.flow.hadoop.ProcessFlow
 import cascading.scheme.hadoop.TextDelimited
 import cascading.tap.Tap
 import cascading.tap.hadoop.Hfs
 
-import com.cloudera.sqoop.SqoopOptions
-
-import org.apache.sqoop.tool.ExportTool
-
 import riffle.process._
 
-import scalaz._, Scalaz._
-
 /** Implements a Cascading Flow that wraps the Sqoop Process */
-class ExportSqoopFlow(name: String,
-                      options: SqoopOptions,
-                      source: Tap[_, _, _],
-                      sink: Tap[_, _, _])
-  extends ProcessFlow[ExportSqoopRiffle](name, new ExportSqoopRiffle(options, source, sink)) {
+class ExportSqoopFlow(
+  name: String,
+  options: SqoopOptions,
+  source: Tap[_, _, _],
+  sink: Tap[_, _, _]
+) extends ProcessFlow[ExportSqoopRiffle](name, new ExportSqoopRiffle(options, source, sink)) {
 }
 
 object ExportSqoopRiffle {
@@ -67,17 +69,17 @@ object ExportSqoopRiffle {
 /** Implements a Riffle for a Sqoop Job */
 @Process
 class ExportSqoopRiffle(options: SqoopOptions,
-                        source: Tap[_, _, _],
-                        sink: Tap[_, _, _],
-                        inferPathFromTap: Boolean = true,
-                        inferSourceDelimitersFromTap: Boolean = true) {
+  source: Tap[_, _, _],
+  sink: Tap[_, _, _],
+  inferPathFromTap: Boolean = true,
+  inferSourceDelimitersFromTap: Boolean = true) {
 
   @ProcessStart
   def start(): Unit = ()
 
   @ProcessStop
   def stop(): Unit = ()
-  
+
   @ProcessComplete
   def complete(): Unit = {
     // Extract the source path from the source tap.

@@ -6,9 +6,9 @@ Parlour
 
 > ***Parlour.*** *a place that sells scoops of ice-cream; a cascading-sqoop integration.*
 
-Parlour provides a basic Cascading/Scalding Sqoop integration allowing export from HDFS.
+Parlour provides a basic Cascading/Scalding Sqoop integration allowing import to and export from HDFS.
 
-It also provides for support for the Cloudera/Teradata Connector.
+It also provides support for the Cloudera/Teradata Connector.
 
 Third-Party Libraries
 ---------------------
@@ -34,13 +34,23 @@ Cascade Job
 
     import au.com.cba.omnia.parlour.SqoopSyntax._
 
+    new ImportSqoopJob(
+      TeradataParlourImportDsl()
+        .inputMethod(SplitByAmp)
+        .connectString("jdbc:teradata://some.server/database=DB1")
+        .username("some username")
+        .password(System.getenv("DATABASE_PASSWORD"))
+        .tableName("some table").toSqoopOptions,
+      TypedTsv[String]("hdfs/path/to/target/dir")
+    )(args)
+
     new ExportSqoopJob(
-      sqoopOptions()
-       .teradata(BatchInsert)
+      TeradataParlourExportDsl()
+       .outputMethod(BatchInsert)
        .connectionString("jdbc:teradata://some.server/database=DB1")
        .username("some username")
        .password(System.getenv("DATABASE_PASSWORD"))
-       .tableName("some table"),
+       .tableName("some table").toSqoopOptions,
       TypedPsv[String]("hdfs/path/to/data/to/export")
     )(args)
 
@@ -55,9 +65,8 @@ Parlour includes a sample job that can be invoked from the command-line:
         au.com.cba.omnia.parlour.ExportSqoopConsoleJob \
         --hdfs \
         --input /data/on/hdfs/to/sqoop \
-        --teradata \
         --teradata-method internal.fastload \
-        --teradata-internal-fastload-host-adapter myhostname1 \
+        --teradata-fastload-socket-hostname myhostname1 \
         --connection-string "jdbc:teradata://database/database=test" \
         --table-name test \
         --username user1 \
@@ -70,9 +79,10 @@ Parlour includes a sample job that can be invoked from the command-line:
 Teradata Fastload Support
 -------------------------
 
-Teradata Internal Fastload requires the use of a coordinating service that runs on the
-machine that launches the jobs.
+Teradata Internal Fastload requires the use of a coordinating service that runs on the machine that launches the jobs.
 
 As a result - you may need to manually specify which  adapter the service should be bound to.
- This is done using `sqoopOptions.teradata(InternalFastload, Some("myhostname"))`.
+This is done using:
+ 
+    TeradataPalourExportDsl(sqoopOptions).fastloadSocketHostName("myhostname")
 
