@@ -24,10 +24,10 @@ import com.twitter.scalding.{ Args, ArgsException }
 object SqoopSyntax {
   def sqoopOptions(): SqoopOptions = new SqoopOptions()
 
-  case class ParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with ParlourImportOptions[ParlourImportDsl]
-  case class ParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with ParlourExportOptions[ParlourExportDsl]
-  case class TeradataParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with TeradataParlourImportOptions[TeradataParlourImportDsl]
-  case class TeradataParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with TeradataParlourExportOptions[TeradataParlourExportDsl]
+  case class ParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[ParlourImportDsl](options) with ParlourImportOptions[ParlourImportDsl]
+  case class ParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[ParlourExportDsl](options) with ParlourExportOptions[ParlourExportDsl]
+  case class TeradataParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[TeradataParlourImportDsl](options) with TeradataParlourImportOptions[TeradataParlourImportDsl]
+  case class TeradataParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[TeradataParlourExportDsl](options) with TeradataParlourExportOptions[TeradataParlourExportDsl]
 }
 
 class ParlourDsl[+Self <: ParlourDsl[_]](options: SqoopOptions) extends ParlourOptions[Self] {
