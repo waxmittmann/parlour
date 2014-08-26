@@ -16,26 +16,26 @@ package au.com.cba.omnia.parlour
 
 import java.util.Properties
 
+import scalaz.State
+
 import com.cloudera.sqoop.SqoopOptions
 import com.twitter.scalding.{ Args, ArgsException }
 
 object SqoopSyntax {
   def sqoopOptions(): SqoopOptions = new SqoopOptions()
 
-  case class ParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with ParlourImportOptions
-  case class ParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with ParlourExportOptions
-  case class TeradataParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with TeradataParlourImportOptions
-  case class TeradataParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with TeradataParlourExportOptions
+  case class ParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with ParlourImportOptions[ParlourImportDsl]
+  case class ParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with ParlourExportOptions[ParlourExportDsl]
+  case class TeradataParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with TeradataParlourImportOptions[TeradataParlourImportDsl]
+  case class TeradataParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl(options) with TeradataParlourExportOptions[TeradataParlourExportDsl]
 }
 
-case class SqoopOption(setOption: SqoopOptions => Unit)
-
-class ParlourDsl(options: SqoopOptions) extends ParlourOptions {
+class ParlourDsl[+Self <: ParlourDsl[_]](options: SqoopOptions) extends ParlourOptions[Self] {
   override def toSqoopOptions = options
 
-  override protected def update(f: SqoopOptions => Unit): ParlourOptions = {
+  override protected def update(f: SqoopOptions => Unit) = {
     f(options)
-    this
+    this.asInstanceOf[Self]
   }
 
   override protected def addExtraArgs(extraArgs: Array[String]) =
@@ -45,13 +45,12 @@ class ParlourDsl(options: SqoopOptions) extends ParlourOptions {
     })
 }
 
-trait ParlourOptions {
+trait ParlourOptions[+Self <: ParlourOptions[_]] {
   val consoleArguments: ConsoleOptions = new ConsoleOptions(this)
-
   def toSqoopOptions: SqoopOptions
 
-  protected def update(f: SqoopOptions => Unit): ParlourOptions
-  protected def addExtraArgs(extraArgs: Array[String]): ParlourOptions
+  protected def update(f: SqoopOptions => Unit): Self
+  protected def addExtraArgs(extraArgs: Array[String]): Self
 
   /** Specify JDBC connect string */
   def connectionString(connectionString: String) = update(_.setConnectString(connectionString))
@@ -94,7 +93,7 @@ trait ParlourOptions {
   consoleArguments.addOptional("null-non-string", nullNonString)
 }
 
-trait ParlourExportOptions extends ParlourOptions {
+trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOptions[Self] {
   /** HDFS source path for the export */
   def exportDir(dir: String) = update(_.setExportDir(dir))
   consoleArguments.addRequired("export-dir", exportDir)
@@ -120,7 +119,7 @@ trait ParlourExportOptions extends ParlourOptions {
   consoleArguments.addBoolean("batch", batch)
 }
 
-trait ParlourImportOptions extends ParlourOptions {
+trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOptions[Self] {
   /** Append data to an existing dataset in HDFS */
   def append() = update(_.setAppendMode(true))
   consoleArguments.addBoolean("append", append)
@@ -166,7 +165,7 @@ trait ParlourImportOptions extends ParlourOptions {
  * Options specific to the Teradata Connector
  * See: http://www.cloudera.com/content/cloudera-content/cloudera-docs/Connectors/Teradata/Cloudera-Connector-for-Teradata/cctd_use_tpcc.html
  */
-trait TeradataParlourOptions extends ParlourOptions {
+trait TeradataParlourOptions[+Self <: TeradataParlourOptions[_]] extends ParlourOptions[Self] {
   update(_.setConnManagerClassName("com.cloudera.connector.teradata.TeradataManager"))
 
   /** Override default staging table name. Please note that this parameter applies only in case that staging tables are used during the data transfer. */
@@ -204,7 +203,7 @@ case object SplitByPartition extends TeradataInputMethod
 case object SplitByHash extends TeradataInputMethod
 
 /** Options specific to the Teradata Connector when importing */
-trait TeradataParlourImportOptions extends TeradataParlourOptions with ParlourImportOptions {
+trait TeradataParlourImportOptions[+Self <: TeradataParlourImportOptions[_]] extends TeradataParlourOptions[Self] with ParlourImportOptions[Self] {
   /**
    * Specifies which input method should be used to transfer data from Teradata to Hadoop.
    */
@@ -247,8 +246,9 @@ case object InternalFastload extends TeradataOutputMethod
 case object MultipleFastload extends TeradataOutputMethod
 
 /** Options specific to the Teradata Connector when exporting */
-trait TeradataParlourExportOptions extends TeradataParlourOptions with ParlourExportOptions {
+trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] extends TeradataParlourOptions[Self] with ParlourExportOptions[Self] {
   /** Specifies which output method whould be used to transfer data from Hadoop to Teradata. */
+
   def outputMethod(method: TeradataOutputMethod) = addExtraArgs(Array("--output-method", method match {
     case BatchInsert      => "batch.insert"
     case InternalFastload => "internal.fastload"
@@ -273,42 +273,42 @@ trait TeradataParlourExportOptions extends TeradataParlourOptions with ParlourEx
   consoleArguments.addOptional("teradata-fastload-socket-hostname", fastloadSocketHostName)
 }
 
-class ConsoleOptions(options: ParlourOptions) {
-  val consoleOptions = scala.collection.mutable.Map[String, (Args, ParlourOptions) => ParlourOptions]()
+class ConsoleOptions(options: ParlourOptions[_]) {
+  type POptions = ParlourOptions[_]
+  val consoleOptions = scala.collection.mutable.Map[String, (Args) => Unit]()
 
-  def addRequired(name: String, setter: String => ParlourOptions): ConsoleOptions = {
+  def addRequired(name: String, setter: String => POptions): ConsoleOptions = {
     addRequired(name, setter, v => v)
     this
   }
 
-  def addRequired[T](name: String, setter: T => ParlourOptions, converter: String => T): ConsoleOptions = {
-    consoleOptions += (name, (args: Args, opts: ParlourOptions) => { setter(converter(args(name))); opts })
+  def addRequired[T](name: String, setter: T => POptions, converter: String => T): ConsoleOptions = {
+    consoleOptions += (name, (args: Args) => setter(converter(args(name))))
     this
   }
 
-  def addBoolean(name: String, setter: () => ParlourOptions): ConsoleOptions = {
-    consoleOptions += (name, (args: Args, opts: ParlourOptions) => { if (args.boolean(name)) setter(); opts })
+  def addBoolean(name: String, setter: () => POptions): ConsoleOptions = {
+    consoleOptions += (name, (args: Args) => if (args.boolean(name)) setter())
     this
   }
 
-  def addOptional(name: String, setter: String => ParlourOptions, default: Option[String] = None): ConsoleOptions = {
+  def addOptional(name: String, setter: String => POptions, default: Option[String] = None): ConsoleOptions = {
     addOptional(name, setter, v => v, default)
     this
   }
 
-  def addOptional[T](name: String, setter: T => ParlourOptions, converter: String => T, default: Option[T] = None): ConsoleOptions = {
-    consoleOptions += (name, (args: Args, opts: ParlourOptions) => {
+  def addOptional[T](name: String, setter: T => POptions, converter: String => T, default: Option[T] = None): ConsoleOptions = {
+    consoleOptions += (name, (args: Args) => {
       args.optional(name) match {
         case Some(value) => setter(converter(value))
         case None        => default.foreach(setter)
       }
-      opts
     })
     this
   }
 
-  def setOptions(args: Args): ParlourOptions = {
-    consoleOptions.values.foldLeft(options)((acc, setter) => setter(args, acc))
+  def setOptions(args: Args): ParlourOptions[_] = {
+    consoleOptions.values.foreach(setter => setter(args))
     options
   }
 
