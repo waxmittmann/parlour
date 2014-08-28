@@ -94,10 +94,6 @@ class ExportSqoopRiffle(options: SqoopOptions,
         .leftMap({ error => println(s"Couldn't infer delimiters from source tap's scheme.\n\t$error") })
     }
 
-    // Required because the Code Generation fails when run via Scalding
-    // (the fat jar isn't on the classpath and thus neither is Sqoop).
-    // NOTE: this will only work for exporting to Teradata.
-    options.setExistingJarName(getClass.getProtectionDomain().getCodeSource().getLocation().getPath())
     new ExportTool().run(options)
   }
 
