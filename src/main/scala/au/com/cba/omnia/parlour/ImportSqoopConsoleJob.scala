@@ -15,7 +15,8 @@
 package au.com.cba.omnia.parlour
 
 import com.cloudera.sqoop.SqoopOptions
-import com.twitter.scalding.{Args, NullTap}
+
+import com.twitter.scalding.Args
 
 import SqoopSyntax.{ParlourImportDsl, TeradataParlourImportDsl}
 
@@ -39,5 +40,5 @@ object ImportSqoopConsoleJob extends SqoopConsoleJob {
  * It specifically has bad password handling.
  */
 class ImportSqoopConsoleJob(args: Args)
-  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args), new NullTap(), new NullTap())(args)
+  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args))(args)
 

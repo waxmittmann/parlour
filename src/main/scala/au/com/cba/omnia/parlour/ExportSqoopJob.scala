@@ -14,9 +14,10 @@
 
 package au.com.cba.omnia.parlour
 
-import com.cloudera.sqoop.SqoopOptions
-import com.twitter.scalding._
+import com.twitter.scalding.NullTap
 
+import com.cloudera.sqoop.SqoopOptions
+import com.twitter.scalding.{Args, Job, Mode, Read, Source, Write}
 import cascading.tap.Tap
 
 /**
@@ -27,12 +28,14 @@ import cascading.tap.Tap
 class ExportSqoopJob(
   options: SqoopOptions,
   source: Tap[_, _, _],
-  sink: Tap[_, _, _] = new NullTap()
-)(args: Args) extends Job(args) {
+  sink: Tap[_, _, _])(args: Args) extends Job(args) {
 
   /** Helper constructor that allows easy usage from Scalding */
   def this(options: SqoopOptions, source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
     this(options, source.createTap(Read), sink.createTap(Write))(args)
+
+  def this(options: SqoopOptions)(args: Args) =
+    this(options, ExportDirTap(options), TableTap(options))(args)
 
   override def buildFlow =
     new ExportSqoopFlow("exporting to sqoop", options, source, sink)

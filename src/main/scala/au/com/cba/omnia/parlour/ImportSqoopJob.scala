@@ -1,5 +1,3 @@
-package au.com.cba.omnia.parlour
-
 //   Copyright 2014 Commonwealth Bank of Australia
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +12,13 @@ package au.com.cba.omnia.parlour
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-import cascading.tap.Tap
+package au.com.cba.omnia.parlour
+
 import com.cloudera.sqoop.SqoopOptions
-import com.twitter.scalding._
-import org.apache.sqoop.manager.SqlManager
+
+import com.twitter.scalding.{Args, Job, Mode, Read, Source, Write}
+
+import cascading.tap.Tap
 
 /**
  * Sqoop import Job that can be embedded within a Cascade
@@ -26,13 +27,15 @@ import org.apache.sqoop.manager.SqlManager
  */
 class ImportSqoopJob(
   options: SqoopOptions,
-  source: Tap[_, _, _] = new NullTap(),
-  sink: Tap[_, _, _]
-)(args: Args) extends Job(args) {
+  source: Tap[_, _, _],
+  sink: Tap[_, _, _])(args: Args) extends Job(args) {
 
   /** Helper constructor that allows easy usage from Scalding */
   def this(options: SqoopOptions, source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
     this(options, source.createTap(Read), sink.createTap(Write))(args)
+
+  def this(options: SqoopOptions)(args: Args) =
+    this(options, TableTap(options), TargetDirTap(options))(args)
 
   override def buildFlow =
     new ImportSqoopFlow("exporting to sqoop", options, source, sink)

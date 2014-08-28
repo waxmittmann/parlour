@@ -16,10 +16,16 @@ package au.com.cba.omnia.parlour
 
 import java.util.Properties
 
-import scalaz.State
-
 import com.cloudera.sqoop.SqoopOptions
-import com.twitter.scalding.{ Args, ArgsException }
+
+import com.twitter.scalding.{Args, ArgsException, NullTap}
+
+protected class NullTapWithId(id: String) extends NullTap {
+  override def getIdentifier() = id
+}
+protected case class ExportDirTap(options: SqoopOptions) extends NullTapWithId(s"sqoop-export-dir[${options.getExportDir()}]")
+protected case class TargetDirTap(options: SqoopOptions) extends NullTapWithId(s"sqoop-target-dir[${options.getTargetDir()}]")
+protected case class TableTap(options: SqoopOptions) extends NullTapWithId(s"sqoop-table-name[${options.getTableName()}]")
 
 object SqoopSyntax {
   def sqoopOptions(): SqoopOptions = new SqoopOptions()
