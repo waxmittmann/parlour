@@ -13,8 +13,7 @@ It also provides support for the Cloudera/Teradata Connector.
 Third-Party Libraries
 ---------------------
 
-In order to get Parlour to work - you will need to include the following third-party JARs
-with the application that you use it in.
+In order to get Parlour to work - you will need to include the following third-party JARs with the application that you use it in.
 
 If you want to use them within the `parlour` repository - you will need to put them in `lib/`.
 
@@ -24,7 +23,7 @@ If you want to use them within the `parlour` repository - you will need to put t
 
 **Teradata Support**:
 
-- `sqoop-connector-teradata-1.2c4.jar`: Cloudera Connector Powered by Teradata
+- `sqoop-connector-teradata-1.2c5.jar`: Cloudera Connector Powered by Teradata
 - `tdgssconfig.jar`: Teradata Driver (Security configuration)
 - `terajdbc4.jar`: Teradata JDBC Adapter
 
