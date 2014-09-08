@@ -43,7 +43,7 @@ class ExportSqoopJob(
     this(options, ExportDirTap(options), TableTap(options))(args)
 
   override def buildFlow =
-    new ExportSqoopFlow("exporting to sqoop", options, source, sink)
+    new ExportSqoopFlow(s"$name [${uniqueId.get}]", options, source, sink)
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()
