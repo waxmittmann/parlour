@@ -15,9 +15,12 @@
 package au.com.cba.omnia.parlour
 
 import com.cloudera.sqoop.SqoopOptions
+
 import com.twitter.scalding.{Args, Job, Mode, Read, Source, Write}
 
 import cascading.tap.Tap
+
+import org.apache.sqoop.Sqoop
 
 /**
  * Sqoop export Job that can be embedded within a Cascade
@@ -52,8 +55,8 @@ class ExportSqoopJob(
    * Overriden to return success (true) - it will throw an exception on any failures.
    */
   override def run: Boolean = {
-    val flow = buildFlow
-    flow.complete
+    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
+    buildFlow.complete
     true
   }
 }
