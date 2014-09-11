@@ -44,7 +44,7 @@ class ImportSqoopJob(
     this(options, TableTap(options), TargetDirTap(options))(args)
 
   override def buildFlow =
-    new ImportSqoopFlow("exporting to sqoop", options, source, sink)
+    new ImportSqoopFlow(s"$name [${uniqueId.get}]", options, source, sink)
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()
