@@ -16,7 +16,7 @@ package au.com.cba.omnia.parlour
 
 import com.cloudera.sqoop.SqoopOptions
 
-import com.twitter.scalding.Args
+import com.twitter.scalding.{Mode, Args}
 
 import SqoopSyntax.{ParlourImportDsl, TeradataParlourImportDsl}
 
@@ -39,6 +39,6 @@ object ImportSqoopConsoleJob extends SqoopConsoleJob {
  * Note - this job should only be used for testing/debugging purposes.
  * It specifically has bad password handling.
  */
-class ImportSqoopConsoleJob(args: Args)
-  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args))(args)
+class ImportSqoopConsoleJob(args: Args)(mode: Mode)
+  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args))(args)(mode)
 
