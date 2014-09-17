@@ -42,8 +42,7 @@ class ExportSqoopJob(
   def this(options: SqoopOptions, source: Source)(args: Args)(implicit mode: Mode) =
     this(options, source.createTap(Read), TableTap(options))(args)
 
-  def this(options: SqoopOptions)(args: Args) =
-    this(options, ExportDirTap(options), TableTap(options))(args)
+  def this(options: SqoopOptions)(args: Args) = this(options, TableTap(options))(args)
 
   override def buildFlow =
     new ExportSqoopFlow(s"$name [${uniqueId.get}]", options, source, sink)

@@ -18,14 +18,18 @@ import java.util.Properties
 
 import com.cloudera.sqoop.SqoopOptions
 
-import com.twitter.scalding.{Args, ArgsException, NullTap}
+import com.twitter.scalding._
 
 protected class NullTapWithId(id: String) extends NullTap {
   override def getIdentifier() = id
 }
-protected case class ExportDirTap(options: SqoopOptions) extends NullTapWithId(s"sqoop-export-dir[${options.getExportDir()}]")
-protected case class TargetDirTap(options: SqoopOptions) extends NullTapWithId(s"sqoop-target-dir[${options.getTargetDir()}]")
-protected case class TableTap(options: SqoopOptions) extends NullTapWithId(s"sqoop-table-name[${options.getTableName()}]")
+
+protected case class TableTap(options: SqoopOptions) extends NullTapWithId(options.getTableName())
+// ExportDirTap and TargetDirTap are used merely as placeholders for a Tap match based on path during a cascade.
+// The TextLineScheme will be ignore as Sqoop directly handles the file/path in question
+protected case class ExportDirTap(options: SqoopOptions) extends FixedPathSource(options.getExportDir()) with TextLineScheme
+protected case class TargetDirTap(options: SqoopOptions) extends FixedPathSource(options.getTargetDir()) with TextLineScheme
+
 
 object SqoopSyntax {
   def sqoopOptions(): SqoopOptions = new SqoopOptions()

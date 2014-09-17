@@ -43,8 +43,7 @@ class ImportSqoopJob(
   def this(options: SqoopOptions, sink: Source)(args: Args)(implicit mode: Mode) =
     this(options, TableTap(options), sink.createTap(Write))(args)
 
-  def this(options: SqoopOptions)(args: Args) =
-    this(options, TableTap(options), TargetDirTap(options))(args)
+  def this(options: SqoopOptions)(args: Args) = this(options, TargetDirTap(options))(args)
 
   override def buildFlow =
     new ImportSqoopFlow(s"$name [${uniqueId.get}]", options, source, sink)
