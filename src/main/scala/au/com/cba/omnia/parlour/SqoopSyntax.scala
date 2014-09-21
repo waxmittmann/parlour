@@ -20,6 +20,13 @@ import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
 
+/**
+ * A directory representation that help with Source/Sink match based on merely the path. The `TextLineScheme`
+ * although mixed in, would be ignored as sqoop handles paths directly i.e. not through any passed in `Tap`.
+ * @param path: Path to the directory on interest
+ */
+class DirSource(path: String) extends FixedPathSource(path) with TextLineScheme
+
 protected class NullTapWithId(id: String) extends NullTap {
   override def getIdentifier() = id
 }
@@ -27,8 +34,8 @@ protected class NullTapWithId(id: String) extends NullTap {
 protected case class TableTap(options: SqoopOptions) extends NullTapWithId(options.getTableName())
 // ExportDirTap and TargetDirTap are used merely as placeholders for a Tap match based on path during a cascade.
 // The TextLineScheme will be ignore as Sqoop directly handles the file/path in question
-protected case class ExportDirTap(options: SqoopOptions) extends FixedPathSource(options.getExportDir()) with TextLineScheme
-protected case class TargetDirTap(options: SqoopOptions) extends FixedPathSource(options.getTargetDir()) with TextLineScheme
+protected case class ExportDirTap(options: SqoopOptions) extends DirSource(options.getExportDir())
+protected case class TargetDirTap(options: SqoopOptions) extends DirSource(options.getTargetDir())
 
 
 object SqoopSyntax {
