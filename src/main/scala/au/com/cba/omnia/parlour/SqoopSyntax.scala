@@ -111,6 +111,10 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] {
   /** The string to be interpreted as null for non-string columns */
   def nullNonString(token: String) = update(_.setNullNonStringValue(token))
   consoleArguments.addOptional("null-non-string", nullNonString)
+
+  /** Use verbose mode */
+  def verbose() = update(_.setVerbose(true))
+  consoleArguments.addBoolean("verbose", verbose)
 }
 
 trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOptions[Self] {
