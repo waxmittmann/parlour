@@ -23,7 +23,23 @@ libraryDependencies ++=
   depend.scaldingproject() ++
     depend.scalaz() ++ Seq(
       // The version of `commons-daemon` in Sqoop has a broken POM so another (fixed) version is included.
-      "org.apache.sqoop"   % "sqoop"          % "1.4.3-cdh4.6.0" exclude("commons-daemon", "commons-daemon") intransitive(),
+      "org.apache.sqoop"   % "sqoop"          % "1.4.3-cdh4.6.0"
+        exclude("commons-cli", "commons-cli")
+        exclude("commons-collections", "commons-collections")
+        exclude("commons-lang", "commons-lang")
+        exclude("commons-io", "commons-io")
+        exclude("commons-logging", "commons-logging")
+        exclude("org.apache.hadoop", "hadoop-common")
+        exclude("org.apache.hadoop", "hadoop-hdfs")
+        exclude("org.apache.hadoop", "hadoop-mapreduce-client-core")
+        exclude("org.apache.hadoop", "hadoop-mapreduce-client-common")
+        exclude("org.apache.hbase", "hbase")
+        exclude("org.apache.hcatalog", "hcatalog-core")
+        exclude("hsqldb", "hsqldb")
+        exclude("ant-contrib", "ant-contrib")
+        exclude("org.apache.avro", "hadoop2")
+        exclude("org.apache.avro", "avro-mapred")
+        exclude("commons-daemon", "commons-daemon"),
       "commons-daemon"     % "commons-daemon" % "1.0.13"
     )
 
