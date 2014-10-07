@@ -70,7 +70,8 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] {
   protected def addExtraArgs(extraArgs: Array[String]): Self
 
   // default to skipping the distrubuted cache, because we generally deploy with assemblies
-  toSqoopOptions.setSkipDistCache(true)
+  toSqoopOptions.setSkipDistCache(false)
+  toSqoopOptions.setVerbose(false)
 
   /** Specify JDBC connect string */
   def connectionString(connectionString: String) = update(_.setConnectString(connectionString))
@@ -112,9 +113,17 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] {
   def nullNonString(token: String) = update(_.setNullNonStringValue(token))
   consoleArguments.addOptional("null-non-string", nullNonString)
 
-  /** Use verbose mode */
+  /** Use verbose mode - This doesn't really work */
   def verbose() = update(_.setVerbose(true))
   consoleArguments.addBoolean("verbose", verbose)
+
+  /** The path to hadoop mapred home - used by tests*/
+  def hadoopMapRedHome(home: String) = update(_.setHadoopMapRedHome(home))
+  consoleArguments.addOptional("hadoop-mapred-home", hadoopMapRedHome)
+
+  /** Can skip the distributed cache feature of sqoop */
+  def skipDistCache() = update(_.setSkipDistCache(true))
+  consoleArguments.addBoolean("skip-dist-cache", skipDistCache)
 }
 
 trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOptions[Self] {
