@@ -69,7 +69,6 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] {
   protected def update(f: SqoopOptions => Unit): Self
   protected def addExtraArgs(extraArgs: Array[String]): Self
 
-  // default to skipping the distrubuted cache, because we generally deploy with assemblies
   toSqoopOptions.setSkipDistCache(false)
   toSqoopOptions.setVerbose(false)
 
