@@ -152,11 +152,17 @@ trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOpti
 
   /** The string to be interpreted as null for input string columns */
   def inputNullString(token: String) = update(_.setInNullStringValue(token))
-  consoleArguments.addOptional("input-null-string", inputNullString )
+  consoleArguments.addOptional("input-null-string", inputNullString)
 
   /** The string to be interpreted as null for input non-string columns */
   def inputNullNonString(token: String) = update(_.setInNullNonStringValue(token))
   consoleArguments.addOptional("input-null-non-string", inputNullNonString)
+
+  /** The string to be interpreted as null for input string and input non-string columns */
+  def inputNull(token: String) = {
+    inputNullString(token)
+    inputNullNonString(token)
+  }
 
 }
 
