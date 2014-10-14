@@ -149,6 +149,15 @@ trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOpti
   /** Use batch mode for underlying statement execution. */
   def batch() = update(_.setBatchMode(true))
   consoleArguments.addBoolean("batch", batch)
+
+  /** The string to be interpreted as null for input string columns */
+  def inputNullString(token: String) = update(_.setInNullStringValue(token))
+  consoleArguments.addOptional("input-null-string", inputNullString )
+
+  /** The string to be interpreted as null for input non-string columns */
+  def inputNullNonString(token: String) = update(_.setInNullNonStringValue(token))
+  consoleArguments.addOptional("input-null-non-string", inputNullNonString)
+
 }
 
 trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOptions[Self] {
