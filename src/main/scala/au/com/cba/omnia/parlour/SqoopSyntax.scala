@@ -40,123 +40,164 @@ protected case class TargetDirTap(options: SqoopOptions) extends DirSource(optio
 
 object SqoopSyntax {
   def sqoopOptions(): SqoopOptions = new SqoopOptions()
+  type SqoopModifier = SqoopOptions => Unit
 
-  case class ParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[ParlourImportDsl](options) with ParlourImportOptions[ParlourImportDsl]
-  case class ParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[ParlourExportDsl](options) with ParlourExportOptions[ParlourExportDsl]
-  case class TeradataParlourImportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[TeradataParlourImportDsl](options) with TeradataParlourImportOptions[TeradataParlourImportDsl]
-  case class TeradataParlourExportDsl(options: SqoopOptions = sqoopOptions()) extends ParlourDsl[TeradataParlourExportDsl](options) with TeradataParlourExportOptions[TeradataParlourExportDsl]
+  case class ParlourImportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourImportDsl] with ParlourImportOptions[ParlourImportDsl]
+  case class ParlourExportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourExportDsl] with ParlourExportOptions[ParlourExportDsl]
+  case class TeradataParlourImportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourImportDsl] with TeradataParlourImportOptions[TeradataParlourImportDsl]
+  case class TeradataParlourExportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourExportDsl] with TeradataParlourExportOptions[TeradataParlourExportDsl]
+
 }
 
-class ParlourDsl[+Self <: ParlourDsl[_]](options: SqoopOptions) extends ParlourOptions[Self] {
-  override def toSqoopOptions = options
+sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
+  protected[parlour] def newSqoopOptions = new SqoopOptions
+  def updates: List[SqoopOptions => Unit]
 
-  override protected def update(f: SqoopOptions => Unit) = {
-    f(options)
-    this.asInstanceOf[Self]
+   def toSqoopOptions = {
+    //foldRight instead of foldLeft to enable options overriding
+    updates.foldRight(newSqoopOptions) {
+      (f, opts) =>
+        f(opts)
+        opts
+    }
   }
 
-  override protected def addExtraArgs(extraArgs: Array[String]) =
-    update(options => {
-      val args = options.getExtraArgs()
-      options.setExtraArgs((if (args != null) options.getExtraArgs() else Array[String]()) ++ extraArgs)
-    })
+  import SqoopSyntax._
+  def update(f: SqoopModifier) = {
+    val nextUpdates = f :: updates
+
+    val nextDsl = this.asInstanceOf[ParlourDsl[_]] match {
+      case ParlourImportDsl(_) => ParlourImportDsl(nextUpdates)
+      case ParlourExportDsl(_) => ParlourExportDsl(nextUpdates)
+      case TeradataParlourImportDsl(_) => TeradataParlourImportDsl(nextUpdates)
+      case TeradataParlourExportDsl(_) => TeradataParlourExportDsl(nextUpdates)
+    }
+    nextDsl.asInstanceOf[Self]
+  }
+
+  protected def addExtraArgs(extraArgs: Array[String]) =
+    update(addExtraArgsRaw(extraArgs))
+  protected def addExtraArgsRaw(extraArgs: Array[String])(options: SqoopOptions): Unit = {
+    val args = options.getExtraArgs()
+    options.setExtraArgs((if (args != null) options.getExtraArgs() else Array[String]()) ++ extraArgs)
+  }
 }
 
-trait ParlourOptions[+Self <: ParlourOptions[_]] {
-  val consoleArguments: ConsoleOptions = new ConsoleOptions(this)
-  def toSqoopOptions: SqoopOptions
-
-  protected def update(f: SqoopOptions => Unit): Self
-  protected def addExtraArgs(extraArgs: Array[String]): Self
-
-  toSqoopOptions.setSkipDistCache(false)
-  toSqoopOptions.setVerbose(false)
+trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with ConsoleOptions[Self] {
+  override protected[parlour] def newSqoopOptions: SqoopOptions = {
+    val opts = new SqoopOptions
+    opts.setSkipDistCache(false)
+    opts.setVerbose(false)
+    opts
+  }
 
   /** Specify JDBC connect string */
   def connectionString(connectionString: String) = update(_.setConnectString(connectionString))
-  consoleArguments.addOptional("connection-string", connectionString)
+  addOptional("connection-string", (v: String) => so => so.setConnectString(v))
+  def getConnectionString = Option(toSqoopOptions.getConnectString)
 
   /** Specify connection manager class to use */
   def connectionManager(className: String) = update(_.setConnManagerClassName(className))
-  consoleArguments.addOptional("connection-manager", connectionManager)
+  addOptional("connection-manager", (v: String) => so => so.setConnManagerClassName(v))
+  def getConnectionManager = Option(toSqoopOptions.getConnManagerClassName)
 
   /** Manually specify JDBC driver class to use */
   def driver(className: String) = update(_.setDriverClassName(className))
-  consoleArguments.addOptional("driver", driver)
+  addOptional("driver", (v: String) => so => so.setDriverClassName(v))
+  def getDriver = Option(toSqoopOptions.getDriverClassName)
 
   /**Set authentication username*/
   def username(username: String) = update(_.setUsername(username))
-  consoleArguments.addOptional("username", username)
+  addOptional("username", (v: String) => so => so.setUsername(v))
+  def getUsername = Option(toSqoopOptions.getUsername)
 
   /** Set authentication password */
   def password(password: String) = update(_.setPassword(password))
-  consoleArguments.addOptional("password", password)
+  addOptional("password", (v: String) => so => so.setPassword(v))
+  def getPassword = Option(toSqoopOptions.getPassword)
 
   /** Optional properties file that provides connection parameters */
   def connectionParams(params: Properties) = update(_.setConnectionParams(params))
+  def getConnectionParams = Option(toSqoopOptions.getConnectionParams)
 
   def numberOfMappers(count: Int) = update(_.setNumMappers(count))
-  consoleArguments.addOptional("mappers", numberOfMappers, _.toInt)
+  addOptional("mappers", (v: Int) => so => so.setNumMappers(v), _.toInt)
+  def getNumberOfMappers = Option(toSqoopOptions.getNumMappers)
 
   def tableName(tableName: String) = update(_.setTableName(tableName))
-  consoleArguments.addOptional("table-name", tableName)
+  addOptional("table-name", (v: String) => so => so.setTableName(v))
+  def getTableName = Option(toSqoopOptions.getTableName)
 
   def sqlQuery(sqlStatement: String) = update(_.setSqlQuery(sqlStatement))
-  consoleArguments.addOptional("sql-query", sqlQuery)
+  addOptional("sql-query", (v: String) => so => so.setSqlQuery(v))
+  def getSqlQuery = Option(toSqoopOptions.getSqlQuery)
 
   /** The string to be interpreted as null for string columns */
   def nullString(token: String) = update(_.setNullStringValue(token))
-  consoleArguments.addOptional("null-string", nullString)
+  addOptional("null-string", (v: String) => so => so.setNullStringValue(v))
+  def getNullString = Option(toSqoopOptions.getNullStringValue)
 
   /** The string to be interpreted as null for non-string columns */
   def nullNonString(token: String) = update(_.setNullNonStringValue(token))
-  consoleArguments.addOptional("null-non-string", nullNonString)
+  addOptional("null-non-string", (v: String) => so => so.setNullNonStringValue(v))
+  def getNullNonString = Option(toSqoopOptions.getNullNonStringValue)
 
   /** Use verbose mode - This doesn't really work */
   def verbose() = update(_.setVerbose(true))
-  consoleArguments.addBoolean("verbose", verbose)
+  addBoolean("verbose", () => so => so.setVerbose(true))
+  def getVerbose = Option(toSqoopOptions.getVerbose)
 
   /** The path to hadoop mapred home - used by tests*/
   def hadoopMapRedHome(home: String) = update(_.setHadoopMapRedHome(home))
-  consoleArguments.addOptional("hadoop-mapred-home", hadoopMapRedHome)
+  addOptional("hadoop-mapred-home", (v: String) => so => so.setHadoopMapRedHome(v))
+  def getHadoopMapRedHome = Option(toSqoopOptions.getHadoopMapRedHome)
 
   /** Can skip the distributed cache feature of sqoop */
   def skipDistCache() = update(_.setSkipDistCache(true))
-  consoleArguments.addBoolean("skip-dist-cache", skipDistCache)
+  addBoolean("skip-dist-cache", () => so => so.setSkipDistCache(true))
+  def getSkipDistCache = Option(toSqoopOptions.isSkipDistCache)
 }
 
 trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOptions[Self] {
   /** HDFS source path for the export */
   def exportDir(dir: String) = update(_.setExportDir(dir))
-  consoleArguments.addRequired("export-dir", exportDir)
+  addRequired("export-dir", (v: String) => so => so.setExportDir(v))
+  def getExportDir = Option(toSqoopOptions.getExportDir)
 
   /** Sets a field enclosing character */
   def inputEnclosedBy(c: Char) = update(_.setInputEnclosedBy(c))
-  consoleArguments.addOptional("input-enclosed-by", inputEnclosedBy, _.head)
+  addOptional("input-enclosed-by", (v: Char) => so => so.setInputEnclosedBy(v), _.head)
+  def getInputEnclosedBy = Option(toSqoopOptions.getInputEnclosedBy)
 
   /** Sets the input escape character */
   def inputEscapedBy(c: Char) = update(_.setInputEscapedBy(c))
-  consoleArguments.addOptional("input-escaped-by", inputEscapedBy, _.head)
+  addOptional("input-escaped-by", (v: Char) => so => so.setInputEscapedBy(v), _.head)
+  def getInputEscapedBy = Option(toSqoopOptions.getInputEscapedBy)
 
   /** Sets the input field separator */
   def inputFieldsTerminatedBy(fieldsDelimiter: Char) = update(_.setInputFieldsTerminatedBy(fieldsDelimiter))
-  consoleArguments.addOptional("input-fields-terminated-by", inputFieldsTerminatedBy, _.head, Some('|'))
+  addOptional("input-fields-terminated-by", (v: Char) => so => so.setInputFieldsTerminatedBy(v), _.head, Some('|'))
+  def getInputFieldsTerminatedBy = Option(toSqoopOptions.getInputFieldDelim)
 
   /** Sets the input end-of-line character */
   def inputLinesTerminatedBy(linesDelimiter: Char) = update(_.setInputLinesTerminatedBy(linesDelimiter))
-  consoleArguments.addOptional("input-lines-terminated-by", inputLinesTerminatedBy, _.head, Some('\n'))
+  addOptional("input-lines-terminated-by", (v: Char) => so => so.setInputLinesTerminatedBy(v), _.head, Some('\n'))
+  def getInputLinesTerminatedBy = Option(toSqoopOptions.getInputRecordDelim)
 
   /** Use batch mode for underlying statement execution. */
   def batch() = update(_.setBatchMode(true))
-  consoleArguments.addBoolean("batch", batch)
+  addBoolean("batch", () => so => so.setBatchMode(true))
+  def getBatch() = Option(toSqoopOptions.isBatchMode)
 
   /** The string to be interpreted as null for input string columns */
   def inputNullString(token: String) = update(_.setInNullStringValue(token))
-  consoleArguments.addOptional("input-null-string", inputNullString)
+  addOptional("input-null-string", (v: String) => so => so.setInNullStringValue(v))
+  def getInputNullString = Option(toSqoopOptions.getInNullStringValue)
 
   /** The string to be interpreted as null for input non-string columns */
   def inputNullNonString(token: String) = update(_.setInNullNonStringValue(token))
-  consoleArguments.addOptional("input-null-non-string", inputNullNonString)
+  addOptional("input-null-non-string", (v: String) => so => so.setInNullNonStringValue(v))
+  def getInputNullNonString = Option(toSqoopOptions.getInNullNonStringValue)
 
   /** The string to be interpreted as null for input string and input non-string columns */
   def inputNull(token: String) = {
@@ -169,43 +210,53 @@ trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOpti
 trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOptions[Self] {
   /** Append data to an existing dataset in HDFS */
   def append() = update(_.setAppendMode(true))
-  consoleArguments.addBoolean("append", append)
+  addBoolean("append", () => so => so.setAppendMode(true))
+  def getAppend = Option(toSqoopOptions.isAppendMode)
 
   /** Columns to import from table */
   def columns(cols: Array[String]) = update(_.setColumns(cols))
-  consoleArguments.addOptional("columns", columns, str => str.split(","))
+  addOptional("columns", (v: Array[String]) => so => so.setColumns(v), str => str.split(","))
+  def getColumns = Option(toSqoopOptions.getColumns)
 
   /** Number of entries to read from database at once */
   def fetchSize(size: Int) = update(_.setFetchSize(size))
-  consoleArguments.addOptional("fetch-size", fetchSize, _.toInt)
+  addOptional("fetch-size", (v: Int) => so => so.setFetchSize(v), _.toInt)
+  def getFetchSize = Option(toSqoopOptions.getFetchSize)
 
   /** Column of the table used to split work units */
   def splitBy(splitByColumn: String) = update(_.setSplitByCol(splitByColumn))
-  consoleArguments.addOptional("split-by", splitBy)
+  addOptional("split-by", (v: String) => so => so.setSplitByCol(v))
+  def getSplitBy = Option(toSqoopOptions.getSplitByCol)
 
   /** HDFS destination dir */
   def targetDir(dir: String) = update(_.setTargetDir(dir))
-  consoleArguments.addRequired("target-dir", targetDir)
+  addRequired("target-dir", (v: String) => so => so.setTargetDir(v))
+  def getTargetDir = Option(toSqoopOptions.getTargetDir)
 
   /** WHERE clause to use during import */
   def where(conditions: String) = update(_.setWhereClause(conditions))
-  consoleArguments.addOptional("where", where)
+  addOptional("where", (v: String) => so => so.setWhereClause(v))
+  def getWhere = Option(toSqoopOptions.getWhereClause)
 
   /** Sets a field enclosing character */
   def enclosedBy(c: Char) = update(_.setEnclosedBy(c))
-  consoleArguments.addOptional("enclosed-by", enclosedBy, _.head)
+  addOptional("enclosed-by", (v: Char) => so => so.setEnclosedBy(v), _.head)
+  def getEnclosedBy = Option(toSqoopOptions.getOutputEnclosedBy)
 
   /** Sets the escape character */
   def escapedBy(c: Char) = update(_.setEscapedBy(c))
-  consoleArguments.addOptional("escaped-by", escapedBy, _.head)
+  addOptional("escaped-by", (v: Char) => so => so.setEscapedBy(v), _.head)
+  def getEscapedBy = Option(toSqoopOptions.getOutputEscapedBy)
 
   /** Sets the field separator character */
   def fieldsTerminatedBy(c: Char) = update(_.setFieldsTerminatedBy(c))
-  consoleArguments.addOptional("fields-terminated-by", fieldsTerminatedBy, _.head, Some('|'))
+  addOptional("fields-terminated-by", (v: Char) => so => so.setFieldsTerminatedBy(v), _.head, Some('|'))
+  def getFieldTerminatedBy = Option(toSqoopOptions.getOutputFieldDelim)
 
   /** Sets the end-of-line character */
   def linesTerminatedBy(c: Char) = update(_.setLinesTerminatedBy(c))
-  consoleArguments.addOptional("lines-terminated-by", linesTerminatedBy, _.head, Some('\n'))
+  addOptional("lines-terminated-by", (v: Char) => so => so.setLinesTerminatedBy(v), _.head, Some('\n'))
+  def getLinesTerminatedBy = Option(toSqoopOptions.getOutputRecordDelim)
 }
 
 /**
@@ -213,34 +264,65 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
  * See: http://www.cloudera.com/content/cloudera-content/cloudera-docs/Connectors/Teradata/Cloudera-Connector-for-Teradata/cctd_use_tpcc.html
  */
 trait TeradataParlourOptions[+Self <: TeradataParlourOptions[_]] extends ParlourOptions[Self] {
-  update(_.setConnManagerClassName("com.cloudera.connector.teradata.TeradataManager"))
+  import TeradataParlourOptions._
+
+  override protected[parlour] def newSqoopOptions: SqoopOptions = {
+    val opts = super.newSqoopOptions
+    opts.setConnManagerClassName("com.cloudera.connector.teradata.TeradataManager")
+    opts
+  }
+
+  protected def getExtraBooleanArg(name: String): Option[Boolean] = Option(toSqoopOptions.getExtraArgs.find(_ == name).isDefined)
+
+  protected def getExtraValueArg(name: String): Option[String] = {
+    val so = toSqoopOptions
+    if (so.getExtraArgs.size < 2) None
+    else {
+      so.getExtraArgs.sliding(2).find(_(0) == name).map(_(1))
+    }
+  }
 
   /** Override default staging table name. Please note that this parameter applies only in case that staging tables are used during the data transfer. */
-  def stagingTable(tableName: String) = addExtraArgs(Array("--staging-table", tableName))
-  consoleArguments.addOptional("teradata-staging-table", stagingTable)
+  def stagingTable(tableName: String) = addExtraArgs(Array(STAGING_TABLE, tableName))
+  addOptional("teradata-staging-table", (v: String) => so => addExtraArgsRaw(Array(STAGING_TABLE, v))(so))
+  def getStagingTable = getExtraValueArg(STAGING_TABLE)
 
   /** Override default staging database name. Please note that this parameter applies only in case that staging tables are used during the data transfer. */
-  def stagingDatabase(databaseName: String) = addExtraArgs(Array("--staging-database", databaseName: String))
-  consoleArguments.addOptional("teradata-staging-database", stagingDatabase)
+  def stagingDatabase(databaseName: String) = addExtraArgs(Array(STAGING_DATABASE, databaseName: String))
+  addOptional("teradata-staging-database", (v: String) => so => addExtraArgsRaw(Array(STAGING_DATABASE, v))(so))
+  def getStagingDatabase = getExtraValueArg(STAGING_DATABASE)
 
   /** Specifies number of rows that will be procesed together in one batch. */
-  def batchSize(size: Int) = addExtraArgs(Array("--batch-size", size.toString))
-  consoleArguments.addOptional("teradata-batch-size", batchSize, _.toInt)
+  def batchSize(size: Int) = addExtraArgs(Array(BATCH_SIZE, size.toString))
+  addOptional("teradata-batch-size", (v: Int) => so => addExtraArgsRaw(Array(BATCH_SIZE, v.toString))(so), _.toInt)
+  def getBatchSize = getExtraValueArg(BATCH_SIZE)
 
   /** Force the connector to create the staging table if input/output method support the staging tables. */
-  def forceStaging() = addExtraArgs(Array("--force-staging"))
-  consoleArguments.addBoolean("teradata-force-staging", forceStaging)
+  def forceStaging() = addExtraArgs(Array(FORCE_STAGING))
+  addBoolean("teradata-force-staging", () => so => addExtraArgsRaw(Array(FORCE_STAGING))(so))
+  def getForceStaging = getExtraBooleanArg(FORCE_STAGING)
 
   /**
    * Allows arbitrary query bands to be set for all queries that are executed by the connector. The expected format is a semicolon-separated key=value pair list.
    * Note that a final semicolon is required after the last key=value pair as well. For example, Data_Center=XO;Location=Europe;.
    */
-  def queryBand(bandPairs: String) = addExtraArgs(Array("--query-band", bandPairs))
-  consoleArguments.addOptional("teradata-query-band", queryBand)
+  def queryBand(bandPairs: String) = addExtraArgs(Array(QUERY_BAND, bandPairs))
+  addOptional("teradata-query-band", (v: String) => so => addExtraArgsRaw(Array(QUERY_BAND, v))(so))
+  def getQueryBand = getExtraValueArg(QUERY_BAND)
 
   /** By default, the connector will use Teradata system views to obtain metadata. Using this parameter the connector will switch to XViews instead. */
-  def skipXviews() = addExtraArgs(Array("--skip-xview"))
-  consoleArguments.addBoolean("teradata-skip-xview", skipXviews)
+  def skipXviews() = addExtraArgs(Array(SKIP_VIEW))
+  addBoolean("teradata-skip-xview", () => so => addExtraArgsRaw(Array(SKIP_VIEW))(so))
+  def getSkipXviews = getExtraBooleanArg(SKIP_VIEW)
+}
+
+object TeradataParlourOptions {
+  val STAGING_TABLE = "--staging-table"
+  val STAGING_DATABASE = "--staging-database"
+  val BATCH_SIZE = "--batch-size"
+  val FORCE_STAGING = "--force-staging"
+  val QUERY_BAND = "--query-band"
+  val SKIP_VIEW = "--skip-xview"
 }
 
 sealed trait TeradataInputMethod
@@ -249,42 +331,64 @@ case object SplitByValue extends TeradataInputMethod
 case object SplitByPartition extends TeradataInputMethod
 case object SplitByHash extends TeradataInputMethod
 
-/** Options specific to the Teradata Connector when importing */
-trait TeradataParlourImportOptions[+Self <: TeradataParlourImportOptions[_]] extends TeradataParlourOptions[Self] with ParlourImportOptions[Self] {
-  /**
-   * Specifies which input method should be used to transfer data from Teradata to Hadoop.
-   */
-  def inputMethod(method: TeradataInputMethod) = addExtraArgs(Array("--input-method", method match {
+object TeradataInputMethod {
+  def toString(method: TeradataInputMethod) = method match {
     case SplitByAmp       => "split.by.amp"
     case SplitByValue     => "split.by.value"
     case SplitByPartition => "split.by.partition"
     case SplitByHash      => "split.by.hash"
-  }))
-  consoleArguments.addOptional("teradata-input-method", inputMethod, _ match {
+  }
+
+  def fromString(method: String) = Option(method match {
     case "split.by.amp"       => SplitByAmp
     case "split.by.value"     => SplitByValue
     case "split.by.partition" => SplitByPartition
     case "split.by.hash"      => SplitByHash
-    case _                    => throw new ArgsException("Please provide a valid input method, one of split.by.[amp|value|partition|hash]")
+    case _                    => null
   })
+}
+
+/** Options specific to the Teradata Connector when importing */
+trait TeradataParlourImportOptions[+Self <: TeradataParlourImportOptions[_]] extends TeradataParlourOptions[Self] with ParlourImportOptions[Self] {
+  import TeradataParlourImportOptions._
+  /**
+   * Specifies which input method should be used to transfer data from Teradata to Hadoop.
+   */
+  def inputMethod(method: TeradataInputMethod) = addExtraArgs(Array(INPUT_METHOD, TeradataInputMethod.toString(method)))
+  addOptional("teradata-input-method",
+    (v:TeradataInputMethod) => so => addExtraArgsRaw(Array(INPUT_METHOD,
+    TeradataInputMethod.toString(v)))(so),
+    TeradataInputMethod.fromString(_).getOrElse(throw new ArgsException("Please provide a valid input method, one of split.by.[amp|value|partition|hash]"))
+  )
+  def getInputMethod = getExtraValueArg(INPUT_METHOD).map(TeradataInputMethod.fromString)
 
   /** Access lock is used to improve concurrency. When used, the import job will not be blocked by concurrent accesses to the same table. */
-  def accessLock() = addExtraArgs(Array("--access-lock"))
-  consoleArguments.addBoolean("teradata-access-lock", accessLock)
+  def accessLock() = addExtraArgs(Array(ACCESS_LOCK))
+  addBoolean("teradata-access-lock", () => so => addExtraArgsRaw(Array(ACCESS_LOCK))(so))
+  def getAccessLock = getExtraBooleanArg(ACCESS_LOCK)
 
   /**
    * By default, the connector will drop all automatically created staging tables upon failed export.
    * Using this option will leave the staging tables with partially imported data in the database.
    */
-  def keepStagingTable() = addExtraArgs(Array("--keep-staging-table"))
-  consoleArguments.addBoolean("teradata-keep-staging-table", keepStagingTable)
+  def keepStagingTable() = addExtraArgs(Array(KEEP_STAGING_TABLE))
+  addBoolean("teradata-keep-staging-table", () => so => addExtraArgsRaw(Array(KEEP_STAGING_TABLE))(so))
+  def getKeepStagingTable = getExtraBooleanArg(KEEP_STAGING_TABLE)
 
   /**
    * Number of partitions that should be used for the automatically created staging table.
    * Note that the connector will automatically generate the value based on the number of mappers used for the job. (only for split.by.partition)
    */
-  def numPartitionsForStagingTable(numPartitions: Int) = addExtraArgs(Array("--num-partitions-for-staging-table", numPartitions.toString))
-  consoleArguments.addOptional("teradata-num-partitions-for-staging-table", numPartitionsForStagingTable, _.toInt)
+  def numPartitionsForStagingTable(numPartitions: Int) = addExtraArgs(Array(NUM_PARTITIONS_FOR_STAGING_TABLE, numPartitions.toString))
+  addOptional("teradata-num-partitions-for-staging-table", (v: Int) => so => addExtraArgsRaw(Array(NUM_PARTITIONS_FOR_STAGING_TABLE, v.toString))(so), _.toInt)
+  def getNumPartitionsForStagingTable = getExtraValueArg(NUM_PARTITIONS_FOR_STAGING_TABLE).map(_.toInt)
+}
+
+object TeradataParlourImportOptions {
+  val INPUT_METHOD = "--input-method"
+  val ACCESS_LOCK = "--access-lock"
+  val KEEP_STAGING_TABLE = "--keep-staging-table"
+  val NUM_PARTITIONS_FOR_STAGING_TABLE = "--num-partitions-for-staging-table"
 }
 
 sealed trait TeradataOutputMethod
@@ -292,75 +396,105 @@ case object BatchInsert extends TeradataOutputMethod
 case object InternalFastload extends TeradataOutputMethod
 case object MultipleFastload extends TeradataOutputMethod
 
-/** Options specific to the Teradata Connector when exporting */
-trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] extends TeradataParlourOptions[Self] with ParlourExportOptions[Self] {
-  /** Specifies which output method whould be used to transfer data from Hadoop to Teradata. */
-
-  def outputMethod(method: TeradataOutputMethod) = addExtraArgs(Array("--output-method", method match {
+object TeradataOutputMethod {
+  def toString(method: TeradataOutputMethod): String = method match {
     case BatchInsert      => "batch.insert"
     case InternalFastload => "internal.fastload"
     case MultipleFastload => "multiple.fastload"
-  }))
-  consoleArguments.addOptional("teradata-output-method", outputMethod, _ match {
-    case "batch.insert"      => BatchInsert
-    case "internal.fastload" => InternalFastload
-    case "multiple.fastload" => MultipleFastload
-    case _                   => throw new ArgsException("Please provide a valid output method, one of [batch.insert|internal.fastload|multiple.fastload]")
+  }
+
+  def fromString(method: String) = Option(method match {
+    case "batch.insert"       => BatchInsert
+    case "internal.fastload"  => InternalFastload
+    case "multiple.fastload"  => MultipleFastload
+    case _                    => null
   })
+}
+
+/** Options specific to the Teradata Connector when exporting */
+trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] extends TeradataParlourOptions[Self] with ParlourExportOptions[Self] {
+  import TeradataParlourExportOptions._
+  /** Specifies which output method whould be used to transfer data from Hadoop to Teradata. */
+
+  def outputMethod(method: TeradataOutputMethod) = addExtraArgs(Array(OUTPUT_METHOD, TeradataOutputMethod.toString(method)))
+  addOptional("teradata-output-method",
+    (v: TeradataOutputMethod) => so => addExtraArgsRaw(Array(OUTPUT_METHOD,
+    TeradataOutputMethod.toString(v)))(so),
+    TeradataOutputMethod.fromString(_).getOrElse(throw new ArgsException("Please provide a valid output method, one of [batch.insert|internal.fastload|multiple.fastload]"))
+  )
+  def getOutputMethod = getExtraValueArg(OUTPUT_METHOD).map(TeradataOutputMethod.fromString)
 
   /** Specifies a prefix for created error tables. (only for internal.fastload) */
-  def errorTable(tableName: String) = addExtraArgs(Array("--error-table", tableName))
-  consoleArguments.addOptional("teradata-error-table", errorTable)
+  def errorTable(tableName: String) = addExtraArgs(Array(ERROR_TABLE, tableName))
+  addOptional("teradata-error-table", (v: String) => so => addExtraArgsRaw(Array(ERROR_TABLE, v))(so))
+  def getErrorTable = getExtraValueArg(ERROR_TABLE)
 
   /**
    * Hostname or IP address of the node where you are executing Sqoop, one that is visible from the Hadoop cluster. The connector has the
    * ability to autodetect the interface. This parameter has been provided to override the autodection routine. (only for internal.fastload)
    */
-  def fastloadSocketHostName(hostname: String) = addExtraArgs(Array("--fastload-socket-hostname", hostname))
-  consoleArguments.addOptional("teradata-fastload-socket-hostname", fastloadSocketHostName)
+  def fastloadSocketHostName(hostname: String) = addExtraArgs(Array(FASTLOAD_SOCKET_HOSTNAME, hostname))
+  addOptional("teradata-fastload-socket-hostname", (v: String) => so => addExtraArgsRaw(Array(FASTLOAD_SOCKET_HOSTNAME, v))(so))
+  def getFastloadSocketHostName = getExtraValueArg(FASTLOAD_SOCKET_HOSTNAME)
 }
 
-class ConsoleOptions(options: ParlourOptions[_]) {
-  type POptions = ParlourOptions[_]
-  val consoleOptions = scala.collection.mutable.Map[String, (Args) => Unit]()
+object TeradataParlourExportOptions {
+  val OUTPUT_METHOD = "--output-method"
+  val ERROR_TABLE = "--error-table"
+  val FASTLOAD_SOCKET_HOSTNAME = "--fastload-socket-hostname"
+}
 
-  def addRequired(name: String, setter: String => POptions): ConsoleOptions = {
+trait ConsoleOptions[+Self <: ParlourOptions[_]] {
+  self: ParlourOptions[Self]  =>
+
+  import SqoopSyntax._
+  type ConsoleSqoopModifier = Args => SqoopModifier
+
+  val mods = scala.collection.mutable.Map[String, ConsoleSqoopModifier]()
+
+  def addRequired(name: String, setter: String => SqoopModifier): ConsoleOptions[Self] = {
     addRequired(name, setter, v => v)
     this
   }
 
-  def addRequired[T](name: String, setter: T => POptions, converter: String => T): ConsoleOptions = {
-    consoleOptions += (name, (args: Args) => setter(converter(args(name))))
+  def addRequired[T](name: String, setter: T => SqoopModifier, converter: String => T): ConsoleOptions[Self] = {
+    mods.put(name, ((args: Args) => converter(args(name))) andThen setter)
     this
   }
 
-  def addBoolean(name: String, setter: () => POptions): ConsoleOptions = {
-    consoleOptions += (name, (args: Args) => if (args.boolean(name)) setter())
+  def addBoolean(name: String, setter: () => SqoopOptions => Unit): ConsoleOptions[Self] = {
+    mods.put(name, ((args: Args) => if (args.boolean(name)) setter() else _ => ()))
     this
   }
 
-  def addOptional(name: String, setter: String => POptions, default: Option[String] = None): ConsoleOptions = {
+  def addOptional(name: String, setter: String => SqoopOptions => Unit, default: Option[String] = None): ConsoleOptions[Self] = {
     addOptional(name, setter, v => v, default)
     this
   }
 
-  def addOptional[T](name: String, setter: T => POptions, converter: String => T, default: Option[T] = None): ConsoleOptions = {
-    consoleOptions += (name, (args: Args) => {
+  def addOptional[T](name: String, setter: T => SqoopOptions => Unit, converter: String => T, default: Option[T] = None): ConsoleOptions[Self] = {
+    val f = (args: Args) => {
       args.optional(name) match {
         case Some(value) => setter(converter(value))
-        case None        => default.foreach(setter)
+        case None        => default match {
+          case Some(defaultValue) => setter(defaultValue)
+          case None               => s:SqoopOptions => ()
+        }
       }
-    })
+    }
+    mods.put(name, f)
     this
   }
 
-  def setOptions(args: Args): ParlourOptions[_] = {
-    consoleOptions.values.foreach(setter => setter(args))
-    options
+  def setOptions(args: Args): Self = {
+    mods.foldLeft(this.asInstanceOf[Self]) {
+      case (dsl, (argName, mod)) =>
+        dsl.update(mod(args)).asInstanceOf[Self]
+    }
   }
 
   def usage: String = {
-    consoleOptions.map(_ match {
+    mods.map(_ match {
       case (name, setter) => s"--${name}"
     }).mkString("\n")
   }

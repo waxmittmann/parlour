@@ -29,7 +29,7 @@ object ImportSqoopConsoleJob extends SqoopConsoleJob {
       case "teradata" => TeradataParlourImportDsl()
       case _          => ParlourImportDsl()
     }
-    dsl.consoleArguments.setOptions(args).toSqoopOptions
+    dsl.setOptions(args).toSqoopOptions
   }
 }
 

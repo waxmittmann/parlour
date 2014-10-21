@@ -28,7 +28,7 @@ object ExportSqoopConsoleJob extends SqoopConsoleJob {
       case "teradata" => TeradataParlourExportDsl()
       case _          => ParlourExportDsl()
     }
-    dsl.consoleArguments.setOptions(args).toSqoopOptions
+    dsl.setOptions(args).toSqoopOptions
   }
 }
 
