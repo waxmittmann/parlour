@@ -39,6 +39,6 @@ object ImportSqoopConsoleJob extends SqoopConsoleJob {
  * Note - this job should only be used for testing/debugging purposes.
  * It specifically has bad password handling.
  */
-class ImportSqoopConsoleJob(args: Args)(mode: Mode)
-  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args))(args)(mode)
+class ImportSqoopConsoleJob(args: Args)
+  extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args))(args)(Mode.getMode(args).getOrElse(sys.error("No Mode defined")))
 
