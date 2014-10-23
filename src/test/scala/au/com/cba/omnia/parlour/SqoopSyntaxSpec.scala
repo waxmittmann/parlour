@@ -2,11 +2,37 @@ package au.com.cba.omnia.parlour
 
 import au.com.cba.omnia.parlour.SqoopSyntax._
 import com.twitter.scalding.Args
-import org.specs2.mutable.Specification
 
-class SqoopSyntaxSpec extends Specification {
-  "Console Options" should {
-    " create Parlour DSL with required arg" in {
+class SqoopSyntaxSpec extends OmniaSpec { def is = s2"""
+SqoopSyntax
+===================
+
+Should be able to apply console options:
+  - with required arg               ${consoleOptions.requiredArg}
+  - with boolean arg                ${consoleOptions.booleanArg}
+  - with optional arg               ${consoleOptions.optionalArg}
+  - with extraArgs-via-addBoolean   ${consoleOptions.extraArgsViaAddBoolean}
+  - with extraArgs-via-addOptional  ${consoleOptions.extraArgsViaAddOptional}
+
+Should be immutable:
+  - without console options         ${immutable.withoutConsoleOpts}
+  - with console options            ${immutable.withConsoleOpts}
+
+Should offer getters:
+  - for extra-value-args            ${getters.extraValueArgs}
+  - for extra-boolean-args          ${getters.extraValueArgs}
+
+Should set by default:
+  - not skipDistCache               ${default.skipDistCache}
+  - not be verbose by default       ${default.verbose}
+  - connection manager for Teradata ${default.teradataConnManager}
+
+Should build proper SqoopOptions:
+  - for Teradata import             ${build.teradataImport}
+  - for Teradata export             ${build.teradataExport}
+"""
+  object consoleOptions {
+    def requiredArg = {
       //given
       val args = Args(List("--target-dir", "somedir"))
       //when
@@ -14,7 +40,8 @@ class SqoopSyntaxSpec extends Specification {
       //then
       so.getTargetDir must beEqualTo("somedir")
     }
-    " create Parlour DSL with boolean arg" in {
+
+    def booleanArg = {
       //given
       val args = Args("--verbose" :: requiredSqoopImportArgList)
       //when
@@ -22,7 +49,8 @@ class SqoopSyntaxSpec extends Specification {
       //then
       so.getVerbose must beEqualTo(true)
     }
-    " create Parlour DSL with optional arg" in {
+
+    def optionalArg = {
       //given
       val args = Args("--teradata-batch-size" :: "7" :: requiredSqoopImportArgList)
       //when
@@ -30,7 +58,8 @@ class SqoopSyntaxSpec extends Specification {
       //then
       so.getExtraArgs must beEqualTo(Array("--batch-size", "7"))
     }
-    " create Parlour DSL with extraArgs-via-addBoolean arg" in {
+
+    def extraArgsViaAddBoolean = {
       //given
       val args = Args("--teradata-skip-xview" :: requiredSqoopImportArgList)
       //when
@@ -38,7 +67,8 @@ class SqoopSyntaxSpec extends Specification {
       //then
       so.getExtraArgs must beEqualTo(Array("--skip-xview"))
     }
-    " create Parlour DSL with extraArgs-via-addOptional arg" in {
+
+    def extraArgsViaAddOptional = {
       //given
       val args = Args("--teradata-query-band" :: "someband" :: requiredSqoopImportArgList)
       //when
@@ -50,8 +80,8 @@ class SqoopSyntaxSpec extends Specification {
 
   def requiredSqoopImportArgList() = List("--target-dir", "somedir")
 
-  "Parlour DSL" should {
-    " be immutable without console args" in {
+  object immutable {
+    def withoutConsoleOpts = {
       //given
       val parent = ParlourImportDsl()
         .username("username")
@@ -64,18 +94,21 @@ class SqoopSyntaxSpec extends Specification {
       childOpts1.getPassword must not be(childOpts2.getPassword)
     }
 
-    " be immutable with console args" in {
-    //given
-    val parent = ParlourImportDsl().setOptions(Args(requiredSqoopImportArgList))
+    def withConsoleOpts = {
+      //given
+      val parent = ParlourImportDsl().setOptions(Args(requiredSqoopImportArgList))
 
-    //when
-    val childOpts1 = parent.password("password 1").toSqoopOptions
-    val childOpts2 = parent.password("password 2").toSqoopOptions
+      //when
+      val childOpts1 = parent.password("password 1").toSqoopOptions
+      val childOpts2 = parent.password("password 2").toSqoopOptions
 
-    //then
-    childOpts1.getPassword must not be(childOpts2.getPassword)
+      //then
+      childOpts1.getPassword must not be(childOpts2.getPassword)
     }
-    " allow to get extra-value-args" in {
+  }
+
+  object getters {
+    def extraValueArgs = {
       //given
       val someAdditionalValue = "hostname"
       val errorTable = "error-table"
@@ -87,7 +120,8 @@ class SqoopSyntaxSpec extends Specification {
       //then
       res must beEqualTo(Some(errorTable))
     }
-    " allow to get extra-boolean-args" in {
+
+    def extraBooleanArgs = {
       //given
       val someAdditionalValue = 5
       val dsl = TeradataParlourImportDsl().numPartitionsForStagingTable(someAdditionalValue).keepStagingTable()
@@ -100,27 +134,25 @@ class SqoopSyntaxSpec extends Specification {
     }
   }
 
-  "SqoopOptions for all Dsls" should {
-    " not skipDistCache by default" in {
+  object default {
+    def skipDistCache = {
       val opts = ParlourImportDsl().toSqoopOptions
       opts.isSkipDistCache must beEqualTo(false)
     }
 
-    " not be verbose by default" in {
+    def verbose = {
       val opts = ParlourImportDsl().toSqoopOptions
       opts.getVerbose must beEqualTo(false)
     }
-  }
 
-  "SqoopOptions for all TeradataParlourDsls" should {
-    " have connManager by default" in {
+    def teradataConnManager = {
       val opts = TeradataParlourImportDsl().toSqoopOptions
       opts.getConnManagerClassName must beEqualTo("com.cloudera.connector.teradata.TeradataManager")
     }
   }
 
-  "TeradataParlourImportDsl" should {
-    " create proper SqoopOptions for simple example" in {
+  object build {
+    def teradataImport = {
       //given
       val connString = "jdbc:teradata://some.server/database=DB1"
       val username = "some username"
@@ -144,30 +176,28 @@ class SqoopSyntaxSpec extends Specification {
       sqoopOpts.getTableName must beEqualTo(tableName)
     }
 
-    "TeradataParlourExportDsl" should {
-      " create proper SqoopOptions for simple example" in {
-        //given
-        val connString = "jdbc:teradata://some.server/database=DB1"
-        val username = "some username"
-        val password = "some password"
-        val tableName = "some table"
+    def teradataExport = {
+      //given
+      val connString = "jdbc:teradata://some.server/database=DB1"
+      val username = "some username"
+      val password = "some password"
+      val tableName = "some table"
 
-        //when
-        val sqoopOpts = TeradataParlourExportDsl()
-          .outputMethod(BatchInsert)
-          .connectionString(connString)
-          .username(username)
-          .password(password)
-          .tableName(tableName)
-          .toSqoopOptions
+      //when
+      val sqoopOpts = TeradataParlourExportDsl()
+        .outputMethod(BatchInsert)
+        .connectionString(connString)
+        .username(username)
+        .password(password)
+        .tableName(tableName)
+        .toSqoopOptions
 
-        //then
-        sqoopOpts.getExtraArgs must beEqualTo(Array("--output-method", "batch.insert"))
-        sqoopOpts.getConnectString must beEqualTo(connString)
-        sqoopOpts.getUsername must beEqualTo(username)
-        sqoopOpts.getPassword must beEqualTo(password)
-        sqoopOpts.getTableName must beEqualTo(tableName)
-      }
+      //then
+      sqoopOpts.getExtraArgs must beEqualTo(Array("--output-method", "batch.insert"))
+      sqoopOpts.getConnectString must beEqualTo(connString)
+      sqoopOpts.getUsername must beEqualTo(username)
+      sqoopOpts.getPassword must beEqualTo(password)
+      sqoopOpts.getTableName must beEqualTo(tableName)
     }
   }
 }

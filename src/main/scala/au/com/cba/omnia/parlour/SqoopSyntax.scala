@@ -16,6 +16,7 @@ package au.com.cba.omnia.parlour
 
 import java.util.Properties
 
+import au.com.cba.omnia.parlour.SqoopSyntax._
 import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
@@ -49,24 +50,27 @@ object SqoopSyntax {
 
 }
 
-sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
-  protected[parlour] def newSqoopOptions = new SqoopOptions
-  def updates: List[SqoopOptions => Unit]
 
-   def toSqoopOptions = {
+
+
+
+sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
+  def defaultOptions: List[SqoopModifier]
+  def updates: List[SqoopModifier]
+
+  def toSqoopOptions = {
     //foldRight instead of foldLeft to enable options overriding
-    updates.foldRight(newSqoopOptions) {
+    (updates ++ defaultOptions).foldRight(new SqoopOptions) {
       (f, opts) =>
         f(opts)
         opts
     }
   }
 
-  import SqoopSyntax._
-  def update(f: SqoopModifier) = {
+  def update(f: SqoopModifier): Self = {
     val nextUpdates = f :: updates
 
-    val nextDsl = this.asInstanceOf[ParlourDsl[_]] match {
+    val nextDsl = this.asInstanceOf[Self] match {
       case ParlourImportDsl(_) => ParlourImportDsl(nextUpdates)
       case ParlourExportDsl(_) => ParlourExportDsl(nextUpdates)
       case TeradataParlourImportDsl(_) => TeradataParlourImportDsl(nextUpdates)
@@ -84,11 +88,8 @@ sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
 }
 
 trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with ConsoleOptions[Self] {
-  override protected[parlour] def newSqoopOptions: SqoopOptions = {
-    val opts = new SqoopOptions
-    opts.setSkipDistCache(false)
-    opts.setVerbose(false)
-    opts
+  override def defaultOptions: List[SqoopModifier] = {
+    List[SqoopModifier](_.setSkipDistCache(false), _.setVerbose(false))
   }
 
   /** Specify JDBC connect string */
@@ -266,10 +267,8 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
 trait TeradataParlourOptions[+Self <: TeradataParlourOptions[_]] extends ParlourOptions[Self] {
   import TeradataParlourOptions._
 
-  override protected[parlour] def newSqoopOptions: SqoopOptions = {
-    val opts = super.newSqoopOptions
-    opts.setConnManagerClassName("com.cloudera.connector.teradata.TeradataManager")
-    opts
+  override def defaultOptions: List[SqoopModifier] = {
+    super.defaultOptions ++ List[SqoopModifier](_.setConnManagerClassName("com.cloudera.connector.teradata.TeradataManager"))
   }
 
   protected def getExtraBooleanArg(name: String): Option[Boolean] = Option(toSqoopOptions.getExtraArgs.find(_ == name).isDefined)
@@ -317,12 +316,12 @@ trait TeradataParlourOptions[+Self <: TeradataParlourOptions[_]] extends Parlour
 }
 
 object TeradataParlourOptions {
-  val STAGING_TABLE = "--staging-table"
-  val STAGING_DATABASE = "--staging-database"
-  val BATCH_SIZE = "--batch-size"
-  val FORCE_STAGING = "--force-staging"
-  val QUERY_BAND = "--query-band"
-  val SKIP_VIEW = "--skip-xview"
+  val STAGING_TABLE     = "--staging-table"
+  val STAGING_DATABASE  = "--staging-database"
+  val BATCH_SIZE        = "--batch-size"
+  val FORCE_STAGING     = "--force-staging"
+  val QUERY_BAND        = "--query-band"
+  val SKIP_VIEW         = "--skip-xview"
 }
 
 sealed trait TeradataInputMethod
@@ -385,10 +384,10 @@ trait TeradataParlourImportOptions[+Self <: TeradataParlourImportOptions[_]] ext
 }
 
 object TeradataParlourImportOptions {
-  val INPUT_METHOD = "--input-method"
-  val ACCESS_LOCK = "--access-lock"
-  val KEEP_STAGING_TABLE = "--keep-staging-table"
-  val NUM_PARTITIONS_FOR_STAGING_TABLE = "--num-partitions-for-staging-table"
+  val INPUT_METHOD                      = "--input-method"
+  val ACCESS_LOCK                       = "--access-lock"
+  val KEEP_STAGING_TABLE                = "--keep-staging-table"
+  val NUM_PARTITIONS_FOR_STAGING_TABLE  = "--num-partitions-for-staging-table"
 }
 
 sealed trait TeradataOutputMethod
@@ -439,9 +438,9 @@ trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] ext
 }
 
 object TeradataParlourExportOptions {
-  val OUTPUT_METHOD = "--output-method"
-  val ERROR_TABLE = "--error-table"
-  val FASTLOAD_SOCKET_HOSTNAME = "--fastload-socket-hostname"
+  val OUTPUT_METHOD             = "--output-method"
+  val ERROR_TABLE               = "--error-table"
+  val FASTLOAD_SOCKET_HOSTNAME  = "--fastload-socket-hostname"
 }
 
 trait ConsoleOptions[+Self <: ParlourOptions[_]] {
