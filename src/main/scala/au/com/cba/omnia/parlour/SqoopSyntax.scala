@@ -157,6 +157,11 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   def skipDistCache() = update(_.setSkipDistCache(true))
   addBoolean("skip-dist-cache", () => so => so.setSkipDistCache(true))
   def getSkipDistCache = Option(toSqoopOptions.isSkipDistCache)
+
+  /** Columns to import/export from/to table */
+  def columns(cols: Array[String]) = update(_.setColumns(cols))
+  addOptional("columns", (v: Array[String]) => so => so.setColumns(v), str => str.split(","))
+  def getColumns = Option(toSqoopOptions.getColumns)
 }
 
 trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOptions[Self] {
@@ -213,11 +218,6 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
   def append() = update(_.setAppendMode(true))
   addBoolean("append", () => so => so.setAppendMode(true))
   def getAppend = Option(toSqoopOptions.isAppendMode)
-
-  /** Columns to import from table */
-  def columns(cols: Array[String]) = update(_.setColumns(cols))
-  addOptional("columns", (v: Array[String]) => so => so.setColumns(v), str => str.split(","))
-  def getColumns = Option(toSqoopOptions.getColumns)
 
   /** Number of entries to read from database at once */
   def fetchSize(size: Int) = update(_.setFetchSize(size))
