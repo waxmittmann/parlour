@@ -38,7 +38,7 @@ class ExportSqoopFlow(
   options: SqoopOptions,
   source: Tap[_, _, _],
   sink: Tap[_, _, _]
-) extends ProcessFlow[ExportSqoopRiffle](name, new ExportSqoopRiffle(options, source, sink)) {
+) extends FixedProcessFlow[ExportSqoopRiffle](name, new ExportSqoopRiffle(options, source, sink)) {
 }
 
 object ExportSqoopRiffle {

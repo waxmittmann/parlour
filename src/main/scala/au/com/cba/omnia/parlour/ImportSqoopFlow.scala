@@ -37,7 +37,7 @@ class ImportSqoopFlow(name: String,
   options: SqoopOptions,
   source: Tap[_, _, _],
   sink: Tap[_, _, _]
-) extends ProcessFlow[ImportSqoopRiffle](name, new ImportSqoopRiffle(options, source, sink)) {
+) extends FixedProcessFlow[ImportSqoopRiffle](name, new ImportSqoopRiffle(options, source, sink)) {
 }
 
 object ImportSqoopRiffle {
