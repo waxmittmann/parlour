@@ -20,10 +20,10 @@ import scalaz._, Scalaz._
 
 import com.cloudera.sqoop.SqoopOptions
 
+import cascading.flow.{Flow, FlowListener}
 import cascading.tap.Tap
 
-import com.twitter.scalding.Write
-import com.twitter.scalding.Csv
+import com.twitter.scalding.{Args, Csv, Write}
 
 import scalikejdbc.{AutoSession, ConnectionPool, SQL}
 import scalikejdbc.LoanPattern._
@@ -43,6 +43,9 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
 
   end to end sqoop flow test      $endToEndFlow
   end to end sqoop job test       $endToEndJob
+
+  failing sqoop job returns false $failingJob
+  sqoop job w/ exception throws   $exceptionalJob
 """
 
   def endToEndFlow = withData(List(
@@ -74,6 +77,22 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
       "003,Robin Hood,0,0",
       "004,Little John,-1,-100"
     )))
+  })
+
+  def failingJob = withData(List())( opts => {
+    opts.setTableName("INVALID")
+    val source = TableTap(opts)
+    val sink   = Csv((dir </> "output").toString).createTap(Write)
+    val job    = new SquishExceptionsImportSqoopJob(opts, source, sink)(scaldingArgs)
+    (new VerifiableJob(job)).run must_== Some(s"Job failed to run <${job.name}>".left)
+  })
+
+  def exceptionalJob = withData(List())( opts => {
+    opts.setTableName("INVALID")
+    val source = TableTap(opts)
+    val sink   = Csv((dir </> "output").toString).createTap(Write)
+    val job    = new ImportSqoopJob(opts, source, sink)(scaldingArgs)
+    (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
   })
 
   def facts(facts: Fact*): Result =
@@ -124,4 +143,25 @@ case class withData(data: List[(String, String, Int, Int)]) extends Fixture[Sqoo
       AsResult(test(opts))
     }
   }
+}
+
+class SquishExceptionsImportSqoopJob(
+  options: SqoopOptions,
+  source: Tap[_, _, _],
+  sink: Tap[_, _, _])(
+  args: Args
+) extends ImportSqoopJob(options, source, sink)(args) {
+  override def buildFlow = {
+    val flow = super.buildFlow
+    flow.addListener(new SquishExceptionListener)
+    flow
+  }
+}
+
+class SquishExceptionListener extends FlowListener {
+  def onStarting(flow: Flow[_]) {}
+  def onStopping(flow: Flow[_]) {}
+  def onCompleted(flow: Flow[_]) {}
+  // mark all throwables as handled
+  def onThrowable(flow: Flow[_], throwable: Throwable): Boolean = true
 }

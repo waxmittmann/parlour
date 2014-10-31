@@ -57,7 +57,6 @@ class ExportSqoopJob(
    */
   override def run: Boolean = {
     System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
-    buildFlow.complete
-    true
+    super.run
   }
 }
