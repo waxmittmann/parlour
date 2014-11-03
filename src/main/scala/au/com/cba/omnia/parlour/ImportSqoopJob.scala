@@ -16,7 +16,7 @@ package au.com.cba.omnia.parlour
 
 import com.cloudera.sqoop.SqoopOptions
 
-import com.twitter.scalding.{Args, Job, Mode, Read, Source, Write}
+import com.twitter.scalding._
 
 import cascading.tap.Tap
 
@@ -30,7 +30,9 @@ import org.apache.sqoop.Sqoop
 class ImportSqoopJob(
   options: SqoopOptions,
   source: Tap[_, _, _],
-  sink: Tap[_, _, _])(args: Args) extends Job(args) {
+  sink: Tap[_, _, _])(args: Args) extends Job(args) with HadoopConfigured {
+
+  getHadoopConf.foreach(options.setConf(_))
 
   def this(options: SqoopOptions, sink: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
     this(options, TableTap(options), sink)(args)
