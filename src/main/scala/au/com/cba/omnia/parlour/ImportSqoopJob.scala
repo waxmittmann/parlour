@@ -14,6 +14,8 @@
 
 package au.com.cba.omnia.parlour
 
+import java.util.UUID
+
 import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
@@ -48,7 +50,7 @@ class ImportSqoopJob(
   def this(options: SqoopOptions)(args: Args)(implicit mode: Mode) = this(options, TargetDirTap(options))(args)
 
   override def buildFlow =
-    new ImportSqoopFlow(s"$name [${uniqueId.get}]", options, source, sink)
+    new ImportSqoopFlow(s"$name-${UUID.randomUUID}", options, source, sink)
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()

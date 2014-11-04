@@ -38,7 +38,7 @@ libraryDependencies ++=
         exclude("org.apache.avro", "avro-mapred")
         exclude("commons-daemon", "commons-daemon"),
       "commons-daemon"     % "commons-daemon" % "1.0.13",
-      "au.com.cba.omnia"  %% "thermometer" % "0.4.0-20140925013601-d800eeb" % "test",
+      "au.com.cba.omnia"  %% "thermometer" % "0.5.0-20141102234309-bf319cc" % "test",
       "org.scalikejdbc"   %% "scalikejdbc" % "2.1.2"                        % "test",
       "org.hsqldb"         % "hsqldb"      % "1.8.0.10"                     % "test"
     )

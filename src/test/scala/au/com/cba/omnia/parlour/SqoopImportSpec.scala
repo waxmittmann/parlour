@@ -94,9 +94,6 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
     val job    = new ImportSqoopJob(opts, source, sink)(scaldingArgs)
     (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
   })
-
-  def facts(facts: Fact*): Result =
-    facts.toList.map(fact => fact.run(Context(jobConf))).suml(Result.ResultMonoid)
 }
 
 /** Provides a temporary dummy table for sqoop iport tests */
