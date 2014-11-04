@@ -36,8 +36,8 @@ import riffle.process._
 class ExportSqoopFlow(
   name: String,
   options: SqoopOptions,
-  source: Tap[_, _, _],
-  sink: Tap[_, _, _]
+  source: Option[Tap[_, _, _]],
+  sink: Option[Tap[_, _, _]]
 ) extends FixedProcessFlow[ExportSqoopRiffle](name, new ExportSqoopRiffle(options, source, sink)) {
 }
 
@@ -69,8 +69,8 @@ object ExportSqoopRiffle {
 /** Implements a Riffle for a Sqoop Job */
 @Process
 class ExportSqoopRiffle(options: SqoopOptions,
-  source: Tap[_, _, _],
-  sink: Tap[_, _, _],
+  source: Option[Tap[_, _, _]],
+  sink: Option[Tap[_, _, _]],
   inferPathFromTap: Boolean = true,
   inferSourceDelimitersFromTap: Boolean = true) {
 
@@ -83,23 +83,23 @@ class ExportSqoopRiffle(options: SqoopOptions,
   @ProcessComplete
   def complete(): Unit = {
     // Extract the source path from the source tap.
-    if (inferPathFromTap) {
-      ExportSqoopRiffle.setPathFromTap(source, options)
+    if (inferPathFromTap) { source.foreach( tap =>
+      ExportSqoopRiffle.setPathFromTap(tap, options)
         .leftMap({ error => println(s"Couldn't infer path from source tap.\n\t$error") })
-    }
+    )}
 
     // Extract the delimiters from the source tap.
-    if (inferSourceDelimitersFromTap) {
-      ExportSqoopRiffle.setDelimitersFromTap(source, options)
+    if (inferSourceDelimitersFromTap) { source.foreach( tap =>
+      ExportSqoopRiffle.setDelimitersFromTap(tap, options)
         .leftMap({ error => println(s"Couldn't infer delimiters from source tap's scheme.\n\t$error") })
-    }
+    )}
 
     new ExportTool().run(options)
   }
 
   @DependencyIncoming
-  def getIncoming(): JCollection[_] = List(source).asJava
+  def getIncoming(): JCollection[_] = source.toList.asJava
 
   @DependencyOutgoing
-  def getOutgoing(): JCollection[_] = List(sink).asJava
+  def getOutgoing(): JCollection[_] = sink.toList.asJava
 }

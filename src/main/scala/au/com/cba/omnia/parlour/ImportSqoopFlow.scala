@@ -35,8 +35,8 @@ import riffle.process._
 /** Implements a Cascading Flow that wraps the Sqoop Process */
 class ImportSqoopFlow(name: String,
   options: SqoopOptions,
-  source: Tap[_, _, _],
-  sink: Tap[_, _, _]
+  source: Option[Tap[_, _, _]],
+  sink: Option[Tap[_, _, _]]
 ) extends FixedProcessFlow[ImportSqoopRiffle](name, new ImportSqoopRiffle(options, source, sink)) {
 }
 
@@ -69,8 +69,8 @@ object ImportSqoopRiffle {
 /** Implements a Riffle for a Sqoop Job */
 @Process
 class ImportSqoopRiffle(options: SqoopOptions,
-  source: Tap[_, _, _],
-  sink: Tap[_, _, _],
+  source: Option[Tap[_, _, _]],
+  sink: Option[Tap[_, _, _]],
   inferPathFromTap: Boolean = true,
   inferSinkDelimitersFromTap: Boolean = true) {
 
@@ -83,23 +83,23 @@ class ImportSqoopRiffle(options: SqoopOptions,
   @ProcessComplete
   def complete(): Unit = {
     // Extract the target path from the sink tap.
-    if (inferPathFromTap) {
-      ImportSqoopRiffle.setTargetPathFromTap(sink, options)
+    if (inferPathFromTap) { sink.foreach( tap =>
+      ImportSqoopRiffle.setTargetPathFromTap(tap, options)
         .leftMap({ error => println(s"Couldn't infer path from sink tap.\n\t$error") })
-    }
+    )}
 
-    // Extract the delimiters from the source tap.
-    if (inferSinkDelimitersFromTap) {
-      ImportSqoopRiffle.setDelimitersFromTap(sink, options)
+    // Extract the delimiters from the sink tap.
+    if (inferSinkDelimitersFromTap) { sink.foreach( tap =>
+      ImportSqoopRiffle.setDelimitersFromTap(tap, options)
         .leftMap({ error => println(s"Couldn't infer delimiters from sink tap's scheme.\n\t$error") })
-    }
+    )}
 
     new ImportTool().run(options)
   }
 
   @DependencyIncoming
-  def getIncoming(): JCollection[_] = List(source).asJava
+  def getIncoming(): JCollection[_] = source.toList.asJava
 
   @DependencyOutgoing
-  def getOutgoing(): JCollection[_] = List(sink).asJava
+  def getOutgoing(): JCollection[_] = sink.toList.asJava
 }

@@ -43,6 +43,8 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
 
   end to end sqoop flow test      $endToEndFlow
   end to end sqoop job test       $endToEndJob
+  end to end sqoop execution test $endToEndExecution
+  sqoop execution test w/ no sink $endToEndExecutionNoSink
 
   failing sqoop job returns false $failingJob
   sqoop job w/ exception throws   $exceptionalJob
@@ -54,7 +56,7 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
   ))( opts => {
     val source = TableTap(opts)
     val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val flow   = new ImportSqoopFlow("endToEndFlow", opts, source, sink)
+    val flow   = new ImportSqoopFlow("endToEndFlow", opts, Some(source), Some(sink))
 
     println(s"=========== endToEndFlow test running in $dir ===============")
 
@@ -78,6 +80,31 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
       "004,Little John,-1,-100"
     )))
   })
+
+  def endToEndExecution = withData(List(
+    ("abc", "Batman", 100000, 10000000)
+  ))( opts => {
+    val sink:   Tap[_, _, _] = Csv((dir </> "output").toString).createTap(Write)
+    val execution = SqoopExecution.sqoopImport(opts, sink)
+    executesOk(execution)
+    facts(dir </> "output" </> "part-m-00000" ==> lines(List(
+      "abc,Batman,100000,10000000"
+    )))
+  })
+
+  def endToEndExecutionNoSink = withData(List(
+    ("abc", "Batman", 100000, 10000000)
+  ))( opts => {
+    opts.setFieldsTerminatedBy('|')
+    opts.setTargetDir((dir </> "output").toString)
+    val execution = SqoopExecution.sqoopImport(opts)
+    executesOk(execution)
+    facts(dir </> "output" </> "part-m-00000" ==> lines(List(
+      "abc|Batman|100000|10000000"
+    )))
+  })
+
+
 
   def failingJob = withData(List())( opts => {
     opts.setTableName("INVALID")
