@@ -73,9 +73,14 @@ FixedProcessFlowSpec
     flow.start
     flow.stop
     flow.waitForProcess
-    // two possible results depending on whether start or stop thread goes first
+    // three invariants:
+    // OnStopping and OnCompleted both fire
+    // if OnStarting fires, both OnStarting and OnStopping fire before OnCompleted
+    // onThrowing doesn't fire
     (listener.calls must_== List(OnStarting, OnStopping, OnCompleted)) or
-    (listener.calls must_== List(OnStopping, OnCompleted))
+    (listener.calls must_== List(OnStopping, OnStarting, OnCompleted)) or
+    (listener.calls must_== List(OnStopping, OnCompleted)) or
+    (listener.calls must_== List(OnCompleted, OnStopping))
   }
 
   def onThrowableExceptionCallbacks = {
