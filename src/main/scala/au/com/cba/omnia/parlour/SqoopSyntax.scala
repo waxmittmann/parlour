@@ -474,11 +474,21 @@ trait ConsoleOptions[+Self <: ParlourOptions[_]] {
   def addOptional[T](name: String, setter: T => SqoopOptions => Unit, converter: String => T, default: Option[T] = None): ConsoleOptions[Self] = {
     val f = (args: Args) => {
       args.optional(name) match {
-        case Some(value) => setter(converter(value))
-        case None        => default match {
-          case Some(defaultValue) => setter(defaultValue)
-          case None               => s:SqoopOptions => ()
+        case Some(value)                => setter(converter(value))
+        case None if args.boolean(name) => {
+          //hack-fix for empty string parameters, e.g. --input-null-string ""
+          //scalding.Args treats "" as empty value, it's simply dropped
+
+          //more technically: here we satisfy (args.optional(name) == None && args.boolean(name) != None)
+          //it means args.m.get(name) == List(). Since it's not a boolean parameter we know there was an attempt to set
+          //a parameter with some value, but the value is now missing
+          setter(converter(""))
         }
+        case None                       =>
+          default match {
+            case Some(defaultValue) => setter(defaultValue)
+            case None               => s:SqoopOptions => ()
+          }
       }
     }
     mods.put(name, f)
