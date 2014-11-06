@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for Sqoop Executions</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/853552a82952be9e2cad4fb2d92c0d024e387a07//src/main/scala/au/com/cba/omnia/parlour/SqoopExecution.scala" target="_blank">SqoopExecution.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Factory for Sqoop Executions</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/1d8d88c57693b2ddf20039c5d3ff0b1a39a5fc46//src/main/scala/au/com/cba/omnia/parlour/SqoopExecution.scala" target="_blank">SqoopExecution.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -319,15 +319,15 @@
       </h4>
       <p class="shortcomment cmt">An Execution that uses sqoop to export data to a database.</p>
     </li><li name="au.com.cba.omnia.parlour.SqoopExecution#sqoopExport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sqoopExport(options:com.cloudera.sqoop.SqoopOptions,source:com.twitter.scalding.Source)(implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.Execution[Unit]"></a>
-      <a id="sqoopExport(SqoopOptions,Source)(Mode):Execution[Unit]"></a>
+      <a id="sqoopExport(options:com.cloudera.sqoop.SqoopOptions,source:com.twitter.scalding.Source):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="sqoopExport(SqoopOptions,Source):Execution[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sqoopExport</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">sqoopExport</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">An Execution that uses sqoop to export data from a tap to a database.</p><div class="fullcomment"><div class="comment cmt"><p>An Execution that uses sqoop to export data from a tap to a database.</p><p><code>options</code> does not need any information about the source.
@@ -347,15 +347,15 @@ We infer that information from <code>source</code>.
       </h4>
       <p class="shortcomment cmt">An Execution that uses sqoop to import data.</p>
     </li><li name="au.com.cba.omnia.parlour.SqoopExecution#sqoopImport" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="sqoopImport(options:com.cloudera.sqoop.SqoopOptions,sink:com.twitter.scalding.Source)(implicitmode:com.twitter.scalding.Mode):com.twitter.scalding.Execution[Unit]"></a>
-      <a id="sqoopImport(SqoopOptions,Source)(Mode):Execution[Unit]"></a>
+      <a id="sqoopImport(options:com.cloudera.sqoop.SqoopOptions,sink:com.twitter.scalding.Source):com.twitter.scalding.Execution[Unit]"></a>
+      <a id="sqoopImport(SqoopOptions,Source):Execution[Unit]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">sqoopImport</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="sink">sink: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
+        <span class="name">sqoopImport</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="sink">sink: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="result">: <span class="extype" name="com.twitter.scalding.Execution">Execution</span>[<span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       <p class="shortcomment cmt">An Execution that uses sqoop to import data to a tap.</p><div class="fullcomment"><div class="comment cmt"><p>An Execution that uses sqoop to import data to a tap.</p><p><code>options</code> does not need any information about the destination.
