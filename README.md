@@ -10,6 +10,10 @@ Parlour provides a basic Cascading/Scalding Sqoop integration allowing import to
 
 It also provides support for the Cloudera/Teradata Connector.
 
+[Scaladoc](https://commbank.github.io/parlour/latest/api/index.html)
+
+[Github Pages](http://commbank.github.io/parlour/)
+
 Third-Party Libraries
 ---------------------
 
