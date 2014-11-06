@@ -28,9 +28,7 @@ import cascading.tap.Tap
 import com.twitter.scalding.{Args, Csv, Write}
 
 import scalikejdbc.{AutoSession, ConnectionPool, SQL}
-import scalikejdbc.LoanPattern._
 
-import au.com.cba.omnia.thermometer.context.Context
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.fact.Fact
