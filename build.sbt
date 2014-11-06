@@ -48,3 +48,7 @@ uniformThriftSettings
 parallelExecution in Test := false
 
 uniformAssemblySettings
+
+uniform.docSettings("https://github.com/CommBank/parlour")
+
+uniform.ghsettings

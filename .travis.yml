@@ -9,11 +9,12 @@ install:
 - git clone https://github.com/CommBank/ci.git
 - chmod ugo+x ci/*
 - ci/sbt-setup.sh
+- ci/sbt-setup-version.sh
 script:
-- sbt -Dsbt.global.base=$TRAVIS_BUILD_DIR/ci '; test; package; assembly'
+- sbt -Dsbt.global.base=$TRAVIS_BUILD_DIR/ci '; test; package; assembly' && ci/sbt-deploy.sh && ci/gh-pages.sh
 after_script:
-- ci/sbt-deploy.sh
 - rm -rf ci
 env:
   global:
-    secure: crMQyJbG6tmKFoSV0WhVXY0h95CLdgAw5fGJx4xDWkeXvIbyr117bemPiRDv+t7DXxaqMqptmGyvI460hZ08c9l2VcavhYtwE7NVy2WVjUqHrI+7+gG3iPMWY7AUkmopaH3JSlJlKTKg6Ya7vKHTkv/dcSQGSF4Co3LJ9hFxXns=
+  - secure: Rp3rwHWSjiJAPRhzlMRhAQNRBpPsFahjWgh21IcMKbUp/gshNyEDNaqrY0H1CRGu5/dzXniUXMi6ClbM0M5lMKUj7XPSQUfDyvk72apXB62S9XYG41aBM+TAmlblwR9eQ0b+xySIoYRxZfEZ3heHwQJPZVnohNq92K1+ge9RC2c=
+  - secure: VAdn8952RVU16RQ0037ZjKt+ya1SNm/h0qs/e7vHpPPkVgImWpVSN5RUhk+IVGLQUJBQ/rGlqtWexKQPQ0+B3vkuNJ94cAwhJp6sPOfZ+Ha+9LmHS9+C/aofTWvihv9Vopy80cvXY2bUGhNZYH5iW+ep0ch4wlIAWDfAj2ZLl1I=
