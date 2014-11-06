@@ -1,0 +1,5 @@
+name: parlour
+exclude: [Gemfile]
+markdown: kramdown
+
+releaseVersion:  "1.5.0-20141106220911-853552a"
