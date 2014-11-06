@@ -18,7 +18,7 @@ import java.util.UUID
 
 import com.cloudera.sqoop.SqoopOptions
 
-import com.twitter.scalding.{Execution, JobStats}
+import com.twitter.scalding.{Execution, Mode, Read, Source, Write}
 
 import cascading.tap.Tap
 
@@ -31,8 +31,8 @@ object SqoopExecution {
     * `options` does not need any information about the destination.
     * We infer that information from `sink`.
     */
-  def sqoopImport(options: SqoopOptions, sink: Tap[_, _, _]): Execution[Unit] = {
-    val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, Some(sink))
+  def sqoopImport(options: SqoopOptions, sink: Source)(implicit mode: Mode): Execution[Unit] = {
+    val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, Some(sink.createTap(Write)))
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 
@@ -48,8 +48,8 @@ object SqoopExecution {
     * `options` does not need any information about the source.
     * We infer that information from `source`.
     */
-  def sqoopExport(options: SqoopOptions, source: Tap[_, _, _]): Execution[Unit] = {
-    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, Some(source), None)
+  def sqoopExport(options: SqoopOptions, source: Source)(implicit mode: Mode): Execution[Unit] = {
+    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, Some(source.createTap(Read)), None)
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 

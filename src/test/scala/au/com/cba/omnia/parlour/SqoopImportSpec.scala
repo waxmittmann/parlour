@@ -87,7 +87,7 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
   def endToEndExecution = withData(List(
     ("abc", "Batman", 100000, 10000000)
   ))( opts => {
-    val sink:   Tap[_, _, _] = Csv((dir </> "output").toString).createTap(Write)
+    val sink      = Csv((dir </> "output").toString)
     val execution = SqoopExecution.sqoopImport(opts, sink)
     executesOk(execution)
     facts(dir </> "output" </> "part-m-00000" ==> lines(List(
@@ -125,7 +125,7 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
 
   def failingExecution = withData(List())( opts => {
     opts.setTableName("INVALID")
-    val sink:   Tap[_, _, _] = Csv((dir </> "output").toString).createTap(Write)
+    val sink      = Csv((dir </> "output").toString)
     val execution = SqoopExecution.sqoopImport(opts, sink)
     execute(execution) must beLike { case Failure(_) => ok }
   })
