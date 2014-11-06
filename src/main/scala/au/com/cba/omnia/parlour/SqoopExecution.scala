@@ -16,23 +16,27 @@ package au.com.cba.omnia.parlour
 
 import java.util.UUID
 
+import org.apache.hadoop.conf.Configuration
+
 import com.cloudera.sqoop.SqoopOptions
 
-import com.twitter.scalding.{Execution, Mode, Read, Source, Write}
+import com.twitter.scalding.{Args, Execution, Mode, Read, Source, Write}
 
 import cascading.tap.Tap
 
 /** Factory for Sqoop Executions */
 object SqoopExecution {
-
   /**
     * An Execution that uses sqoop to import data to a tap.
     *
     * `options` does not need any information about the destination.
     * We infer that information from `sink`.
     */
-  def sqoopImport(options: SqoopOptions, sink: Source)(implicit mode: Mode): Execution[Unit] = {
-    val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, Some(sink.createTap(Write)))
+  def sqoopImport(options: SqoopOptions, sink: Source): Execution[Unit] = {
+    //TODO fix when scalding provides access to the mode
+    val mode = Mode(Args("--hdfs"), new Configuration)
+    val tap  =Some(sink.createTap(Write)(mode))
+    val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, tap) 
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 
