@@ -22,8 +22,6 @@ import com.twitter.scalding._
 
 import cascading.tap.Tap
 
-import org.apache.sqoop.Sqoop
-
 /**
  * Sqoop export Job that can be embedded within a Cascade
  *
@@ -53,12 +51,4 @@ class ExportSqoopJob(
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()
-
-  /**
-   * Overriden to return success (true) - it will throw an exception on any failures.
-   */
-  override def run: Boolean = {
-    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
-    super.run
-  }
 }

@@ -20,6 +20,7 @@ import java.util.{Collection => JCollection}
 
 import com.cloudera.sqoop.SqoopOptions
 
+import org.apache.sqoop.Sqoop
 import org.apache.sqoop.tool.ExportTool
 
 import scalaz.Scalaz._
@@ -94,6 +95,7 @@ class ExportSqoopRiffle(options: SqoopOptions,
         .leftMap({ error => println(s"Couldn't infer delimiters from source tap's scheme.\n\t$error") })
     )}
 
+    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
     new ExportTool().run(options)
   }
 

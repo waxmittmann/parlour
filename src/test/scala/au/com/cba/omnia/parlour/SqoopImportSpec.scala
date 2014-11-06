@@ -16,7 +16,9 @@ package au.com.cba.omnia.parlour
 
 import java.util.UUID
 
-import scalaz._, Scalaz._
+import scala.util.Failure
+
+import scalaz.{Failure => _, _}, Scalaz._
 
 import com.cloudera.sqoop.SqoopOptions
 
@@ -48,6 +50,7 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
 
   failing sqoop job returns false $failingJob
   sqoop job w/ exception throws   $exceptionalJob
+  failing sqoop execution fails   $failingExecution
 """
 
   def endToEndFlow = withData(List(
@@ -104,8 +107,6 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
     )))
   })
 
-
-
   def failingJob = withData(List())( opts => {
     opts.setTableName("INVALID")
     val source = TableTap(opts)
@@ -120,6 +121,13 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
     val sink   = Csv((dir </> "output").toString).createTap(Write)
     val job    = new ImportSqoopJob(opts, source, sink)(scaldingArgs)
     (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
+  })
+
+  def failingExecution = withData(List())( opts => {
+    opts.setTableName("INVALID")
+    val sink:   Tap[_, _, _] = Csv((dir </> "output").toString).createTap(Write)
+    val execution = SqoopExecution.sqoopImport(opts, sink)
+    execute(execution) must beLike { case Failure(_) => ok }
   })
 }
 
