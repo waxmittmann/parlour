@@ -35,7 +35,7 @@ object SqoopExecution {
   def sqoopImport(options: SqoopOptions, sink: Source): Execution[Unit] = {
     //TODO fix when scalding provides access to the mode
     val mode = Mode(Args("--hdfs"), new Configuration)
-    val tap  =Some(sink.createTap(Write)(mode))
+    val tap  = Some(sink.createTap(Write)(mode))
     val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, tap) 
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
@@ -52,14 +52,17 @@ object SqoopExecution {
     * `options` does not need any information about the source.
     * We infer that information from `source`.
     */
-  def sqoopExport(options: SqoopOptions, source: Source)(implicit mode: Mode): Execution[Unit] = {
-    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, Some(source.createTap(Read)), None)
+  def sqoopExport(options: SqoopOptions, source: Source): Execution[Unit] = {
+    //TODO fix when scalding provides access to the mode
+    val mode = Mode(Args("--hdfs"), new Configuration)
+    val tap  = Some(source.createTap(Read)(mode))
+    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, tap, None)
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 
   /** An Execution that uses sqoop to export data to a database. */
   def sqoopExport(options: SqoopOptions): Execution[Unit] = {
-    val flow = new ImportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, None, None)
+    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, None, None)
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 }
