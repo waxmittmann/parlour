@@ -21,12 +21,13 @@ import java.util.{Collection => JCollection}
 import com.cloudera.sqoop.SqoopOptions
 
 import org.apache.sqoop.Sqoop
-import org.apache.sqoop.tool.ExportTool
+import org.apache.sqoop.tool.{EvalSqlTool, ExportTool}
+
+import org.apache.commons.lang.StringUtils
 
 import scalaz.Scalaz._
 import scalaz.{\/ => \/}
 
-import cascading.flow.hadoop.ProcessFlow
 import cascading.scheme.hadoop.TextDelimited
 import cascading.tap.Tap
 import cascading.tap.hadoop.Hfs
@@ -96,6 +97,9 @@ class ExportSqoopRiffle(options: SqoopOptions,
     )}
 
     System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
+    if (!StringUtils.isEmpty(options.getSqlQuery)) {
+      new EvalSqlTool().run(options)
+    }
     new ExportTool().run(options)
   }
 
