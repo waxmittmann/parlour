@@ -14,98 +14,88 @@
 
 package au.com.cba.omnia.parlour
 
-import scala.collection.JavaConverters.seqAsJavaListConverter
-
-import java.util.{Collection => JCollection}
-
-import com.cloudera.sqoop.SqoopOptions
-
 import org.apache.sqoop.Sqoop
 import org.apache.sqoop.tool.{EvalSqlTool, ExportTool}
 
-import org.apache.commons.lang.StringUtils
-
-import scalaz.Scalaz._
-import scalaz.{\/ => \/}
-
-import cascading.scheme.hadoop.TextDelimited
 import cascading.tap.Tap
-import cascading.tap.hadoop.Hfs
 
-import riffle.process._
+import au.com.cba.omnia.parlour.flow.SqoopFlow
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
+import au.com.cba.omnia.parlour.SqoopSetup.Delimiters
 
-/** Implements a Cascading Flow that wraps the Sqoop Process */
+/**
+ * Implements a Cascading Flow that wraps the Sqoop Export Process.
+ * Appends data to the target table.
+ */
 class ExportSqoopFlow(
   name: String,
-  options: SqoopOptions,
-  source: Option[Tap[_, _, _]],
-  sink: Option[Tap[_, _, _]]
-) extends FixedProcessFlow[ExportSqoopRiffle](name, new ExportSqoopRiffle(options, source, sink)) {
-}
-
-object ExportSqoopRiffle {
-  private def getSingleCharacter(name: String, value: Option[String]): String \/ Option[Char] =
-    if (value.map(_.length == 1).getOrElse(true)) value.map(_.head).right
-    else s"$name had multiple characters for a delimiter - this is not supported by Sqoop".left
-
-  def setDelimitersFromTap(source: Tap[_, _, _], options: SqoopOptions) =
-    source.getScheme() match {
-      case delimited: TextDelimited => for {
-        quote     <- getSingleCharacter("Quote", Option(delimited.getQuote))
-        delimiter <- getSingleCharacter("Delimiter", Option(delimited.getDelimiter))
-      } yield {
-        quote.foreach(options.setEscapedBy)
-        delimiter.foreach(options.setInputFieldsTerminatedBy)
-        options.setInputLinesTerminatedBy('\n')
-      }
-      case scheme => s"Unknown scheme used by tap: $scheme (${scheme.getClass.getName})".left
-    }
-
-  def setPathFromTap(source: Tap[_, _, _], options: SqoopOptions) =
-    source match {
-      case hfs: Hfs => options.setExportDir(hfs.getPath.toString).right
-      case tap      => s"Unknown tap used: $tap (${tap.getClass.getName})".left
-    }
-}
-
-/** Implements a Riffle for a Sqoop Job */
-@Process
-class ExportSqoopRiffle(options: SqoopOptions,
+  options: ParlourExportOptions[_],
   source: Option[Tap[_, _, _]],
   sink: Option[Tap[_, _, _]],
   inferPathFromTap: Boolean = true,
-  inferSourceDelimitersFromTap: Boolean = true) {
+  inferSourceDelimitersFromTap: Boolean = true
+) extends SqoopFlow(name, source, sink)(ExportSqoop.doExport(options, inferPathFromTap, inferSourceDelimitersFromTap))
 
-  @ProcessStart
-  def start(): Unit = ()
+/**
+ * Implements a Cascading Flow that wraps the Sqoop Delete and Export Process.
+ * Deletes all rows from the target table before export.
+ */
+class DeleteAndExportSqoopFlow(
+  name: String,
+  options: ParlourExportOptions[_],
+  source: Option[Tap[_, _, _]],
+  sink: Option[Tap[_, _, _]],
+  inferPathFromTap: Boolean = true,
+  inferSourceDelimitersFromTap: Boolean = true
+) extends SqoopFlow(name, source, sink)(ExportSqoop.doDeleteAndExport(options, inferPathFromTap, inferSourceDelimitersFromTap))
 
-  @ProcessStop
-  def stop(): Unit = ()
-
-  @ProcessComplete
-  def complete(): Unit = {
-    // Extract the source path from the source tap.
-    if (inferPathFromTap) { source.foreach( tap =>
-      ExportSqoopRiffle.setPathFromTap(tap, options)
-        .leftMap({ error => println(s"Couldn't infer path from source tap.\n\t$error") })
-    )}
-
-    // Extract the delimiters from the source tap.
-    if (inferSourceDelimitersFromTap) { source.foreach( tap =>
-      ExportSqoopRiffle.setDelimitersFromTap(tap, options)
-        .leftMap({ error => println(s"Couldn't infer delimiters from source tap's scheme.\n\t$error") })
-    )}
-
+/**
+ * Logic for Sqoop Export with appending data or deleting data first.
+ */
+object ExportSqoop {
+  def doExport(options: ParlourExportOptions[_], inferPathFromTap: Boolean, inferSourceDelimitersFromTap: Boolean)
+            (source: Option[Tap[_, _, _]], sink: Option[Tap[_, _, _]]): Unit = {
     System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
-    if (!StringUtils.isEmpty(options.getSqlQuery)) {
-      new EvalSqlTool().run(options)
-    }
-    new ExportTool().run(options)
+
+    val dsl = ParlourExportDsl(options.updates)
+    val inferredOptions = inferFromSourceTap(dsl, source, inferPathFromTap, inferSourceDelimitersFromTap)
+
+    new ExportTool().run(inferredOptions.toSqoopOptions)
   }
 
-  @DependencyIncoming
-  def getIncoming(): JCollection[_] = source.toList.asJava
+  def doDeleteAndExport(options: ParlourExportOptions[_], inferPathFromTap: Boolean, inferSourceDelimitersFromTap: Boolean)
+                     (source: Option[Tap[_, _, _]], sink: Option[Tap[_, _, _]]): Unit = {
+    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
 
-  @DependencyOutgoing
-  def getOutgoing(): JCollection[_] = sink.toList.asJava
+    val dsl = ParlourExportDsl(options.updates)
+    delete(dsl)
+    val inferredDsl = inferFromSourceTap(dsl, source, inferPathFromTap, inferSourceDelimitersFromTap)
+
+    new ExportTool().run(inferredDsl.toSqoopOptions)
+  }
+
+  private def delete(dsl: ParlourExportDsl) = {
+    val withDeleteQuery = dsl sqlQuery s"DELETE FROM ${dsl.getTableName.get}"
+    new EvalSqlTool().run(withDeleteQuery.toSqoopOptions)
+  }
+
+  private def inferFromSourceTap(dsl: ParlourExportDsl, source: Option[Tap[_, _, _]],
+                         inferPathFromTap: Boolean, inferSourceDelimitersFromTap: Boolean): ParlourExportDsl = {
+    val sourcePathOpt = SqoopSetup.inferPathFromTap(inferPathFromTap, source)
+    val sourceDelimiters = SqoopSetup.inferDelimitersFromTap(inferSourceDelimitersFromTap, source)
+
+    val withExportDir = sourcePathOpt.fold(dsl)(dsl exportDir _)
+
+    val withDelimiters = sourceDelimiters match {
+      case Delimiters(quoteOpt, fieldDelimOpt) =>
+        val withQuote = quoteOpt.fold(withExportDir)(withExportDir inputEscapedBy _)
+        val withDelim = fieldDelimOpt.fold(withQuote)(withQuote inputFieldsTerminatedBy _)
+
+        if (inferSourceDelimitersFromTap)
+          withDelim inputLinesTerminatedBy '\n'
+        else withDelim
+    }
+
+    withDelimiters
+  }
 }

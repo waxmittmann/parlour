@@ -18,11 +18,8 @@ import java.util.UUID
 
 import org.apache.hadoop.conf.Configuration
 
-import com.cloudera.sqoop.SqoopOptions
-
 import com.twitter.scalding.{Args, Execution, Mode, Read, Source, Write}
 
-import cascading.tap.Tap
 
 /** Factory for Sqoop Executions */
 object SqoopExecution {
@@ -32,7 +29,7 @@ object SqoopExecution {
     * `options` does not need any information about the destination.
     * We infer that information from `sink`.
     */
-  def sqoopImport(options: SqoopOptions, sink: Source): Execution[Unit] = {
+  def sqoopImport(options: ParlourImportOptions[_], sink: Source): Execution[Unit] = {
     //TODO fix when scalding provides access to the mode
     val mode = Mode(Args("--hdfs"), new Configuration)
     val tap  = Some(sink.createTap(Write)(mode))
@@ -41,18 +38,19 @@ object SqoopExecution {
   }
 
   /** An Execution that uses sqoop to import data. */
-  def sqoopImport(options: SqoopOptions): Execution[Unit] = {
+  def sqoopImport(options: ParlourImportOptions[_]): Execution[Unit] = {
     val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, None)
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 
   /**
     * An Execution that uses sqoop to export data from a tap to a database.
+    * Data is appended to target table.
     *
     * `options` does not need any information about the source.
     * We infer that information from `source`.
     */
-  def sqoopExport(options: SqoopOptions, source: Source): Execution[Unit] = {
+  def sqoopExport(options: ParlourExportOptions[_], source: Source): Execution[Unit] = {
     //TODO fix when scalding provides access to the mode
     val mode = Mode(Args("--hdfs"), new Configuration)
     val tap  = Some(source.createTap(Read)(mode))
@@ -60,9 +58,32 @@ object SqoopExecution {
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 
-  /** An Execution that uses sqoop to export data to a database. */
-  def sqoopExport(options: SqoopOptions): Execution[Unit] = {
+  /**
+   * An Execution that uses sqoop to export data to a database.
+   * Data is appended to target table.
+   */
+  def sqoopExport(options: ParlourExportOptions[_]): Execution[Unit] = {
     val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, None, None)
+    Execution.fromFuture(_ => Execution.run(flow)).unit
+  }
+
+  /**
+   * An Execution that uses sqoop to delete all rows from target table and then export data from a tap to a database.
+   *
+   * `options` does not need any information about the source.
+   * We infer that information from `source`.
+   */
+  def sqoopDeleteAndExport(options: ParlourExportOptions[_], source: Source): Execution[Unit] = {
+    //TODO fix when scalding provides access to the mode
+    val mode = Mode(Args("--hdfs"), new Configuration)
+    val tap  = Some(source.createTap(Read)(mode))
+    val flow = new DeleteAndExportSqoopFlow(s"SqoopExecutionDeleteAndExport-${UUID.randomUUID}", options, tap, None)
+    Execution.fromFuture(_ => Execution.run(flow)).unit
+  }
+
+  /** An Execution that uses sqoop to delete all rows from target table and then export data to a database. */
+  def sqoopDeleteAndExport(options: ParlourExportOptions[_]): Execution[Unit] = {
+    val flow = new DeleteAndExportSqoopFlow(s"SqoopExecutionDeleteAndExport-${UUID.randomUUID}", options, None, None)
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 }

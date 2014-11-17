@@ -16,39 +16,39 @@ package au.com.cba.omnia.parlour
 
 import java.util.UUID
 
-import com.cloudera.sqoop.SqoopOptions
-
 import com.twitter.scalding._
 
 import cascading.tap.Tap
 
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
+
 /**
  * Sqoop import Job that can be embedded within a Cascade
- *
- * See [[SqoopSyntax]] for an easy way to create a [[SqoopOptions]]
  */
 class ImportSqoopJob(
-  options: SqoopOptions,
+  options: ParlourImportOptions[_],
   source: Tap[_, _, _],
   sink: Tap[_, _, _])(args: Args) extends Job(args) with HadoopConfigured {
 
-  getHadoopConf.foreach(options.setConf(_))
-
-  def this(options: SqoopOptions, sink: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
-    this(options, TableTap(options), sink)(args)
+  def this(options: ParlourImportOptions[_], sink: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
+    this(options, TableTap(options.toSqoopOptions), sink)(args)
 
   /** Helper constructor that allows easy usage from Scalding */
-  def this(options: SqoopOptions, source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
+  def this(options: ParlourImportOptions[_], source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
     this(options, source.createTap(Read), sink.createTap(Write))(args)
 
   /** Helper constructor that allows easy usage from Scalding */
-  def this(options: SqoopOptions, sink: Source)(args: Args)(implicit mode: Mode) =
-    this(options, TableTap(options), sink.createTap(Write))(args)
+  def this(options: ParlourImportOptions[_], sink: Source)(args: Args)(implicit mode: Mode) =
+    this(options, TableTap(options.toSqoopOptions), sink.createTap(Write))(args)
 
-  def this(options: SqoopOptions)(args: Args)(implicit mode: Mode) = this(options, TargetDirTap(options))(args)
+  def this(options: ParlourImportOptions[_])(args: Args)(implicit mode: Mode) =
+    this(options, TargetDirTap(options.toSqoopOptions))(args)
 
-  override def buildFlow =
-    new ImportSqoopFlow(s"$name-${UUID.randomUUID}", options, Some(source), Some(sink))
+  override def buildFlow = {
+    val dsl = ParlourImportDsl(options.updates)
+    val withConfig = getHadoopConf.fold(dsl)(dsl config _)
+    new ImportSqoopFlow(s"$name-${UUID.randomUUID}", withConfig, Some(source), Some(sink))
+  }
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()

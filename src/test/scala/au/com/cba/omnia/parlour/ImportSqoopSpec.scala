@@ -16,11 +16,11 @@ package au.com.cba.omnia.parlour
 
 import java.util.UUID
 
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
+
 import scala.util.Failure
 
 import scalaz.{Failure => _, _}, Scalaz._
-
-import com.cloudera.sqoop.SqoopOptions
 
 import cascading.flow.{Flow, FlowListener}
 import cascading.tap.Tap
@@ -31,14 +31,13 @@ import scalikejdbc.{AutoSession, ConnectionPool, SQL}
 
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.core.Thermometer._
-import au.com.cba.omnia.thermometer.fact.Fact
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 
 import org.specs2.execute.{AsResult, Result}
 import org.specs2.specification.Fixture
 
-class SqoopImportSpec extends ThermometerSpec { def is = s2"""
-  Sqoop Import Flow/Job Spec
+class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
+  Import Sqoop Flow/Job/Execution Spec
   ==========================
 
   end to end sqoop flow test      $endToEndFlow
@@ -54,10 +53,10 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
   def endToEndFlow = withData(List(
     ("001", "Micky Mouse",  10,  1000),
     ("002", "Donald Duck", 100, 10000)
-  ))( opts => {
-    val source = TableTap(opts)
+  ))( dsl => {
+    val source = TableTap(dsl.toSqoopOptions)
     val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val flow   = new ImportSqoopFlow("endToEndFlow", opts, Some(source), Some(sink))
+    val flow   = new ImportSqoopFlow("endToEndFlow", dsl, Some(source), Some(sink))
 
     println(s"=========== endToEndFlow test running in $dir ===============")
 
@@ -72,10 +71,10 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
   def endToEndJob = withData(List(
     ("003", "Robin Hood", 0, 0),
     ("004", "Little John", -1, -100)
-  ))( opts => {
-    val source = TableTap(opts)
+  ))( dsl => {
+    val source = TableTap(dsl.toSqoopOptions)
     val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val job    = new ImportSqoopJob(opts, source, sink)(scaldingArgs)
+    val job    = new ImportSqoopJob(dsl, source, sink)(scaldingArgs)
     job.withFacts(dir </> "output" </> "part-m-00000" ==> lines(List(
       "003,Robin Hood,0,0",
       "004,Little John,-1,-100"
@@ -84,9 +83,9 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
 
   def endToEndExecution = withData(List(
     ("abc", "Batman", 100000, 10000000)
-  ))( opts => {
+  ))( dsl => {
     val sink      = Csv((dir </> "output").toString)
-    val execution = SqoopExecution.sqoopImport(opts, sink)
+    val execution = SqoopExecution.sqoopImport(dsl, sink)
     executesOk(execution)
     facts(dir </> "output" </> "part-m-00000" ==> lines(List(
       "abc,Batman,100000,10000000"
@@ -95,45 +94,49 @@ class SqoopImportSpec extends ThermometerSpec { def is = s2"""
 
   def endToEndExecutionNoSink = withData(List(
     ("abc", "Batman", 100000, 10000000)
-  ))( opts => {
-    opts.setFieldsTerminatedBy('|')
-    opts.setTargetDir((dir </> "output").toString)
-    val execution = SqoopExecution.sqoopImport(opts)
+  ))( dsl => {
+    val withDelimiter = dsl fieldsTerminatedBy('|')
+    val withTargetDir = withDelimiter targetDir((dir </> "output").toString)
+
+    val execution = SqoopExecution.sqoopImport(withTargetDir)
     executesOk(execution)
     facts(dir </> "output" </> "part-m-00000" ==> lines(List(
       "abc|Batman|100000|10000000"
     )))
   })
 
-  def failingJob = withData(List())( opts => {
-    opts.setTableName("INVALID")
-    val source = TableTap(opts)
+  def failingJob = withData(List())( dsl => {
+    val withTableName = dsl tableName("INVALID")
+
+    val source = TableTap(withTableName.toSqoopOptions)
     val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val job    = new SquishExceptionsImportSqoopJob(opts, source, sink)(scaldingArgs)
+    val job    = new SquishExceptionsImportSqoopJob(withTableName, source, sink)(scaldingArgs)
     (new VerifiableJob(job)).run must_== Some(s"Job failed to run <${job.name}>".left)
   })
 
-  def exceptionalJob = withData(List())( opts => {
-    opts.setTableName("INVALID")
-    val source = TableTap(opts)
+  def exceptionalJob = withData(List())( dsl => {
+    val withTableName = dsl tableName("INVALID")
+
+    val source = TableTap(withTableName.toSqoopOptions)
     val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val job    = new ImportSqoopJob(opts, source, sink)(scaldingArgs)
+    val job    = new ImportSqoopJob(withTableName, source, sink)(scaldingArgs)
     (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
   })
 
-  def failingExecution = withData(List())( opts => {
-    opts.setTableName("INVALID")
+  def failingExecution = withData(List())( dsl => {
+    val withTableName = dsl tableName("INVALID")
+
     val sink      = Csv((dir </> "output").toString)
-    val execution = SqoopExecution.sqoopImport(opts, sink)
+    val execution = SqoopExecution.sqoopImport(withTableName, sink)
     execute(execution) must beLike { case Failure(_) => ok }
   })
 }
 
 /** Provides a temporary dummy table for sqoop iport tests */
-case class withData(data: List[(String, String, Int, Int)]) extends Fixture[SqoopOptions] {
+case class withData(data: List[(String, String, Int, Int)]) extends Fixture[ParlourImportDsl] {
   Class.forName("org.hsqldb.jdbcDriver")
 
-  def apply[R: AsResult](test: SqoopOptions => R): Result = {
+  def apply[R: AsResult](test: ParlourImportDsl => R): Result = {
     val table   = s"table_${UUID.randomUUID.toString.replace('-', '_')}"
     val connStr = "jdbc:hsqldb:mem:sqoopdb"
     val user    = "sa"
@@ -162,21 +165,21 @@ case class withData(data: List[(String, String, Int, Int)]) extends Fixture[Sqoo
       failure.updateMessage("failed to insert data into the test table")
     }
     else {
-      val opts = new SqoopOptions
-      opts.setConnectString(connStr)
-      opts.setUsername(user)
-      opts.setPassword(pwd)
-      opts.setTableName(table)
-      opts.setNumMappers(1)
-      opts.setHadoopMapRedHome(System.getProperty("user.home") + "/.ivy2/cache")
+      val dsl = new ParlourImportDsl()
+      .connectionString(connStr)
+      .username(user)
+      .password(pwd)
+      .tableName(table)
+      .numberOfMappers(1)
+      .hadoopMapRedHome(System.getProperty("user.home") + "/.ivy2/cache")
 
-      AsResult(test(opts))
+      AsResult(test(dsl))
     }
   }
 }
 
 class SquishExceptionsImportSqoopJob(
-  options: SqoopOptions,
+  options: ParlourImportOptions[_],
   source: Tap[_, _, _],
   sink: Tap[_, _, _])(
   args: Args

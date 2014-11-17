@@ -16,38 +16,73 @@ package au.com.cba.omnia.parlour
 
 import java.util.UUID
 
-import com.cloudera.sqoop.SqoopOptions
-
 import com.twitter.scalding._
 
 import cascading.tap.Tap
 
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
+
 /**
- * Sqoop export Job that can be embedded within a Cascade
- *
- * See [[SqoopSyntax]] for an easy way to create a [[SqoopOptions]]
+ * Sqoop export Job that can be embedded within a Cascade.
+ * Appends data to the target table.
  */
 class ExportSqoopJob(
-  options: SqoopOptions,
+  options: ParlourExportOptions[_],
   source: Tap[_, _, _],
   sink: Tap[_, _, _])(args: Args) extends Job(args) with HadoopConfigured {
 
-  getHadoopConf.foreach(options.setConf(_))
-
-  def this(options: SqoopOptions, source: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
-    this(options, source, TableTap(options))(args)
+  def this(options: ParlourExportOptions[_], source: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
+    this(options, source, TableTap(options.toSqoopOptions))(args)
 
   /** Helper constructor that allows easy usage from Scalding */
-  def this(options: SqoopOptions, source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
+  def this(options: ParlourExportOptions[_], source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
     this(options, source.createTap(Read), sink.createTap(Write))(args)
 
-  def this(options: SqoopOptions, source: Source)(args: Args)(implicit mode: Mode) =
-    this(options, source.createTap(Read), TableTap(options))(args)
+  def this(options: ParlourExportOptions[_], source: Source)(args: Args)(implicit mode: Mode) =
+    this(options, source.createTap(Read), TableTap(options.toSqoopOptions))(args)
 
-  def this(options: SqoopOptions)(args: Args)(implicit mode: Mode) = this(options, new DirSource(options.getExportDir))(args)
+  def this(options: ParlourExportOptions[_])(args: Args)(implicit mode: Mode) =
+    this(options, new DirSource(options.getExportDir.getOrElse("")))(args)
 
-  override def buildFlow =
-    new ExportSqoopFlow(s"$name-${UUID.randomUUID}", options, Some(source), Some(sink))
+  override def buildFlow = {
+    val dsl = ParlourExportDsl(options.updates)
+    val withConfig = getHadoopConf.fold(dsl)(dsl config _)
+
+    new ExportSqoopFlow(s"$name-${UUID.randomUUID}", withConfig, Some(source), Some(sink))
+  }
+
+  /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
+  override def validate = ()
+}
+
+/**
+ * Sqoop delete and export Job that can be embedded within a Cascade.
+ * Deletes all rows from the target table before export.
+ */
+class DeleteAndExportSqoopJob(
+  options: ParlourExportOptions[_],
+  source: Tap[_, _, _],
+  sink: Tap[_, _, _])(args: Args) extends Job(args) with HadoopConfigured {
+
+  def this(options: ParlourExportOptions[_], source: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
+    this(options, source, TableTap(options.toSqoopOptions))(args)
+
+  /** Helper constructor that allows easy usage from Scalding */
+  def this(options: ParlourExportOptions[_], source: Source, sink: Source)(args: Args)(implicit mode: Mode) =
+    this(options, source.createTap(Read), sink.createTap(Write))(args)
+
+  def this(options: ParlourExportOptions[_], source: Source)(args: Args)(implicit mode: Mode) =
+    this(options, source.createTap(Read), TableTap(options.toSqoopOptions))(args)
+
+  def this(options: ParlourExportOptions[_])(args: Args)(implicit mode: Mode) =
+    this(options, new DirSource(options.toSqoopOptions.getExportDir))(args)
+
+  override def buildFlow = {
+    val dsl = ParlourExportDsl(options.updates)
+    val withConfig = getHadoopConf.fold(dsl)(dsl config _)
+
+    new DeleteAndExportSqoopFlow(s"$name-${UUID.randomUUID}", withConfig, Some(source), Some(sink))
+  }
 
   /** Can't validate anything because this doesn't use a Hadoop FlowDef. */
   override def validate = ()

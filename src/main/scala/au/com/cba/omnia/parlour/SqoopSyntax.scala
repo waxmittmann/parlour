@@ -16,10 +16,13 @@ package au.com.cba.omnia.parlour
 
 import java.util.Properties
 
-import au.com.cba.omnia.parlour.SqoopSyntax._
 import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
+
+import org.apache.hadoop.conf.Configuration
+
+import au.com.cba.omnia.parlour.SqoopSyntax._
 
 /**
  * A directory representation that help with Source/Sink match based on merely the path. The `TextLineScheme`
@@ -40,7 +43,6 @@ protected case class TargetDirTap(options: SqoopOptions) extends DirSource(optio
 
 
 object SqoopSyntax {
-  def sqoopOptions(): SqoopOptions = new SqoopOptions()
   type SqoopModifier = SqoopOptions => Unit
 
   case class ParlourImportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourImportDsl] with ParlourImportOptions[ParlourImportDsl]
@@ -49,9 +51,6 @@ object SqoopSyntax {
   case class TeradataParlourExportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourExportDsl] with TeradataParlourExportOptions[TeradataParlourExportDsl]
 
 }
-
-
-
 
 
 sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
@@ -129,9 +128,8 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   addOptional("table-name", (v: String) => so => so.setTableName(v))
   def getTableName = Option(toSqoopOptions.getTableName)
 
-  def sqlQuery(sqlStatement: String) = update(_.setSqlQuery(sqlStatement))
-  addOptional("sql-query", (v: String) => so => so.setSqlQuery(v))
-  def getSqlQuery = Option(toSqoopOptions.getSqlQuery)
+  private[parlour] def sqlQuery(sqlStatement: String) = update(_.setSqlQuery(sqlStatement))
+  private[parlour] def getSqlQuery = Option(toSqoopOptions.getSqlQuery)
 
   /** The string to be interpreted as null for string columns */
   def nullString(token: String) = update(_.setNullStringValue(token))
@@ -162,6 +160,10 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   def columns(cols: Array[String]) = update(_.setColumns(cols))
   addOptional("columns", (v: Array[String]) => so => so.setColumns(v), str => str.split(","))
   def getColumns = Option(toSqoopOptions.getColumns)
+
+  /** Hadoop Configuration */
+  private[parlour] def config(config: Configuration) = update(_.setConf(config))
+  private[parlour] def getConfig = Option(toSqoopOptions.getConf)
 }
 
 trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOptions[Self] {

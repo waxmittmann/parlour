@@ -14,21 +14,19 @@
 
 package au.com.cba.omnia.parlour
 
-import com.cloudera.sqoop.SqoopOptions
-
 import com.twitter.scalding.{Mode, Args}
 
 import SqoopSyntax.{ParlourExportDsl, TeradataParlourExportDsl}
 
 object ExportSqoopConsoleJob extends SqoopConsoleJob {
   /** Configures a Sqoop Job by parsing command line arguments */
-  def optionsFromArgs(args: Args): SqoopOptions = {
+  def optionsFromArgs(args: Args): ParlourExportOptions[_] = {
     val scheme = jdbcScheme(args("connection-string"))
     val dsl = scheme match {
       case "teradata" => TeradataParlourExportDsl()
       case _          => ParlourExportDsl()
     }
-    dsl.setOptions(args).toSqoopOptions
+    dsl.setOptions(args)
   }
 }
 
