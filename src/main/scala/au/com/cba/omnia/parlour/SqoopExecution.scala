@@ -45,7 +45,6 @@ object SqoopExecution {
 
   /**
     * An Execution that uses sqoop to export data from a tap to a database.
-    * Data is appended to target table.
     *
     * `options` does not need any information about the source.
     * We infer that information from `source`.
@@ -58,32 +57,9 @@ object SqoopExecution {
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 
-  /**
-   * An Execution that uses sqoop to export data to a database.
-   * Data is appended to target table.
-   */
+  /** An Execution that uses sqoop to export data to a database. */
   def sqoopExport(options: ParlourExportOptions[_]): Execution[Unit] = {
     val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, None, None)
-    Execution.fromFuture(_ => Execution.run(flow)).unit
-  }
-
-  /**
-   * An Execution that uses sqoop to delete all rows from target table and then export data from a tap to a database.
-   *
-   * `options` does not need any information about the source.
-   * We infer that information from `source`.
-   */
-  def sqoopDeleteAndExport(options: ParlourExportOptions[_], source: Source): Execution[Unit] = {
-    //TODO fix when scalding provides access to the mode
-    val mode = Mode(Args("--hdfs"), new Configuration)
-    val tap  = Some(source.createTap(Read)(mode))
-    val flow = new DeleteAndExportSqoopFlow(s"SqoopExecutionDeleteAndExport-${UUID.randomUUID}", options, tap, None)
-    Execution.fromFuture(_ => Execution.run(flow)).unit
-  }
-
-  /** An Execution that uses sqoop to delete all rows from target table and then export data to a database. */
-  def sqoopDeleteAndExport(options: ParlourExportOptions[_]): Execution[Unit] = {
-    val flow = new DeleteAndExportSqoopFlow(s"SqoopExecutionDeleteAndExport-${UUID.randomUUID}", options, None, None)
     Execution.fromFuture(_ => Execution.run(flow)).unit
   }
 }

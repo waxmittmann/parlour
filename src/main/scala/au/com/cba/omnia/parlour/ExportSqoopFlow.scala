@@ -24,65 +24,38 @@ import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 import au.com.cba.omnia.parlour.SqoopSetup.Delimiters
 
 /**
- * Implements a Cascading Flow that wraps the Sqoop Export Process.
- * Appends data to the target table.
+  * Implements a Cascading Flow that wraps the Sqoop Export Process.
+  * If a SQL query is set on 'options' param, then it is executed before export.
  */
 class ExportSqoopFlow(
   name: String,
   options: ParlourExportOptions[_],
   source: Option[Tap[_, _, _]],
   sink: Option[Tap[_, _, _]],
-  inferPathFromTap: Boolean = true,
-  inferSourceDelimitersFromTap: Boolean = true
-) extends SqoopFlow(name, source, sink)(ExportSqoop.doExport(options, inferPathFromTap, inferSourceDelimitersFromTap))
+  inferPathFromSourceTap: Boolean = true,
+  inferDelimitersFromSourceTap: Boolean = true
+) extends SqoopFlow(name, source, sink)(ExportSqoop.doExport(options, inferPathFromSourceTap, inferDelimitersFromSourceTap))
 
-/**
- * Implements a Cascading Flow that wraps the Sqoop Delete and Export Process.
- * Deletes all rows from the target table before export.
- */
-class DeleteAndExportSqoopFlow(
-  name: String,
-  options: ParlourExportOptions[_],
-  source: Option[Tap[_, _, _]],
-  sink: Option[Tap[_, _, _]],
-  inferPathFromTap: Boolean = true,
-  inferSourceDelimitersFromTap: Boolean = true
-) extends SqoopFlow(name, source, sink)(ExportSqoop.doDeleteAndExport(options, inferPathFromTap, inferSourceDelimitersFromTap))
-
-/**
- * Logic for Sqoop Export with appending data or deleting data first.
- */
+/** Logic for Sqoop Export with appending data or deleting data first. */
 object ExportSqoop {
-  def doExport(options: ParlourExportOptions[_], inferPathFromTap: Boolean, inferSourceDelimitersFromTap: Boolean)
-            (source: Option[Tap[_, _, _]], sink: Option[Tap[_, _, _]]): Unit = {
+  def doExport
+    (options: ParlourExportOptions[_], inferPathFromSourceTap: Boolean, inferDelimitersFromSourceTap: Boolean)
+    (source: Option[Tap[_, _, _]], sink: Option[Tap[_, _, _]]): Unit = {
     System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
 
     val dsl = ParlourExportDsl(options.updates)
-    val inferredOptions = inferFromSourceTap(dsl, source, inferPathFromTap, inferSourceDelimitersFromTap)
+    val inferredOptions = inferFromSourceTap(dsl, source, inferPathFromSourceTap, inferDelimitersFromSourceTap)
 
+    SqoopEval.evalSql(dsl)
     new ExportTool().run(inferredOptions.toSqoopOptions)
   }
 
-  def doDeleteAndExport(options: ParlourExportOptions[_], inferPathFromTap: Boolean, inferSourceDelimitersFromTap: Boolean)
-                     (source: Option[Tap[_, _, _]], sink: Option[Tap[_, _, _]]): Unit = {
-    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
-
-    val dsl = ParlourExportDsl(options.updates)
-    delete(dsl)
-    val inferredDsl = inferFromSourceTap(dsl, source, inferPathFromTap, inferSourceDelimitersFromTap)
-
-    new ExportTool().run(inferredDsl.toSqoopOptions)
-  }
-
-  private def delete(dsl: ParlourExportDsl) = {
-    val withDeleteQuery = dsl sqlQuery s"DELETE FROM ${dsl.getTableName.get}"
-    new EvalSqlTool().run(withDeleteQuery.toSqoopOptions)
-  }
-
-  private def inferFromSourceTap(dsl: ParlourExportDsl, source: Option[Tap[_, _, _]],
-                         inferPathFromTap: Boolean, inferSourceDelimitersFromTap: Boolean): ParlourExportDsl = {
-    val sourcePathOpt = SqoopSetup.inferPathFromTap(inferPathFromTap, source)
-    val sourceDelimiters = SqoopSetup.inferDelimitersFromTap(inferSourceDelimitersFromTap, source)
+  private def inferFromSourceTap(
+    dsl: ParlourExportDsl, source: Option[Tap[_, _, _]],
+    inferPathFromSourceTap: Boolean, inferDelimitersFromSourceTap: Boolean
+  ): ParlourExportDsl = {
+    val sourcePathOpt = SqoopSetup.inferPathFromTap(inferPathFromSourceTap, source)
+    val sourceDelimiters = SqoopSetup.inferDelimitersFromTap(inferDelimitersFromSourceTap, source)
 
     val withExportDir = sourcePathOpt.fold(dsl)(dsl exportDir _)
 
@@ -91,7 +64,7 @@ object ExportSqoop {
         val withQuote = quoteOpt.fold(withExportDir)(withExportDir inputEscapedBy _)
         val withDelim = fieldDelimOpt.fold(withQuote)(withQuote inputFieldsTerminatedBy _)
 
-        if (inferSourceDelimitersFromTap)
+        if (inferDelimitersFromSourceTap)
           withDelim inputLinesTerminatedBy '\n'
         else withDelim
     }

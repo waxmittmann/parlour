@@ -39,25 +39,16 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
   Export Sqoop Flow/Job/Execution Spec
   ==========================
 
-  with appending data
-    end to end sqoop flow test        ${withAppend.endToEndFlow}
-    end to end sqoop job test         ${withAppend.endToEndJob}
-    end to end sqoop execution test   ${withAppend.endToEndExecution}
-    sqoop execution test w/ no source ${withAppend.endToEndExecutionNoSource}
+  end to end flow test                    ${flowTest.endToEndFlow}
+  end to end job test                     ${jobTest.endToEndJob}
+  end to end execution test               ${executionTest.endToEndExecution}
+  execution test w/ no source             ${executionTest.endToEndExecutionNoSource}
 
-    failing sqoop job returns false   ${withAppend.failingJob}
-    sqoop job w/ exception throws     ${withAppend.exceptionalJob}
-    failing sqoop execution fails     ${withAppend.failingExecution}
 
-  with deleting data first
-    end to end sqoop flow test        ${withDelete.endToEndFlow}
-    end to end sqoop job test         ${withDelete.endToEndJob}
-    end to end sqoop execution test   ${withDelete.endToEndExecution}
-    sqoop execution test w/ no source ${withDelete.endToEndExecutionNoSource}
+  failing job returns false               ${jobTest.failingJob}
+  job w/ exception throws                 ${jobTest.exceptionalJob}
+  failing execution fails                 ${executionTest.failingExecution}
 
-    failing sqoop job returns false   ${withDelete.failingJob}
-    sqoop job w/ exception throws     ${withDelete.exceptionalJob}
-    failing sqoop execution fails     ${withDelete.failingExecution}
 """
 
   val resourceUrl = getClass.getResource("/sqoop")
@@ -84,53 +75,52 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
 
 
   object jobTest {
-    type JobFactory = (ParlourExportDsl, Tap[_, _, _], Tap[_, _, _], Args) => Job
-
-    def endToEndJob(factory: JobFactory)(expected: Seq[Customer]) =
+    def endToEndJob =
       withEnvironment(path(resourceUrl.toString)) {
+        val expected = newData ++ oldData
+
         val table = tableSetup(oldData)
         val dsl = createDsl(table)
 
         val source = Csv(exportDir, "|").createTap(Read)
         val sink   = TableTap(dsl.toSqoopOptions)
-        val job    = factory(dsl, source, sink, scaldingArgs)
+        val job    = new ExportSqoopJob(dsl, source, sink)(scaldingArgs)
 
         job.runsOk
         tableData(table) must containTheSameElementsAs(expected)
       }
 
-    def failingJob(factory: JobFactory) =
+    def failingJob =
       withEnvironment(path(resourceUrl.toString)) {
         val dsl = createDsl("INVALID")
 
         val source   = Csv(exportDir).createTap(Read)
         val sink = TableTap(dsl.toSqoopOptions)
-        val job    = factory(dsl, source, sink, scaldingArgs)
+        val job    = new SquishExceptionsExportSqoopJob(dsl, source, sink)(scaldingArgs)
         (new VerifiableJob(job)).run must_== Some(s"Job failed to run <${job.name}>".left)
       }
 
-    def exceptionalJob(factory: JobFactory) =
+    def exceptionalJob =
       withEnvironment(path(resourceUrl.toString)) {
         val dsl = createDsl("INVALID")
 
         val source   = Csv(exportDir).createTap(Read)
         val sink = TableTap(dsl.toSqoopOptions)
-        val job    = factory(dsl, source, sink, scaldingArgs)
+        val job    = new ExportSqoopJob(dsl, source, sink)(scaldingArgs)
         (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
       }
   }
 
   object flowTest {
-    type FlowFactory = (String, ParlourExportDsl, Option[Tap[_, _, _]], Option[Tap[_, _, _]]) => FixedProcessFlow[SqoopRiffle]
-
-    def endToEndFlow(factory: FlowFactory)(expected: Seq[Customer]) =
+    def endToEndFlow =
       withEnvironment(path(resourceUrl.toString)) {
+        val expected = newData ++ oldData
         val table = tableSetup(oldData)
         val dsl = createDsl(table)
 
         val source = Csv(exportDir, "|").createTap(Read)
         val sink   = TableTap(dsl.toSqoopOptions)
-        val flow   = factory("endToEndFlow", dsl, Some(source), Some(sink))
+        val flow   = new ExportSqoopFlow("endToEndFlow", dsl, Some(source), Some(sink))
 
         println(s"=========== endToEndFlow test running in $dir ===============")
 
@@ -141,98 +131,50 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
   }
 
   object executionTest {
-    type ExecutionFactory        = ParlourExportDsl => Execution[Unit]
-    type ExecutionWithTapFactory = (ParlourExportDsl, Tap[_, _, _]) => Execution[Unit]
-
-    def endToEndExecution(factory: ExecutionWithTapFactory)(expected: Seq[Customer]) =
+    def endToEndExecution =
       withEnvironment(path(resourceUrl.toString)) {
+        val expected = newData ++ oldData
+
         val table = tableSetup(oldData)
         val dsl = createDsl(table)
 
-        val source = Csv(exportDir, "|").createTap(Read)
-        val execution = factory(dsl, source)
+        val source = Csv(exportDir, "|")
+        val execution = SqoopExecution.sqoopExport(dsl, source)
         executesOk(execution)
         tableData(table) must containTheSameElementsAs(expected)
       }
 
-    def endToEndExecutionNoSource(factory: ExecutionFactory)(expected: Seq[Customer]) =
+    def endToEndExecutionNoSource =
       withEnvironment(path(resourceUrl.toString)) {
+        val expected = newData ++ oldData
+
         val table = tableSetup(oldData)
         val dsl = createDsl(table)
 
-        val execution = factory(dsl)
+        val execution = SqoopExecution.sqoopExport(dsl)
         executesOk(execution)
         tableData(table) must containTheSameElementsAs(expected)
       }
 
-    def failingExecution(factory: ExecutionFactory) =
+    def failingExecution =
       withEnvironment(path(resourceUrl.toString)) {
         val dsl = createDsl("INVALID")
 
-        val execution = factory(dsl)
+        val execution = SqoopExecution.sqoopExport(dsl)
         execute(execution) must beLike { case Failure(_) => ok }
       }
   }
 
-  object withAppend {
-    def endToEndFlow =
-      flowTest.endToEndFlow(new ExportSqoopFlow(_, _, _, _))(newData ++ oldData)
-    def endToEndJob =
-      jobTest.endToEndJob(new ExportSqoopJob(_, _, _)(_))(newData ++ oldData)
-    def endToEndExecution =
-      executionTest.endToEndExecutionNoSource(SqoopExecution.sqoopExport)(newData ++ oldData)
-    def endToEndExecutionNoSource =
-      executionTest.endToEndExecutionNoSource(SqoopExecution.sqoopExport)(newData ++ oldData)
-
-    def failingJob =
-      jobTest.failingJob(new SquishExceptionsExportSqoopJob(_, _, _)(_))
-    def exceptionalJob =
-      jobTest.exceptionalJob(new ExportSqoopJob(_, _, _)(_))
-    def failingExecution =
-      executionTest.failingExecution(SqoopExecution.sqoopExport)
-
-    class SquishExceptionsExportSqoopJob(
-      options: ParlourExportOptions[_],
-      source: Tap[_, _, _],
-      sink: Tap[_, _, _])(
-      args: Args
-      ) extends ExportSqoopJob(options, source, sink)(args) {
-      override def buildFlow = {
-        val flow = super.buildFlow
-        flow.addListener(new SquishExceptionListener)
-        flow
-      }
-    }
-  }
-
-  object withDelete {
-    def endToEndFlow =
-      flowTest.endToEndFlow(new DeleteAndExportSqoopFlow(_, _, _, _))(newData)
-    def endToEndJob =
-      jobTest.endToEndJob(new DeleteAndExportSqoopJob(_, _, _)(_))(newData)
-    def endToEndExecution =
-      executionTest.endToEndExecutionNoSource(SqoopExecution.sqoopDeleteAndExport)(newData)
-    def endToEndExecutionNoSource =
-      executionTest.endToEndExecutionNoSource(SqoopExecution.sqoopDeleteAndExport)(newData)
-
-    def failingJob =
-      jobTest.failingJob(new SquishExceptionsDeleteAndExportSqoopJob(_, _, _)(_))
-    def exceptionalJob =
-      jobTest.exceptionalJob(new DeleteAndExportSqoopJob(_, _, _)(_))
-    def failingExecution =
-      executionTest.failingExecution(SqoopExecution.sqoopDeleteAndExport)
-
-    class SquishExceptionsDeleteAndExportSqoopJob(
-      options: ParlourExportOptions[_],
-      source: Tap[_, _, _],
-      sink: Tap[_, _, _])(
-      args: Args
-      ) extends DeleteAndExportSqoopJob(options, source, sink)(args) {
-      override def buildFlow = {
-        val flow = super.buildFlow
-        flow.addListener(new SquishExceptionListener)
-        flow
-      }
+  class SquishExceptionsExportSqoopJob(
+    options: ParlourExportOptions[_],
+    source: Tap[_, _, _],
+    sink: Tap[_, _, _])(
+    args: Args
+    ) extends ExportSqoopJob(options, source, sink)(args) {
+    override def buildFlow = {
+      val flow = super.buildFlow
+      flow.addListener(new SquishExceptionListener)
+      flow
     }
   }
 }

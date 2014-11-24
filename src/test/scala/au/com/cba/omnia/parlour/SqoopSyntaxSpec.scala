@@ -30,6 +30,7 @@ Should set by default:
 Should build proper SqoopOptions:
   - for Teradata import             ${build.teradataImport}
   - for Teradata export             ${build.teradataExport}
+
 """
   object consoleOptions {
     def requiredArg = {

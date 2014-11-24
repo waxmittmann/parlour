@@ -28,7 +28,8 @@ import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
 class ImportSqoopJob(
   options: ParlourImportOptions[_],
   source: Tap[_, _, _],
-  sink: Tap[_, _, _])(args: Args) extends Job(args) with HadoopConfigured {
+  sink: Tap[_, _, _]
+)(args: Args) extends Job(args) with HadoopConfigured {
 
   def this(options: ParlourImportOptions[_], sink: Tap[_, _, _])(args: Args)(implicit mode: Mode) =
     this(options, TableTap(options.toSqoopOptions), sink)(args)

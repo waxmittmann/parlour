@@ -128,8 +128,9 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   addOptional("table-name", (v: String) => so => so.setTableName(v))
   def getTableName = Option(toSqoopOptions.getTableName)
 
-  private[parlour] def sqlQuery(sqlStatement: String) = update(_.setSqlQuery(sqlStatement))
-  private[parlour] def getSqlQuery = Option(toSqoopOptions.getSqlQuery)
+  def sqlQuery(sqlStatement: String) = update(_.setSqlQuery(sqlStatement))
+  addOptional("sql-query", (v: String) => so => so.setSqlQuery(v))
+  def getSqlQuery = Option(toSqoopOptions.getSqlQuery)
 
   /** The string to be interpreted as null for string columns */
   def nullString(token: String) = update(_.setNullStringValue(token))
@@ -212,7 +213,6 @@ trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOpti
     inputNullString(token)
     inputNullNonString(token)
   }
-
 }
 
 trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOptions[Self] {
