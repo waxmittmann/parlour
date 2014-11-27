@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>ExportSqoopRiffle - au.com.cba.omnia.parlour.ExportSqoopRiffle</title>
-          <meta name="description" content="ExportSqoopRiffle - au.com.cba.omnia.parlour.ExportSqoopRiffle" />
-          <meta name="keywords" content="ExportSqoopRiffle au.com.cba.omnia.parlour.ExportSqoopRiffle" />
+          <title>ExportSqoop - au.com.cba.omnia.parlour.ExportSqoop</title>
+          <meta name="description" content="ExportSqoop - au.com.cba.omnia.parlour.ExportSqoop" />
+          <meta name="keywords" content="ExportSqoop au.com.cba.omnia.parlour.ExportSqoop" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../index.html';
-            var hash = 'au.com.cba.omnia.parlour.ExportSqoopRiffle$';
+            var hash = 'au.com.cba.omnia.parlour.ExportSqoop$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,9 +24,9 @@
         </head>
         <body class="value">
       <div id="definition">
-        <a href="ExportSqoopRiffle.html" title="Go to companion"><img src="../../../../../lib/object_to_class_big.png" /></a>
+        <img src="../../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../../package.html" class="extype" name="au">au</a>.<a href="../../../package.html" class="extype" name="au.com">com</a>.<a href="../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.parlour">parlour</a></p>
-        <h1><a href="ExportSqoopRiffle.html" title="Go to companion">ExportSqoopRiffle</a></h1>
+        <h1>ExportSqoop</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,11 +35,11 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopRiffle</span>
+        <span class="name">ExportSqoop</span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/7f2b94728760f2406a8ad902fc9b8d27ee390ec1//src/main/scala/au/com/cba/omnia/parlour/ExportSqoopFlow.scala" target="_blank">ExportSqoopFlow.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Logic for Sqoop Export with appending data or deleting data first.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/e2812e79aa9743006867d67ddc9553e20fa178d9//src/main/scala/au/com/cba/omnia/parlour/ExportSqoopFlow.scala" target="_blank">ExportSqoopFlow.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.parlour.ExportSqoopRiffle"><span>ExportSqoopRiffle</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.parlour.ExportSqoop"><span>ExportSqoop</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -182,6 +182,19 @@
     </span>)</span>
               
         </dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.ExportSqoop#doExport" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="doExport(options:au.com.cba.omnia.parlour.ParlourExportOptions[_],inferPathFromSourceTap:Boolean,inferDelimitersFromSourceTap:Boolean)(source:Option[cascading.tap.Tap[_,_,_]],sink:Option[cascading.tap.Tap[_,_,_]]):Unit"></a>
+      <a id="doExport(ParlourExportOptions[_],Boolean,Boolean)(Option[Tap[_,_,_]],Option[Tap[_,_,_]]):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">doExport</span><span class="params">(<span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>, <span name="inferPathFromSourceTap">inferPathFromSourceTap: <span class="extype" name="scala.Boolean">Boolean</span></span>, <span name="inferDelimitersFromSourceTap">inferDelimitersFromSourceTap: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="params">(<span name="source">source: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="sink">sink: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -305,32 +318,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="au.com.cba.omnia.parlour.ExportSqoopRiffle#setDelimitersFromTap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="setDelimitersFromTap(source:cascading.tap.Tap[_,_,_],options:com.cloudera.sqoop.SqoopOptions):scalaz.\/[String,Unit]"></a>
-      <a id="setDelimitersFromTap(Tap[_,_,_],SqoopOptions):\/[String,Unit]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">setDelimitersFromTap</span><span class="params">(<span name="source">source: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>, <span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>)</span><span class="result">: <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Unit">Unit</span>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="au.com.cba.omnia.parlour.ExportSqoopRiffle#setPathFromTap" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="setPathFromTap(source:cascading.tap.Tap[_,_,_],options:com.cloudera.sqoop.SqoopOptions):scalaz.\/[String,Unit]"></a>
-      <a id="setPathFromTap(Tap[_,_,_],SqoopOptions):\/[String,Unit]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">setPathFromTap</span><span class="params">(<span name="source">source: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>, <span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>)</span><span class="result">: <span class="extype" name="scalaz.\/">\/</span>[<span class="extype" name="scala.Predef.String">String</span>, <span class="extype" name="scala.Unit">Unit</span>]</span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>

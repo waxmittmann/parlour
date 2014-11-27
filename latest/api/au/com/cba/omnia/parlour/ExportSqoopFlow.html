@@ -35,13 +35,15 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopFlow</span><span class="result"> extends <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a>]</span>
+        <span class="name">ExportSqoopFlow</span><span class="result"> extends <a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implements a Cascading Flow that wraps the Sqoop Process</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/7f2b94728760f2406a8ad902fc9b8d27ee390ec1//src/main/scala/au/com/cba/omnia/parlour/ExportSqoopFlow.scala" target="_blank">ExportSqoopFlow.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implements a Cascading Flow that wraps the Sqoop Export Process.
+If a SQL query is set on 'options' param, then it is executed before export.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/e2812e79aa9743006867d67ddc9553e20fa178d9//src/main/scala/au/com/cba/omnia/parlour/ExportSqoopFlow.scala" target="_blank">ExportSqoopFlow.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.HadoopFlow">HadoopFlow</span>, <span class="extype" name="cascading.flow.BaseFlow">BaseFlow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.flow.Flow">Flow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.management.UnitOfWork">UnitOfWork</span>[<span class="extype" name="cascading.stats.FlowStats">FlowStats</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a>, <span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.HadoopFlow">HadoopFlow</span>, <span class="extype" name="cascading.flow.BaseFlow">BaseFlow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.flow.Flow">Flow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.management.UnitOfWork">UnitOfWork</span>[<span class="extype" name="cascading.stats.FlowStats">FlowStats</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -59,7 +61,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.parlour.ExportSqoopFlow"><span>ExportSqoopFlow</span></li><li class="in" name="au.com.cba.omnia.parlour.FixedProcessFlow"><span>FixedProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.ProcessFlow"><span>ProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.HadoopFlow"><span>HadoopFlow</span></li><li class="in" name="cascading.flow.BaseFlow"><span>BaseFlow</span></li><li class="in" name="cascading.flow.Flow"><span>Flow</span></li><li class="in" name="cascading.management.UnitOfWork"><span>UnitOfWork</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.parlour.ExportSqoopFlow"><span>ExportSqoopFlow</span></li><li class="in" name="au.com.cba.omnia.parlour.flow.SqoopFlow"><span>SqoopFlow</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="au.com.cba.omnia.parlour.FixedProcessFlow"><span>FixedProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.ProcessFlow"><span>ProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.HadoopFlow"><span>HadoopFlow</span></li><li class="in" name="cascading.flow.BaseFlow"><span>BaseFlow</span></li><li class="in" name="cascading.flow.Flow"><span>Flow</span></li><li class="in" name="cascading.management.UnitOfWork"><span>UnitOfWork</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -80,7 +82,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.parlour.ExportSqoopFlow#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(name:String,options:com.cloudera.sqoop.SqoopOptions,source:Option[cascading.tap.Tap[_,_,_]],sink:Option[cascading.tap.Tap[_,_,_]]):au.com.cba.omnia.parlour.ExportSqoopFlow"></a>
+      <a id="&lt;init&gt;(name:String,options:au.com.cba.omnia.parlour.ParlourExportOptions[_],source:Option[cascading.tap.Tap[_,_,_]],sink:Option[cascading.tap.Tap[_,_,_]],inferPathFromSourceTap:Boolean,inferDelimitersFromSourceTap:Boolean):au.com.cba.omnia.parlour.ExportSqoopFlow"></a>
       <a id="&lt;init&gt;:ExportSqoopFlow"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -88,7 +90,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopFlow</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="sink">sink: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span>
+        <span class="name">ExportSqoopFlow</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>, <span name="source">source: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="sink">sink: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="inferPathFromSourceTap">inferPathFromSourceTap: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="inferDelimitersFromSourceTap">inferDelimitersFromSourceTap: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span>
       </span>
       </h4>
       
@@ -489,19 +491,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.AnyRef#equals" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="equals(x$1:Any):Boolean"></a>
-      <a id="equals(Any):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -887,14 +876,14 @@
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseFlow → Flow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.ProcessFlow#getProcess" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getProcess():P"></a>
-      <a id="getProcess():ExportSqoopRiffle"></a>
+      <a id="getProcess():SqoopRiffle"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getProcess</span><span class="params">()</span><span class="result">: <a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a></span>
+        <span class="name">getProcess</span><span class="params">()</span><span class="result">: <a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ProcessFlow</dd></dl></div>
@@ -1196,19 +1185,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>BaseFlow → Flow</dd></dl></div>
-    </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="hashCode():Int"></a>
-      <a id="hashCode():Int"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#initConfig" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="initConfig(x$1:java.util.Map[Object,Object],x$2:org.apache.hadoop.mapred.JobConf):Unit"></a>
       <a id="initConfig(Map[AnyRef,AnyRef],JobConf):Unit"></a>
@@ -2180,10 +2156,20 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="au.com.cba.omnia.parlour.FixedProcessFlow">
-              <h3>Inherited from <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a>]</h3>
+        <div class="parent" name="au.com.cba.omnia.parlour.flow.SqoopFlow">
+              <h3>Inherited from <a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a></h3>
+            </div><div class="parent" name="scala.Serializable">
+              <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="java.io.Serializable">
+              <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
+            </div><div class="parent" name="scala.Product">
+              <h3>Inherited from <span class="extype" name="scala.Product">Product</span></h3>
+            </div><div class="parent" name="scala.Equals">
+              <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
+            </div><div class="parent" name="au.com.cba.omnia.parlour.FixedProcessFlow">
+              <h3>Inherited from <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>]</h3>
             </div><div class="parent" name="cascading.flow.hadoop.ProcessFlow">
-              <h3>Inherited from <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a>]</h3>
+              <h3>Inherited from <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>]</h3>
             </div><div class="parent" name="cascading.flow.hadoop.HadoopFlow">
               <h3>Inherited from <span class="extype" name="cascading.flow.hadoop.HadoopFlow">HadoopFlow</span></h3>
             </div><div class="parent" name="cascading.flow.BaseFlow">

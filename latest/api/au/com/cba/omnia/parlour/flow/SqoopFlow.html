@@ -2,17 +2,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>ImportSqoopFlow - au.com.cba.omnia.parlour.ImportSqoopFlow</title>
-          <meta name="description" content="ImportSqoopFlow - au.com.cba.omnia.parlour.ImportSqoopFlow" />
-          <meta name="keywords" content="ImportSqoopFlow au.com.cba.omnia.parlour.ImportSqoopFlow" />
+          <title>SqoopFlow - au.com.cba.omnia.parlour.flow.SqoopFlow</title>
+          <meta name="description" content="SqoopFlow - au.com.cba.omnia.parlour.flow.SqoopFlow" />
+          <meta name="keywords" content="SqoopFlow au.com.cba.omnia.parlour.flow.SqoopFlow" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
-      <link href="../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
-      <link href="../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <link href="../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
       <script type="text/javascript">
          if(top === self) {
-            var url = '../../../../../index.html';
-            var hash = 'au.com.cba.omnia.parlour.ImportSqoopFlow';
+            var url = '../../../../../../index.html';
+            var hash = 'au.com.cba.omnia.parlour.flow.SqoopFlow';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -24,26 +24,27 @@
         </head>
         <body class="type">
       <div id="definition">
-        <img src="../../../../../lib/class_big.png" />
-        <p id="owner"><a href="../../../../package.html" class="extype" name="au">au</a>.<a href="../../../package.html" class="extype" name="au.com">com</a>.<a href="../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.parlour">parlour</a></p>
-        <h1>ImportSqoopFlow</h1>
+        <a href="SqoopFlow$.html" title="Go to companion"><img src="../../../../../../lib/class_to_object_big.png" /></a>
+        <p id="owner"><a href="../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.parlour">parlour</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.parlour.flow">flow</a></p>
+        <h1><a href="SqoopFlow$.html" title="Go to companion">SqoopFlow</a></h1>
       </div>
 
       <h4 id="signature" class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
-        <span class="kind">class</span>
+        <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">ImportSqoopFlow</span><span class="result"> extends <a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a></span>
+        <span class="name">SqoopFlow</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="source">source: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="sink">sink: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="params">(<span name="logic">logic: (<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]], <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result"> extends <a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>] with <span class="extype" name="scala.Product">Product</span> with <span class="extype" name="scala.Serializable">Serializable</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implements a Cascading Flow that wraps the Sqoop Import Process.
-If a SQL query is set on 'options' param, then it is executed before import.
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/e2812e79aa9743006867d67ddc9553e20fa178d9//src/main/scala/au/com/cba/omnia/parlour/ImportSqoopFlow.scala" target="_blank">ImportSqoopFlow.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Implements a Cascading Flow that wraps the Sqoop Process</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/e2812e79aa9743006867d67ddc9553e20fa178d9//src/main/scala/au/com/cba/omnia/parlour/flow/SqoopFlow.scala" target="_blank">SqoopFlow.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a>, <span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.HadoopFlow">HadoopFlow</span>, <span class="extype" name="cascading.flow.BaseFlow">BaseFlow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.flow.Flow">Flow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.management.UnitOfWork">UnitOfWork</span>[<span class="extype" name="cascading.stats.FlowStats">FlowStats</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>], <span class="extype" name="cascading.flow.hadoop.HadoopFlow">HadoopFlow</span>, <span class="extype" name="cascading.flow.BaseFlow">BaseFlow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.flow.Flow">Flow</span>[<span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span>], <span class="extype" name="cascading.management.UnitOfWork">UnitOfWork</span>[<span class="extype" name="cascading.stats.FlowStats">FlowStats</span>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+        </div><div class="toggleContainer block">
+          <span class="toggle">Known Subclasses</span>
+          <div class="subClasses hiddenContent"><a href="../ExportSqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopFlow">ExportSqoopFlow</a>, <a href="../ImportSqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.ImportSqoopFlow">ImportSqoopFlow</a></div>
         </div></div>
         
 
@@ -61,7 +62,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.parlour.ImportSqoopFlow"><span>ImportSqoopFlow</span></li><li class="in" name="au.com.cba.omnia.parlour.flow.SqoopFlow"><span>SqoopFlow</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="au.com.cba.omnia.parlour.FixedProcessFlow"><span>FixedProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.ProcessFlow"><span>ProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.HadoopFlow"><span>HadoopFlow</span></li><li class="in" name="cascading.flow.BaseFlow"><span>BaseFlow</span></li><li class="in" name="cascading.flow.Flow"><span>Flow</span></li><li class="in" name="cascading.management.UnitOfWork"><span>UnitOfWork</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.parlour.flow.SqoopFlow"><span>SqoopFlow</span></li><li class="in" name="scala.Serializable"><span>Serializable</span></li><li class="in" name="java.io.Serializable"><span>Serializable</span></li><li class="in" name="scala.Product"><span>Product</span></li><li class="in" name="scala.Equals"><span>Equals</span></li><li class="in" name="au.com.cba.omnia.parlour.FixedProcessFlow"><span>FixedProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.ProcessFlow"><span>ProcessFlow</span></li><li class="in" name="cascading.flow.hadoop.HadoopFlow"><span>HadoopFlow</span></li><li class="in" name="cascading.flow.BaseFlow"><span>BaseFlow</span></li><li class="in" name="cascading.flow.Flow"><span>Flow</span></li><li class="in" name="cascading.management.UnitOfWork"><span>UnitOfWork</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -81,16 +82,16 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <div id="allMembers">
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
-              <ol><li name="au.com.cba.omnia.parlour.ImportSqoopFlow#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(name:String,options:au.com.cba.omnia.parlour.ParlourImportOptions[_],source:Option[cascading.tap.Tap[_,_,_]],sink:Option[cascading.tap.Tap[_,_,_]],inferPathFromSinkTap:Boolean,inferDelimitersFromSinkTap:Boolean):au.com.cba.omnia.parlour.ImportSqoopFlow"></a>
-      <a id="&lt;init&gt;:ImportSqoopFlow"></a>
+              <ol><li name="au.com.cba.omnia.parlour.flow.SqoopFlow#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="&lt;init&gt;(name:String,source:Option[cascading.tap.Tap[_,_,_]],sink:Option[cascading.tap.Tap[_,_,_]])(logic:(Option[cascading.tap.Tap[_,_,_]],Option[cascading.tap.Tap[_,_,_]])=&gt;Unit):au.com.cba.omnia.parlour.flow.SqoopFlow"></a>
+      <a id="&lt;init&gt;:SqoopFlow"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ImportSqoopFlow</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="options">options: <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[_]</span>, <span name="source">source: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="sink">sink: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="inferPathFromSinkTap">inferPathFromSinkTap: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>, <span name="inferDelimitersFromSinkTap">inferDelimitersFromSinkTap: <span class="extype" name="scala.Boolean">Boolean</span> = <span class="symbol">true</span></span>)</span>
+        <span class="name">SqoopFlow</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="source">source: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>, <span name="sink">sink: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="params">(<span name="logic">logic: (<span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]], <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span>
       </span>
       </h4>
       
@@ -108,10 +109,10 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="FixedProcessFlow$ProcessFlowRunnable.html"><span class="name">ProcessFlowRunnable</span></a><span class="result"> extends <span class="extype" name="java.lang.Runnable">Runnable</span></span>
+        <a href="../FixedProcessFlow$ProcessFlowRunnable.html"><span class="name">ProcessFlowRunnable</span></a><span class="result"> extends <span class="extype" name="java.lang.Runnable">Runnable</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li></ol>
             </div>
 
@@ -286,7 +287,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">clearFlowListenerThrowable</span><span class="params">(<span name="listener">listener: <span class="extype" name="cascading.flow.FlowListener">FlowListener</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -299,7 +300,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">clone</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.AnyRef">AnyRef</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
@@ -318,7 +319,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">complete</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a> → ProcessFlow → BaseFlow → Flow → UnitOfWork</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a> → ProcessFlow → BaseFlow → Flow → UnitOfWork</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#createConfig" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="createConfig(x$1:java.util.Map[Object,Object],x$2:Config):Config"></a>
       <a id="createConfig(Map[AnyRef,AnyRef],JobConf):JobConf"></a>
@@ -344,7 +345,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">createFlowThread</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="java.lang.Thread">Thread</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#deleteCheckpointsIfNotUpdate" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="deleteCheckpointsIfNotUpdate():Unit"></a>
       <a id="deleteCheckpointsIfNotUpdate():Unit"></a>
@@ -503,7 +504,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">finalize</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
       <span class="symbol">classOf[java.lang.Throwable]</span>
@@ -522,7 +523,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">fireOnCompleted</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#fireOnStarting" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fireOnStarting():Unit"></a>
       <a id="fireOnStarting():Unit"></a>
@@ -535,7 +536,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">fireOnStarting</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#fireOnStopping" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fireOnStopping():Unit"></a>
       <a id="fireOnStopping():Unit"></a>
@@ -548,7 +549,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">fireOnStopping</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#fireOnThrowable" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fireOnThrowable():Unit"></a>
       <a id="fireOnThrowable():Unit"></a>
@@ -561,7 +562,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">fireOnThrowable</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#flowListeners" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="flowListeners:Iterable[cascading.flow.FlowListener]"></a>
       <a id="flowListeners:Iterable[FlowListener]"></a>
@@ -574,7 +575,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">flowListeners</span><span class="result">: <span class="extype" name="scala.Iterable">Iterable</span>[<span class="extype" name="cascading.flow.FlowListener">FlowListener</span>]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#getCascadeID" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getCascadeID():String"></a>
       <a id="getCascadeID():String"></a>
@@ -665,7 +666,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">getClassPath</span><span class="params">()</span><span class="result">: <span class="extype" name="java.util.List">List</span>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#getConfig" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getConfig():org.apache.hadoop.mapred.JobConf"></a>
       <a id="getConfig():JobConf"></a>
@@ -717,7 +718,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">getFieldsFor</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.planner.ElementGraph">ElementGraph</span></span>, <span name="arg1">arg1: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>)</span><span class="result">: <span class="extype" name="cascading.tuple.Fields">Fields</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#getFlowListenerThrowable" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getFlowListenerThrowable(listener:cascading.flow.FlowListener):Option[Throwable]"></a>
       <a id="getFlowListenerThrowable(FlowListener):Option[Throwable]"></a>
@@ -730,7 +731,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">getFlowListenerThrowable</span><span class="params">(<span name="listener">listener: <span class="extype" name="cascading.flow.FlowListener">FlowListener</span></span>)</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Throwable">Throwable</span>]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#getFlowProcess" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getFlowProcess():cascading.flow.FlowProcess[org.apache.hadoop.mapred.JobConf]"></a>
       <a id="getFlowProcess():FlowProcess[JobConf]"></a>
@@ -847,7 +848,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">getMaxNumParallelSteps</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Int">Int</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#getName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getName():String"></a>
       <a id="getName():String"></a>
@@ -883,7 +884,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getProcess</span><span class="params">()</span><span class="result">: <a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a></span>
+        <span class="name">getProcess</span><span class="params">()</span><span class="result">: <a href="SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a></span>
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ProcessFlow</dd></dl></div>
@@ -1158,7 +1159,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">handleExecutorShutdown</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#hasListeners" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hasListeners():Boolean"></a>
       <a id="hasListeners():Boolean"></a>
@@ -1197,7 +1198,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">initConfig</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.Map">Map</span>[<span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>]</span>, <span name="arg1">arg1: <span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#initFromProperties" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="initFromProperties(x$1:java.util.Map[Object,Object]):Unit"></a>
       <a id="initFromProperties(Map[AnyRef,AnyRef]):Unit"></a>
@@ -1210,7 +1211,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">initFromProperties</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.Map">Map</span>[<span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#initSteps" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="initSteps():Unit"></a>
       <a id="initSteps():Unit"></a>
@@ -1223,7 +1224,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">initSteps</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#initialize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="initialize(x$1:cascading.flow.planner.ElementGraph,x$2:cascading.flow.planner.FlowStepGraph[Config]):Unit"></a>
       <a id="initialize(ElementGraph,FlowStepGraph[JobConf]):Unit"></a>
@@ -1249,7 +1250,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">initializeNewJobsMap</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#internalClean" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="internalClean(x$1:Boolean):Unit"></a>
       <a id="internalClean(Boolean):Unit"></a>
@@ -1262,7 +1263,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">internalClean</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="scala.Boolean">Boolean</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#internalShutdown" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="internalShutdown():Unit"></a>
       <a id="internalShutdown():Unit"></a>
@@ -1275,7 +1276,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">internalShutdown</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#internalStart" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="internalStart():Unit"></a>
       <a id="internalStart():Unit"></a>
@@ -1288,7 +1289,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">internalStart</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#internalStopAllJobs" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="internalStopAllJobs():Unit"></a>
       <a id="internalStopAllJobs():Unit"></a>
@@ -1301,7 +1302,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">internalStopAllJobs</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -1372,7 +1373,20 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">logInfo</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.flow.SqoopFlow#name" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="name:String"></a>
+      <a id="name:String"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">name</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
+      </span>
+      </h4>
+      
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
       <a id="ne(AnyRef):Boolean"></a>
@@ -1398,7 +1412,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">newConfig</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span></span>)</span><span class="result">: <span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
       <a id="notify():Unit"></a>
@@ -1602,7 +1616,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">presentSinkFields</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.planner.ElementGraph">ElementGraph</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#presentSourceFields" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="presentSourceFields(x$1:cascading.flow.planner.ElementGraph):Unit"></a>
       <a id="presentSourceFields(ElementGraph):Unit"></a>
@@ -1615,7 +1629,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">presentSourceFields</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.planner.ElementGraph">ElementGraph</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#processWrapper" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="processWrapper:riffle.process.scheduler.ProcessWrapper"></a>
       <a id="processWrapper:ProcessWrapper"></a>
@@ -1628,7 +1642,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">processWrapper</span><span class="result">: <span class="extype" name="riffle.process.scheduler.ProcessWrapper">ProcessWrapper</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#registerShutdownHook" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="registerShutdownHook():Unit"></a>
       <a id="registerShutdownHook():Unit"></a>
@@ -1641,7 +1655,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">registerShutdownHook</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#removeListener" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="removeListener(x$1:cascading.flow.FlowListener):Boolean"></a>
       <a id="removeListener(FlowListener):Boolean"></a>
@@ -1699,7 +1713,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">retrieveSinkFields</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#retrieveSourceFields" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="retrieveSourceFields():Unit"></a>
       <a id="retrieveSourceFields():Unit"></a>
@@ -1712,7 +1726,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">retrieveSourceFields</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#run" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="run():Unit"></a>
       <a id="run():Unit"></a>
@@ -1725,7 +1739,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">run</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#setCascade" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setCascade(x$1:cascading.cascade.Cascade):Unit"></a>
       <a id="setCascade(Cascade):Unit"></a>
@@ -1751,7 +1765,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setCheckpoints</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#setConfigProperty" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setConfigProperty(x$1:org.apache.hadoop.mapred.JobConf,x$2:Any,x$3:Any):Unit"></a>
       <a id="setConfigProperty(JobConf,Any,Any):Unit"></a>
@@ -1764,7 +1778,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setConfigProperty</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.apache.hadoop.mapred.JobConf">JobConf</span></span>, <span name="arg1">arg1: <span class="extype" name="scala.Any">Any</span></span>, <span name="arg2">arg2: <span class="extype" name="scala.Any">Any</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow$hadoop.html" class="extype" name="cascading.flow.hadoop">cascading.flow.hadoop</a>] </dd><dt>Definition Classes</dt><dd>HadoopFlow → BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#setFlowSkipStrategy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setFlowSkipStrategy(x$1:cascading.flow.FlowSkipStrategy):cascading.flow.FlowSkipStrategy"></a>
       <a id="setFlowSkipStrategy(FlowSkipStrategy):FlowSkipStrategy"></a>
@@ -1790,7 +1804,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setFlowStepGraph</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="cascading.flow.planner.FlowStepGraph">FlowStepGraph</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#setFlowStepStrategy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setFlowStepStrategy(x$1:cascading.flow.FlowStepStrategy):Unit"></a>
       <a id="setFlowStepStrategy(FlowStepStrategy):Unit"></a>
@@ -1816,7 +1830,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setName</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.lang.String">String</span></span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#setSinks" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setSinks(x$1:java.util.Map[String,cascading.tap.Tap[_,_,_]]):Unit"></a>
       <a id="setSinks(Map[String,Tap[_,_,_]]):Unit"></a>
@@ -1829,7 +1843,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setSinks</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#setSources" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setSources(x$1:java.util.Map[String,cascading.tap.Tap[_,_,_]]):Unit"></a>
       <a id="setSources(Map[String,Tap[_,_,_]]):Unit"></a>
@@ -1842,7 +1856,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setSources</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#setSpawnStrategy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setSpawnStrategy(x$1:cascading.management.UnitOfWorkSpawnStrategy):Unit"></a>
       <a id="setSpawnStrategy(UnitOfWorkSpawnStrategy):Unit"></a>
@@ -1894,7 +1908,33 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">setTraps</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="java.util.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>)</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../../cascading$flow.html" class="extype" name="cascading.flow">cascading.flow</a>] </dd><dt>Definition Classes</dt><dd>BaseFlow</dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.flow.SqoopFlow#sink" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="sink:Option[cascading.tap.Tap[_,_,_]]"></a>
+      <a id="sink:Option[Tap[_,_,_]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sink</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.parlour.flow.SqoopFlow#source" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="source:Option[cascading.tap.Tap[_,_,_]]"></a>
+      <a id="source:Option[Tap[_,_,_]]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">source</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]]</span>
+      </span>
+      </h4>
+      
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#start" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="start():Unit"></a>
       <a id="start():Unit"></a>
@@ -1907,7 +1947,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">start</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a> → ProcessFlow → BaseFlow → Flow → UnitOfWork</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a> → ProcessFlow → BaseFlow → Flow → UnitOfWork</dd></dl></div>
     </li><li name="cascading.flow.hadoop.HadoopFlow#stepsAreLocal" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="stepsAreLocal():Boolean"></a>
       <a id="stepsAreLocal():Boolean"></a>
@@ -1933,7 +1973,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">stop</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a> → ProcessFlow → BaseFlow → Flow → UnitOfWork</dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a> → ProcessFlow → BaseFlow → Flow → UnitOfWork</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#stopLock" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="stopLock:java.util.concurrent.locks.ReentrantLock"></a>
       <a id="stopLock:ReentrantLock"></a>
@@ -1946,7 +1986,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">stopLock</span><span class="result">: <span class="extype" name="java.util.concurrent.locks.ReentrantLock">ReentrantLock</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#stopped" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="stopped:Boolean"></a>
       <a id="stopped:Boolean"></a>
@@ -1959,7 +1999,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">stopped</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
       <a id="synchronized[T0](⇒T0):T0"></a>
@@ -1985,7 +2025,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">testFlowListenerThrowable</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#testFlowListeners" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="testFlowListeners():Unit"></a>
       <a id="testFlowListeners():Unit"></a>
@@ -1998,7 +2038,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">testFlowListeners</span><span class="params">()</span><span class="result">: <span class="extype" name="scala.Unit">Unit</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow#throwable" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="throwable:Option[Throwable]"></a>
       <a id="throwable:Option[Throwable]"></a>
@@ -2011,7 +2051,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">throwable</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="scala.Throwable">Throwable</span>]</span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.hadoop.ProcessFlow#toString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toString():String"></a>
       <a id="toString():String"></a>
@@ -2037,7 +2077,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">tryHandleThrowable</span><span class="params">(<span name="ex">ex: <span class="extype" name="scala.Throwable">Throwable</span></span>)</span><span class="result">: <span class="extype" name="scala.Boolean">Boolean</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#updateSchemes" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="updateSchemes(x$1:cascading.flow.planner.ElementGraph):cascading.flow.planner.ElementGraph"></a>
       <a id="updateSchemes(ElementGraph):ElementGraph"></a>
@@ -2120,7 +2160,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         <span class="name">wrap</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="desc">desc: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="action">action: ⇒ <span class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow.wrap.A">A</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow.wrap.A">A</span></span>
       </span>
       </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a></dd></dl></div>
     </li><li name="cascading.flow.BaseFlow#writeDOT" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="writeDOT(x$1:String):Unit"></a>
       <a id="writeDOT(String):Unit"></a>
@@ -2156,9 +2196,7 @@ If a SQL query is set on 'options' param, then it is executed before import.
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="au.com.cba.omnia.parlour.flow.SqoopFlow">
-              <h3>Inherited from <a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a></h3>
-            </div><div class="parent" name="scala.Serializable">
+        <div class="parent" name="scala.Serializable">
               <h3>Inherited from <span class="extype" name="scala.Serializable">Serializable</span></h3>
             </div><div class="parent" name="java.io.Serializable">
               <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
@@ -2167,9 +2205,9 @@ If a SQL query is set on 'options' param, then it is executed before import.
             </div><div class="parent" name="scala.Equals">
               <h3>Inherited from <span class="extype" name="scala.Equals">Equals</span></h3>
             </div><div class="parent" name="au.com.cba.omnia.parlour.FixedProcessFlow">
-              <h3>Inherited from <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>]</h3>
+              <h3>Inherited from <a href="../FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>]</h3>
             </div><div class="parent" name="cascading.flow.hadoop.ProcessFlow">
-              <h3>Inherited from <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="flow/SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>]</h3>
+              <h3>Inherited from <span class="extype" name="cascading.flow.hadoop.ProcessFlow">ProcessFlow</span>[<a href="SqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopRiffle">SqoopRiffle</a>]</h3>
             </div><div class="parent" name="cascading.flow.hadoop.HadoopFlow">
               <h3>Inherited from <span class="extype" name="cascading.flow.hadoop.HadoopFlow">HadoopFlow</span></h3>
             </div><div class="parent" name="cascading.flow.BaseFlow">
@@ -2198,6 +2236,6 @@ If a SQL query is set on 'options' param, then it is executed before import.
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../lib/template.js"></script>
+      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../../lib/template.js"></script>
     </body>
       </html>

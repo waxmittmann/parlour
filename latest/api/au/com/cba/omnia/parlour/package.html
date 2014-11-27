@@ -111,7 +111,7 @@
       </h4>
       <p class="comment cmt">A Basic Sqoop Job that can be invoked from the Console.</p>
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopFlow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ExportSqoopFlowextendsFixedProcessFlow[au.com.cba.omnia.parlour.ExportSqoopRiffle]"></a>
+      <a id="ExportSqoopFlowextendsSqoopFlow"></a>
       <a id="ExportSqoopFlow:ExportSqoopFlow"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -119,10 +119,10 @@
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="ExportSqoopFlow.html"><span class="name">ExportSqoopFlow</span></a><span class="result"> extends <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="ExportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ExportSqoopRiffle">ExportSqoopRiffle</a>]</span>
+        <a href="ExportSqoopFlow.html"><span class="name">ExportSqoopFlow</span></a><span class="result"> extends <a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Implements a Cascading Flow that wraps the Sqoop Process</p>
+      <p class="comment cmt">Implements a Cascading Flow that wraps the Sqoop Export Process.</p>
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ExportSqoopJobextendsJobwithHadoopConfigured"></a>
       <a id="ExportSqoopJob:ExportSqoopJob"></a>
@@ -135,20 +135,7 @@
         <a href="ExportSqoopJob.html"><span class="name">ExportSqoopJob</span></a><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span> with <a href="HadoopConfigured.html" class="extype" name="au.com.cba.omnia.parlour.HadoopConfigured">HadoopConfigured</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Sqoop export Job that can be embedded within a Cascade</p>
-    </li><li name="au.com.cba.omnia.parlour.ExportSqoopRiffle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ExportSqoopRiffleextendsAnyRef"></a>
-      <a id="ExportSqoopRiffle:ExportSqoopRiffle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="ExportSqoopRiffle.html"><span class="name">ExportSqoopRiffle</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Implements a Riffle for a Sqoop Job</p>
+      <p class="comment cmt">Sqoop export Job that can be embedded within a Cascade.</p>
     </li><li name="au.com.cba.omnia.parlour.FixedProcessFlow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="FixedProcessFlow[P]extendsProcessFlow[P]"></a>
       <a id="FixedProcessFlow[P]:FixedProcessFlow[P]"></a>
@@ -191,7 +178,7 @@ onThrowable
       </h4>
       <p class="comment cmt">A Basic Sqoop Job that can be invoked from the Console.</p>
     </li><li name="au.com.cba.omnia.parlour.ImportSqoopFlow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ImportSqoopFlowextendsFixedProcessFlow[au.com.cba.omnia.parlour.ImportSqoopRiffle]"></a>
+      <a id="ImportSqoopFlowextendsSqoopFlow"></a>
       <a id="ImportSqoopFlow:ImportSqoopFlow"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -199,10 +186,10 @@ onThrowable
         <span class="kind">class</span>
       </span>
       <span class="symbol">
-        <a href="ImportSqoopFlow.html"><span class="name">ImportSqoopFlow</span></a><span class="result"> extends <a href="FixedProcessFlow.html" class="extype" name="au.com.cba.omnia.parlour.FixedProcessFlow">FixedProcessFlow</a>[<a href="ImportSqoopRiffle.html" class="extype" name="au.com.cba.omnia.parlour.ImportSqoopRiffle">ImportSqoopRiffle</a>]</span>
+        <a href="ImportSqoopFlow.html"><span class="name">ImportSqoopFlow</span></a><span class="result"> extends <a href="flow/SqoopFlow.html" class="extype" name="au.com.cba.omnia.parlour.flow.SqoopFlow">SqoopFlow</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Implements a Cascading Flow that wraps the Sqoop Process</p>
+      <p class="comment cmt">Implements a Cascading Flow that wraps the Sqoop Import Process.</p>
     </li><li name="au.com.cba.omnia.parlour.ImportSqoopJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ImportSqoopJobextendsJobwithHadoopConfigured"></a>
       <a id="ImportSqoopJob:ImportSqoopJob"></a>
@@ -215,20 +202,8 @@ onThrowable
         <a href="ImportSqoopJob.html"><span class="name">ImportSqoopJob</span></a><span class="result"> extends <span class="extype" name="com.twitter.scalding.Job">Job</span> with <a href="HadoopConfigured.html" class="extype" name="au.com.cba.omnia.parlour.HadoopConfigured">HadoopConfigured</a></span>
       </span>
       </h4>
-      <p class="comment cmt">Sqoop import Job that can be embedded within a Cascade</p>
-    </li><li name="au.com.cba.omnia.parlour.ImportSqoopRiffle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ImportSqoopRiffleextendsAnyRef"></a>
-      <a id="ImportSqoopRiffle:ImportSqoopRiffle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">class</span>
-      </span>
-      <span class="symbol">
-        <a href="ImportSqoopRiffle.html"><span class="name">ImportSqoopRiffle</span></a><span class="result"> extends <span class="extype" name="scala.AnyRef">AnyRef</span></span>
-      </span>
-      </h4>
-      <p class="comment cmt">Implements a Riffle for a Sqoop Job</p>
+      <p class="comment cmt">Sqoop import Job that can be embedded within a Cascade
+</p>
     </li><li name="au.com.cba.omnia.parlour.NullFlowListener" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="NullFlowListenerextendsFlowListener"></a>
       <a id="NullFlowListener:NullFlowListener"></a>
@@ -432,6 +407,19 @@ See: http://www.</p>
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.parlour.ExportSqoop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ExportSqoop"></a>
+      <a id="ExportSqoop:ExportSqoop"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="ExportSqoop$.html"><span class="name">ExportSqoop</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Logic for Sqoop Export with appending data or deleting data first.</p>
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopConsoleJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ExportSqoopConsoleJob"></a>
       <a id="ExportSqoopConsoleJob:ExportSqoopConsoleJob"></a>
@@ -445,19 +433,19 @@ See: http://www.</p>
       </span>
       </h4>
       
-    </li><li name="au.com.cba.omnia.parlour.ExportSqoopRiffle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ExportSqoopRiffle"></a>
-      <a id="ExportSqoopRiffle:ExportSqoopRiffle"></a>
+    </li><li name="au.com.cba.omnia.parlour.ImportSqoop" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="ImportSqoop"></a>
+      <a id="ImportSqoop:ImportSqoop"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <a href="ExportSqoopRiffle$.html"><span class="name">ExportSqoopRiffle</span></a>
+        <a href="ImportSqoop$.html"><span class="name">ImportSqoop</span></a>
       </span>
       </h4>
-      
+      <p class="comment cmt">Logic for Sqoop Import with appending or deleting data first.</p>
     </li><li name="au.com.cba.omnia.parlour.ImportSqoopConsoleJob" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="ImportSqoopConsoleJob"></a>
       <a id="ImportSqoopConsoleJob:ImportSqoopConsoleJob"></a>
@@ -468,19 +456,6 @@ See: http://www.</p>
       </span>
       <span class="symbol">
         <a href="ImportSqoopConsoleJob$.html"><span class="name">ImportSqoopConsoleJob</span></a><span class="result"> extends <a href="SqoopConsoleJob.html" class="extype" name="au.com.cba.omnia.parlour.SqoopConsoleJob">SqoopConsoleJob</a> with <span class="extype" name="scala.Serializable">Serializable</span></span>
-      </span>
-      </h4>
-      
-    </li><li name="au.com.cba.omnia.parlour.ImportSqoopRiffle" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="ImportSqoopRiffle"></a>
-      <a id="ImportSqoopRiffle:ImportSqoopRiffle"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">object</span>
-      </span>
-      <span class="symbol">
-        <a href="ImportSqoopRiffle$.html"><span class="name">ImportSqoopRiffle</span></a>
       </span>
       </h4>
       
@@ -562,6 +537,19 @@ See: http://www.</p>
       </span>
       </h4>
       
+    </li><li name="au.com.cba.omnia.parlour.SqoopEval" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopEval"></a>
+      <a id="SqoopEval:SqoopEval"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SqoopEval$.html"><span class="name">SqoopEval</span></a>
+      </span>
+      </h4>
+      
     </li><li name="au.com.cba.omnia.parlour.SqoopExecution" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SqoopExecution"></a>
       <a id="SqoopExecution:SqoopExecution"></a>
@@ -575,6 +563,19 @@ See: http://www.</p>
       </span>
       </h4>
       <p class="comment cmt">Factory for Sqoop Executions</p>
+    </li><li name="au.com.cba.omnia.parlour.SqoopSetup" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="SqoopSetup"></a>
+      <a id="SqoopSetup:SqoopSetup"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">object</span>
+      </span>
+      <span class="symbol">
+        <a href="SqoopSetup$.html"><span class="name">SqoopSetup</span></a>
+      </span>
+      </h4>
+      <p class="comment cmt">Infers settings from source/sink taps.</p>
     </li><li name="au.com.cba.omnia.parlour.SqoopSyntax" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
       <a id="SqoopSyntax"></a>
       <a id="SqoopSyntax:SqoopSyntax"></a>
@@ -663,6 +664,19 @@ See: http://www.</p>
       </span>
       <span class="symbol">
         <a href="VersionInfo$.html"><span class="name">VersionInfo</span></a>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.parlour.flow" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="flow"></a>
+      <a id="flow:flow"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a href="flow/package.html"><span class="name">flow</span></a>
       </span>
       </h4>
       

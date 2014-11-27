@@ -39,8 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Sqoop export Job that can be embedded within a Cascade</p><p>See <a href="SqoopSyntax$.html" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax">SqoopSyntax</a> for an easy way to create a <span class="extype" name="SqoopOptions">SqoopOptions</span>
-</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/7f2b94728760f2406a8ad902fc9b8d27ee390ec1//src/main/scala/au/com/cba/omnia/parlour/ExportSqoopJob.scala" target="_blank">ExportSqoopJob.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Sqoop export Job that can be embedded within a Cascade.</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/e2812e79aa9743006867d67ddc9553e20fa178d9//src/main/scala/au/com/cba/omnia/parlour/ExportSqoopJob.scala" target="_blank">ExportSqoopJob.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><a href="HadoopConfigured.html" class="extype" name="au.com.cba.omnia.parlour.HadoopConfigured">HadoopConfigured</a>, <span class="extype" name="com.twitter.scalding.Job">Job</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="com.twitter.scalding.FieldConversions">FieldConversions</span>, <span class="extype" name="com.twitter.scalding.LowPriorityFieldConversions">LowPriorityFieldConversions</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -84,7 +83,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.parlour.ExportSqoopJob#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(options:com.cloudera.sqoop.SqoopOptions)(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
+      <a id="&lt;init&gt;(options:au.com.cba.omnia.parlour.ParlourExportOptions[_])(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
       <a id="&lt;init&gt;:ExportSqoopJob"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -92,12 +91,12 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
+        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
       </span>
       </h4>
       
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopJob#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(options:com.cloudera.sqoop.SqoopOptions,source:com.twitter.scalding.Source)(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
+      <a id="&lt;init&gt;(options:au.com.cba.omnia.parlour.ParlourExportOptions[_],source:com.twitter.scalding.Source)(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
       <a id="&lt;init&gt;:ExportSqoopJob"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -105,12 +104,12 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
+        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>, <span name="source">source: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
       </span>
       </h4>
       
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopJob#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(options:com.cloudera.sqoop.SqoopOptions,source:com.twitter.scalding.Source,sink:com.twitter.scalding.Source)(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
+      <a id="&lt;init&gt;(options:au.com.cba.omnia.parlour.ParlourExportOptions[_],source:com.twitter.scalding.Source,sink:com.twitter.scalding.Source)(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
       <a id="&lt;init&gt;:ExportSqoopJob"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -118,12 +117,12 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>, <span name="sink">sink: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
+        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>, <span name="source">source: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>, <span name="sink">sink: <span class="extype" name="com.twitter.scalding.Source">Source</span></span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
       </span>
       </h4>
       <p class="shortcomment cmt">Helper constructor that allows easy usage from Scalding</p>
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopJob#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(options:com.cloudera.sqoop.SqoopOptions,source:cascading.tap.Tap[_,_,_])(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
+      <a id="&lt;init&gt;(options:au.com.cba.omnia.parlour.ParlourExportOptions[_],source:cascading.tap.Tap[_,_,_])(args:com.twitter.scalding.Args)(implicitmode:com.twitter.scalding.Mode):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
       <a id="&lt;init&gt;:ExportSqoopJob"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -131,12 +130,12 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
+        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>, <span name="source">source: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="mode">mode: <span class="extype" name="com.twitter.scalding.Mode">Mode</span></span>)</span>
       </span>
       </h4>
       
     </li><li name="au.com.cba.omnia.parlour.ExportSqoopJob#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(options:com.cloudera.sqoop.SqoopOptions,source:cascading.tap.Tap[_,_,_],sink:cascading.tap.Tap[_,_,_])(args:com.twitter.scalding.Args):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
+      <a id="&lt;init&gt;(options:au.com.cba.omnia.parlour.ParlourExportOptions[_],source:cascading.tap.Tap[_,_,_],sink:cascading.tap.Tap[_,_,_])(args:com.twitter.scalding.Args):au.com.cba.omnia.parlour.ExportSqoopJob"></a>
       <a id="&lt;init&gt;:ExportSqoopJob"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -144,7 +143,7 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>, <span name="source">source: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>, <span name="sink">sink: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span>
+        <span class="name">ExportSqoopJob</span><span class="params">(<span name="options">options: <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[_]</span>, <span name="source">source: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>, <span name="sink">sink: <span class="extype" name="cascading.tap.Tap">Tap</span>[_, _, _]</span>)</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span>
       </span>
       </h4>
       
