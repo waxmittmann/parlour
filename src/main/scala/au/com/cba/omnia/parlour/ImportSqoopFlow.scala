@@ -48,7 +48,6 @@ object ImportSqoop {
     val dsl = ParlourImportDsl(options.updates)
     val inferredDsl = inferFromSinkTap(dsl, sink, inferPathFromSinkTap, inferDelimitersFromSinkTap)
 
-    SqoopEval.evalSql(dsl)
     new ImportTool().run(inferredDsl.toSqoopOptions)
   }
 

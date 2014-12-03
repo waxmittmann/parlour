@@ -40,14 +40,16 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
   Import Sqoop Flow/Job/Execution Spec
   ==========================
 
-  end to end sqoop flow test      $endToEndFlow
-  end to end sqoop job test       $endToEndJob
-  end to end sqoop execution test $endToEndExecution
-  sqoop execution test w/ no sink $endToEndExecutionNoSink
+  end to end sqoop flow test        $endToEndFlow
+  end to end sqoop job test         $endToEndJob
+  end to end sqoop execution test   $endToEndExecution
+  sqoop execution test w/ no sink   $endToEndExecutionNoSink
 
-  failing sqoop job returns false $failingJob
-  sqoop job w/ exception throws   $exceptionalJob
-  failing sqoop execution fails   $failingExecution
+  end to end sqoop flow with SELECT $endToEndFlowWithQuery
+
+  failing sqoop job returns false   $failingJob
+  sqoop job w/ exception throws     $exceptionalJob
+  failing sqoop execution fails     $failingExecution
 """
 
   def endToEndFlow = withData(List(
@@ -102,6 +104,28 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     executesOk(execution)
     facts(dir </> "output" </> "part-m-00000" ==> lines(List(
       "abc|Batman|100000|10000000"
+    )))
+  })
+
+  def endToEndFlowWithQuery = withData(List(
+    ("001", "Micky Mouse",  10,  1000),
+    ("002", "Donald Duck", 100, 10000)
+  ))( dsl => {
+    //In this test we need to know what's the name of the table created automatically in `withData`; luckily it was set on dsl.tableName; we use this name in SELECT query.
+    //Then we set dsl.tableName=null, to tell Sqoop to use provided Sql query to fetch data on import.
+    val tableName = dsl.getTableName.get
+    val withQuery = dsl.tableName(null).sqlQuery(s"SELECT id, customer, balance FROM $tableName WHERE balance > 10 AND " + "$CONDITIONS")
+
+    val source = TableTap(dsl.toSqoopOptions)
+    val sink   = Csv((dir </> "output").toString).createTap(Write)
+    val flow   = new ImportSqoopFlow("endToEndFlow", withQuery, Some(source), Some(sink))
+
+    println(s"=========== endToEndFlow test running in $dir ===============")
+
+    flow.complete
+    flow.getFlowStats.isSuccessful must beTrue
+    facts(dir </> "output" </> "part-m-00000" ==> lines(List(
+      "002,Donald Duck,100"
     )))
   })
 
