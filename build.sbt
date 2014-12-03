@@ -47,6 +47,8 @@ uniformThriftSettings
 
 parallelExecution in Test := false
 
+updateOptions := updateOptions.value.withCachedResolution(true)
+
 uniformAssemblySettings
 
 uniform.docSettings("https://github.com/CommBank/parlour")
