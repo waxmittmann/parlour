@@ -27,6 +27,9 @@ Should set by default:
   - not be verbose by default       ${default.verbose}
   - connection manager for Teradata ${default.teradataConnManager}
 
+Should preserve defaults when:
+  - converting from Teradata Dsl    ${preserveDefaults.teradataConnManager}
+
 Should build proper SqoopOptions:
   - for Teradata import             ${build.teradataImport}
   - for Teradata export             ${build.teradataExport}
@@ -148,6 +151,13 @@ Should build proper SqoopOptions:
 
     def teradataConnManager = {
       val opts = TeradataParlourImportDsl().toSqoopOptions
+      opts.getConnManagerClassName must beEqualTo("com.cloudera.connector.teradata.TeradataManager")
+    }
+  }
+
+  object preserveDefaults {
+    def teradataConnManager = {
+      val opts = ParlourImportDsl(TeradataParlourImportDsl().updates).toSqoopOptions
       opts.getConnManagerClassName must beEqualTo("com.cloudera.connector.teradata.TeradataManager")
     }
   }

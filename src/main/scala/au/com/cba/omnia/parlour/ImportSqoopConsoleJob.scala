@@ -40,4 +40,4 @@ class ImportSqoopConsoleJob(args: Args)
   extends ImportSqoopJob(ImportSqoopConsoleJob.optionsFromArgs(args))(args) (
     Mode.getMode(args).getOrElse(sys.error("No Mode defined"))
   )
-
+ 

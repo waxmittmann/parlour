@@ -50,21 +50,23 @@ protected case class TargetDirTap(options: SqoopOptions) extends DirSource(optio
 object SqoopSyntax {
   type SqoopModifier = SqoopOptions => Unit
 
-  case class ParlourImportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourImportDsl] with ParlourImportOptions[ParlourImportDsl]
-  case class ParlourExportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourExportDsl] with ParlourExportOptions[ParlourExportDsl]
-  case class TeradataParlourImportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourImportDsl] with TeradataParlourImportOptions[TeradataParlourImportDsl]
-  case class TeradataParlourExportDsl(updates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourExportDsl] with TeradataParlourExportOptions[TeradataParlourExportDsl]
+  case class ParlourImportDsl(customUpdates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourImportDsl] with ParlourImportOptions[ParlourImportDsl]
+  case class ParlourExportDsl(customUpdates: List[SqoopModifier] = List()) extends ParlourDsl[ParlourExportDsl] with ParlourExportOptions[ParlourExportDsl]
+  case class TeradataParlourImportDsl(customUpdates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourImportDsl] with TeradataParlourImportOptions[TeradataParlourImportDsl]
+  case class TeradataParlourExportDsl(customUpdates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourExportDsl] with TeradataParlourExportOptions[TeradataParlourExportDsl]
 
+  
 }
 
 
 sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
   def defaultOptions: List[SqoopModifier]
-  def updates: List[SqoopModifier]
+  def customUpdates: List[SqoopModifier]
+  def updates: List[SqoopModifier] = customUpdates ++ defaultOptions
 
   def toSqoopOptions = {
     //foldRight instead of foldLeft to enable options overriding
-    (updates ++ defaultOptions).foldRight(new SqoopOptions) {
+    updates.foldRight(new SqoopOptions) {
       (f, opts) =>
         f(opts)
         opts
@@ -72,7 +74,7 @@ sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
   }
 
   def update(f: SqoopModifier): Self = {
-    val nextUpdates = f :: updates
+    val nextUpdates = f :: customUpdates
 
     val nextDsl = this.asInstanceOf[Self] match {
       case ParlourImportDsl(_) => ParlourImportDsl(nextUpdates)
