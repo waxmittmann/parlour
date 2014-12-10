@@ -35,7 +35,12 @@ protected class NullTapWithId(id: String) extends NullTap {
   override def getIdentifier() = id
 }
 
-protected case class TableTap(options: SqoopOptions) extends NullTapWithId(options.getTableName())
+protected case class TableTap(options: SqoopOptions) extends NullTapWithId(
+  // If the TableTap is used for Import with custom SQL query to fetch data, then `options.getTableName` is null.
+  // In consequence Cascading throws NPE trying to build jobs graph. To prevent that we set `options.getSqlQuery` instead.
+  if (options.getTableName != null) options.getTableName else options.getSqlQuery
+)
+
 // ExportDirTap and TargetDirTap are used merely as placeholders for a Tap match based on path during a cascade.
 // The TextLineScheme will be ignore as Sqoop directly handles the file/path in question
 protected case class ExportDirTap(options: SqoopOptions) extends DirSource(options.getExportDir())
