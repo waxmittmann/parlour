@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/a26a3e8f73a57c4c3e72db5181f6b63683e4e1ea//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/4e9465bcd6d14d2f02ad4bac040634a2218180eb//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div><div class="toggleContainer block">
@@ -86,7 +86,20 @@
 
         <div id="values" class="values members">
               <h3>Abstract Value Members</h3>
-              <ol><li name="au.com.cba.omnia.parlour.ParlourDsl#defaultOptions" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+              <ol><li name="au.com.cba.omnia.parlour.ParlourDsl#customUpdates" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="customUpdates:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
+      <a id="customUpdates:List[(SqoopOptions)⇒Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">customUpdates</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.parlour.ParlourDsl#defaultOptions" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
       <a id="defaultOptions:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
       <a id="defaultOptions:List[(SqoopOptions)⇒Unit]"></a>
       <h4 class="signature">
@@ -96,19 +109,6 @@
       </span>
       <span class="symbol">
         <span class="name">defaultOptions</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>
-      </span>
-      </h4>
-      
-    </li><li name="au.com.cba.omnia.parlour.ParlourDsl#updates" visbl="pub" data-isabs="true" fullComment="no" group="Ungrouped">
-      <a id="updates:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
-      <a id="updates:List[(SqoopOptions)⇒Unit]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">abstract </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">updates</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       
@@ -412,6 +412,19 @@
       </span>
       <span class="symbol">
         <span class="name">update</span><span class="params">(<span name="f">f: (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.parlour.ParlourDsl.Self">Self</span></span>
+      </span>
+      </h4>
+      
+    </li><li name="au.com.cba.omnia.parlour.ParlourDsl#updates" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="updates:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
+      <a id="updates:List[(SqoopOptions)⇒Unit]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">updates</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <span class="extype" name="scala.Unit">Unit</span>]</span>
       </span>
       </h4>
       
