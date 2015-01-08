@@ -87,5 +87,5 @@ Teradata Internal Fastload requires the use of a coordinating service that runs 
 As a result - you may need to manually specify which  adapter the service should be bound to.
 This is done using:
  
-    TeradataPalourExportDsl(sqoopOptions).fastloadSocketHostName("myhostname")
+    TeradataParlourExportDsl(sqoopOptions).fastloadSocketHostName("myhostname")
 
