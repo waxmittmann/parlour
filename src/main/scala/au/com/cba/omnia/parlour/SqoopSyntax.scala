@@ -16,6 +16,8 @@ package au.com.cba.omnia.parlour
 
 import java.util.Properties
 
+import scalaz.Monoid
+
 import com.cloudera.sqoop.SqoopOptions
 
 import com.twitter.scalding._
@@ -55,7 +57,37 @@ object SqoopSyntax {
   case class TeradataParlourImportDsl(customUpdates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourImportDsl] with TeradataParlourImportOptions[TeradataParlourImportDsl]
   case class TeradataParlourExportDsl(customUpdates: List[SqoopModifier] = List()) extends ParlourDsl[TeradataParlourExportDsl] with TeradataParlourExportOptions[TeradataParlourExportDsl]
 
-  
+  object ParlourImportDsl {
+    implicit val monoid: Monoid[ParlourImportDsl] =
+      new Monoid[ParlourImportDsl] {
+        def zero = ParlourImportDsl()
+        def append(x: ParlourImportDsl, y: => ParlourImportDsl) = ParlourImportDsl(y.updates ++ x.updates)
+      }
+  }
+
+  object ParlourExportDsl {
+    implicit val monoid: Monoid[ParlourExportDsl] =
+      new Monoid[ParlourExportDsl] {
+        def zero = ParlourExportDsl()
+        def append(x: ParlourExportDsl, y: => ParlourExportDsl) = ParlourExportDsl(y.updates ++ x.updates)
+      }
+  }
+
+  object TeradataParlourImportDsl {
+    implicit val monoid: Monoid[TeradataParlourImportDsl] =
+      new Monoid[TeradataParlourImportDsl] {
+        def zero = TeradataParlourImportDsl()
+        def append(x: TeradataParlourImportDsl, y: => TeradataParlourImportDsl) = TeradataParlourImportDsl(y.updates ++ x.updates)
+      }
+  }
+
+  object TeradataParlourExportDsl {
+    implicit val monoid: Monoid[TeradataParlourExportDsl] =
+      new Monoid[TeradataParlourExportDsl] {
+        def zero = TeradataParlourExportDsl()
+        def append(x: TeradataParlourExportDsl, y: => TeradataParlourExportDsl) = TeradataParlourExportDsl(y.updates ++ x.updates)
+      }
+  }
 }
 
 
