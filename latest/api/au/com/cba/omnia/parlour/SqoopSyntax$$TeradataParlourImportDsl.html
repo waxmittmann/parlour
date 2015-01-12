@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/83555c445b89dd705a99a8ea07e4adb6d7747ccd//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/161305f1aa08066a5931f13660e2c674f2dea788//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="TeradataParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourImportOptions">TeradataParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a>], <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a>], <a href="TeradataParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourOptions">TeradataParlourOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a>], <a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a>], <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a>], <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -766,6 +766,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TeradataParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourImportOptions">TeradataParlourImportOptions</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getJobName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getJobName:Option[String]"></a>
+      <a id="getJobName:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getJobName</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.TeradataParlourImportOptions#getKeepStagingTable" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getKeepStagingTable:Option[Boolean]"></a>
       <a id="getKeepStagingTable:Option[Boolean]"></a>
@@ -1215,6 +1228,19 @@ Note that the connector will automatically generate the value based on the numbe
       <p class="shortcomment cmt">Allows arbitrary query bands to be set for all queries that are executed by the connector.</p><div class="fullcomment"><div class="comment cmt"><p>Allows arbitrary query bands to be set for all queries that are executed by the connector. The expected format is a semicolon-separated key=value pair list.
 Note that a final semicolon is required after the last key=value pair as well. For example, Data_Center=XO;Location=Europe;.
 </p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TeradataParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourOptions">TeradataParlourOptions</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.ParlourOptions#setJobName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="setJobName(name:String):Self"></a>
+      <a id="setJobName(String):TeradataParlourImportDsl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">setJobName</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourImportDsl">TeradataParlourImportDsl</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Sets the name of the sqoop job.</p><div class="fullcomment"><div class="comment cmt"><p>Sets the name of the sqoop job.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#setOptions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setOptions(args:com.twitter.scalding.Args):Self"></a>
       <a id="setOptions(Args):TeradataParlourImportDsl"></a>
