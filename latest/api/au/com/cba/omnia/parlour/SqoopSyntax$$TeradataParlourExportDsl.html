@@ -39,7 +39,7 @@
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/6b5ba442a47d410871d8bfd39f0cf2de171c9082//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/c8f29282a8349173bae0f16c4657ea759f145823//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
           <div class="superTypes hiddenContent"><span class="extype" name="scala.Serializable">Serializable</span>, <span class="extype" name="java.io.Serializable">Serializable</span>, <span class="extype" name="scala.Product">Product</span>, <span class="extype" name="scala.Equals">Equals</span>, <a href="TeradataParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourExportOptions">TeradataParlourExportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a>], <a href="ParlourExportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourExportOptions">ParlourExportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a>], <a href="TeradataParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourOptions">TeradataParlourOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a>], <a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a>], <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a>], <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a>], <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
@@ -312,6 +312,19 @@
       </span>
       </h4>
       <p class="shortcomment cmt">Specifies number of rows that will be procesed together in one batch.</p><div class="fullcomment"><div class="comment cmt"><p>Specifies number of rows that will be procesed together in one batch.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="TeradataParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.TeradataParlourOptions">TeradataParlourOptions</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.ParlourOptions#className" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="className(name:String):Self"></a>
+      <a id="className(String):TeradataParlourExportDsl"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">className</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.TeradataParlourExportDsl">TeradataParlourExportDsl</a></span>
+      </span>
+      </h4>
+      <p class="shortcomment cmt">Sets the class name of the sqoop job.</p><div class="fullcomment"><div class="comment cmt"><p>Sets the class name of the sqoop job.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -547,6 +560,19 @@ ability to autodetect the interface. This parameter has been provided to overrid
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getClassName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClassName:Option[String]"></a>
+      <a id="getClassName:Option[String]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClassName</span><span class="result">: <span class="extype" name="scala.Option">Option</span>[<span class="extype" name="java.lang.String">String</span>]</span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getColumns" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getColumns:Option[Array[String]]"></a>
       <a id="getColumns:Option[Array[String]]"></a>
