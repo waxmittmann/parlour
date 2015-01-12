@@ -201,6 +201,11 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   addOptional("columns", (v: Array[String]) => so => so.setColumns(v), str => str.split(","))
   def getColumns = Option(toSqoopOptions.getColumns)
 
+  /** Sets the name of the sqoop job. */
+  def setJobName(name: String) = update(_.setJobName(name))
+  addOptional("job-name", (v: String) => so => so.setJobName(v))
+  def getJobName = Option(toSqoopOptions.getJobName)
+
   /** Hadoop Configuration */
   private[parlour] def config(config: Configuration) = update(_.setConf(config))
   private[parlour] def getConfig = Option(toSqoopOptions.getConf)
