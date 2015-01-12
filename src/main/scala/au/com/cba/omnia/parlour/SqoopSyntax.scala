@@ -202,7 +202,7 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   def getColumns = Option(toSqoopOptions.getColumns)
 
   /** Sets the name of the sqoop job. */
-  def setJobName(name: String) = update(_.setJobName(name))
+  def jobName(name: String) = update(_.setJobName(name))
   addOptional("job-name", (v: String) => so => so.setJobName(v))
   def getJobName = Option(toSqoopOptions.getJobName)
 
