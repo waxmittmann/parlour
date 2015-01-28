@@ -43,6 +43,7 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
   end to end job test                     ${jobTest.endToEndJob}
   end to end execution test               ${executionTest.endToEndExecution}
   execution test w/ no source             ${executionTest.endToEndExecutionNoSource}
+  null strings are correctly handled      ${executionTest.nullExecution}
 
 
   failing job returns false               ${jobTest.failingJob}
@@ -54,13 +55,13 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
   val resourceUrl = getClass.getResource("/sqoop")
   val exportDir = s"$dir/user/sales/books/customers"
 
-  val oldData = Seq((1, "Hugo", "abc_accr", "Fish", "Tuna", 200))
+  val oldData = Seq((1, Option("Hugo"), "abc_accr", "Fish", "Tuna", 200))
   val newData = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/customer.txt").getLines()
                 .map(parseData).toSeq
 
   def parseData(line: String): Customer = {
     val fields = line.split("\\|")
-    (fields(0).toInt, fields(1), fields(2), fields(3), fields(4), fields(5).toInt)
+    (fields(0).toInt, Option(fields(1)), fields(2), fields(3), fields(4), fields(5).toInt)
   }
 
   def createDsl(table: String) = new ParlourExportDsl()
@@ -163,6 +164,19 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
         val execution = SqoopExecution.sqoopExport(dsl)
         execute(execution) must beLike { case Failure(_) => ok }
       }
+
+    def nullExecution =
+      withEnvironment(path(resourceUrl.toString)) {
+        val nullDataOut = Seq((3, Option.empty[String], "002", "F", "M", 225))
+        val expected   = newData.init ++ oldData ++ nullDataOut
+
+        val table = tableSetup(oldData)
+        val dsl = createDsl(table).inputNull("Bart")
+
+        val execution = SqoopExecution.sqoopExport(dsl)
+        executesOk(execution)
+        tableData(table) must containTheSameElementsAs(expected)
+      }
   }
 
   class SquishExceptionsExportSqoopJob(
@@ -189,7 +203,7 @@ trait ExportDb {
 
   implicit val session = AutoSession
 
-  type Customer = (Int, String, String, String, String, Int)
+  type Customer = (Int, Option[String], String, String, String, Int)
 
   def tableSetup(data: Seq[Customer]): String = {
     val table = s"table_${UUID.randomUUID.toString.replace('-', '_')}"
@@ -224,7 +238,7 @@ trait ExportDb {
   def tableData(table: String): List[Customer] = {
     ConnectionPool.singleton(connectionString, username, password)
     implicit val session = AutoSession
-    SQL(s"select * from $table").map(rs => (rs.int("id"), rs.string("name"), rs.string("accr"),
+    SQL(s"select * from $table").map(rs => (rs.int("id"), rs.stringOpt("name"), rs.string("accr"),
       rs.string("cat"), rs.string("sub_cat"), rs.int("balance"))).list.apply()
   }
 }

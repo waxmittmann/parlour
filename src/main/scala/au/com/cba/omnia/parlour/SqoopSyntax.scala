@@ -258,9 +258,9 @@ trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOpti
   def getInputNullNonString = Option(toSqoopOptions.getInNullNonStringValue)
 
   /** The string to be interpreted as null for input string and input non-string columns */
-  def inputNull(token: String) = {
-    inputNullString(token)
-    inputNullNonString(token)
+  def inputNull(token: String) = update { conf =>
+    conf.setInNullNonStringValue(token)
+    conf.setInNullStringValue(token)
   }
 }
 
