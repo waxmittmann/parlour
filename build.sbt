@@ -16,31 +16,17 @@ uniform.project("parlour", "au.com.cba.omnia.parlour")
 
 uniformDependencySettings
 
+strictDependencySettings
+
+val thermometerVersion = "0.7.1-20150326002216-cbeb5fa"
+
 libraryDependencies ++=
+  depend.hadoopClasspath ++
   depend.scaldingproject() ++
     depend.scalaz() ++ Seq(
-      // The version of `commons-daemon` in Sqoop has a broken POM so another (fixed) version is included.
-      "org.apache.sqoop"   % "sqoop"          % "1.4.5-cdh5.2.4"
-        exclude("commons-cli", "commons-cli")
-        exclude("commons-collections", "commons-collections")
-        exclude("commons-lang", "commons-lang")
-        exclude("commons-io", "commons-io")
-        exclude("commons-logging", "commons-logging")
-        exclude("org.apache.hadoop", "hadoop-common")
-        exclude("org.apache.hadoop", "hadoop-hdfs")
-        exclude("org.apache.hadoop", "hadoop-mapreduce-client-core")
-        exclude("org.apache.hadoop", "hadoop-mapreduce-client-common")
-        exclude("org.apache.hbase", "hbase")
-        exclude("org.apache.hcatalog", "hcatalog-core")
-        exclude("hsqldb", "hsqldb")
-        exclude("ant-contrib", "ant-contrib")
-        exclude("org.apache.avro", "hadoop2")
-        exclude("org.apache.avro", "avro-mapred")
-        exclude("commons-daemon", "commons-daemon"),
-      "commons-daemon"     % "commons-daemon" % "1.0.13",
-      "au.com.cba.omnia"  %% "thermometer" % "0.7.0-20150318035217-23adcab" % "test",
-      "org.scalikejdbc"   %% "scalikejdbc" % "2.1.2"                        % "test",
-      "org.hsqldb"         % "hsqldb"      % "1.8.0.10"                     % "test"
+      "au.com.cba.omnia"          %% "thermometer" % thermometerVersion % "test",
+      noHadoop("org.scalikejdbc"  %% "scalikejdbc" % "2.1.2"            % "test"),
+      noHadoop("org.apache.sqoop"  % "sqoop"       % "1.4.5-cdh5.2.4")
     )
 
 uniformThriftSettings
