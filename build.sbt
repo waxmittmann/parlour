@@ -20,7 +20,7 @@ libraryDependencies ++=
   depend.scaldingproject() ++
     depend.scalaz() ++ Seq(
       // The version of `commons-daemon` in Sqoop has a broken POM so another (fixed) version is included.
-      "org.apache.sqoop"   % "sqoop"          % "1.4.5-cdh5.2.0"
+      "org.apache.sqoop"   % "sqoop"          % "1.4.5-cdh5.2.4"
         exclude("commons-cli", "commons-cli")
         exclude("commons-collections", "commons-collections")
         exclude("commons-lang", "commons-lang")
@@ -38,7 +38,7 @@ libraryDependencies ++=
         exclude("org.apache.avro", "avro-mapred")
         exclude("commons-daemon", "commons-daemon"),
       "commons-daemon"     % "commons-daemon" % "1.0.13",
-      "au.com.cba.omnia"  %% "thermometer" % "0.6.0-20150317012710-6f91910" % "test",
+      "au.com.cba.omnia"  %% "thermometer" % "0.7.0-20150318035217-23adcab" % "test",
       "org.scalikejdbc"   %% "scalikejdbc" % "2.1.2"                        % "test",
       "org.hsqldb"         % "hsqldb"      % "1.8.0.10"                     % "test"
     )
