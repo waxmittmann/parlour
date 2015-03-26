@@ -2,4 +2,4 @@ name: parlour
 exclude: [Gemfile]
 markdown: kramdown
 
-releaseVersion:  "1.8.0-20150318041121-52934e3"
+releaseVersion:  "1.8.1-20150326035955-18bc8d9"
