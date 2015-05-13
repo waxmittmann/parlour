@@ -14,11 +14,22 @@
 
 package au.com.cba.omnia.parlour
 
-import com.twitter.scalding.{Mode, Args}
+import com.twitter.scalding.{Args, Execution, ExecutionApp}
 
 import SqoopSyntax.{ParlourExportDsl, TeradataParlourExportDsl}
 
-object ExportSqoopConsoleJob extends SqoopConsoleJob {
+/**
+  * A Basic Sqoop Job that can be invoked from the Console.
+  *
+  * Note - this job should only be used for testing/debugging purposes.
+  * It specifically has bad password handling.
+  */
+object ExportSqoopConsoleJob extends ExecutionApp with SqoopConsoleJob {
+  def job = for {
+    args <- Execution.getConfig.map(_.getArgs)
+    _    <- SqoopExecution.sqoopExport(optionsFromArgs(args))
+  } yield ()
+
   /** Configures a Sqoop Job by parsing command line arguments */
   def optionsFromArgs(args: Args): ParlourExportOptions[_] = {
     val scheme = jdbcScheme(args("connection-string"))
@@ -29,12 +40,3 @@ object ExportSqoopConsoleJob extends SqoopConsoleJob {
     dsl.setOptions(args)
   }
 }
-
-/**
- * A Basic Sqoop Job that can be invoked from the Console.
- *
- * Note - this job should only be used for testing/debugging purposes.
- * It specifically has bad password handling.
- */
-class ExportSqoopConsoleJob(args: Args)
-  extends ExportSqoopJob(ExportSqoopConsoleJob.optionsFromArgs(args))(args)(Mode.getMode(args).getOrElse(sys.error("No Mode defined")))

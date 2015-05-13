@@ -99,9 +99,9 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
       "fields-terminated-by" -> ",",
       "hadoop-mapred-home"   -> dsl.getHadoopMapRedHome.get
     )
-    val job = withArgs(args)(new ImportSqoopConsoleJob(_))
 
-    job.withFacts(dst </> "part-m-00000" ==> lines(List(
+    executesOk(ImportSqoopConsoleJob.job, args.mapValues(List(_)))
+    facts(dst </> "part-m-00000" ==> lines(List(
       "003,Robin Hood,0,0",
       "004,Little John,-1,-100"
     )))

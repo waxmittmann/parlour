@@ -106,9 +106,8 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
           "input-field-delimiter" -> "|",
           "hadoop-mapred-home"    -> dsl.getHadoopMapRedHome.get
         )
-        val job = withArgs(args)(new ExportSqoopConsoleJob(_))
 
-        job.runsOk
+        executesOk(ExportSqoopConsoleJob.job, args.mapValues(List(_)))
         tableData(table) must containTheSameElementsAs(expected)
       }
 
