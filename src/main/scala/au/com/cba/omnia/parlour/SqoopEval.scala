@@ -19,8 +19,9 @@ import org.apache.sqoop.tool.EvalSqlTool
 /** Uses Sqoop's [[EvalSqlToop]] to evaluate sql queries. */
 object SqoopEval {
   /** Calls [[EvalSqlTool]] to execute an sql query if any */
-  def evalSql(options: ParlourOptions[_]): Unit =
+  def evalSql(options: ParlourOptions[_]): Option[Unit] =
     if (options.getSqlQuery.isDefined) {
-      new EvalSqlTool().run(options.toSqoopOptions)
-    }
+      if (new EvalSqlTool().run(options.toSqoopOptions) == 0) Option(())
+      else                                                    Option.empty
+    } else Option(())
 }

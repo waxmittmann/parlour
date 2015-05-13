@@ -53,7 +53,8 @@ object SqoopExecution {
   def sqoopImport(options: ParlourImportOptions[_]): Execution[Unit] = Execution.from {
     System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
     val dsl = ParlourImportDsl(options.updates)
-    new ImportTool().run(dsl.toSqoopOptions)
+    if (new ImportTool().run(dsl.toSqoopOptions) != 0)
+      throw new Exception("Failed to run sqoop import.")
   }
 
   /**
@@ -80,7 +81,10 @@ object SqoopExecution {
     System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
     val dsl = ParlourExportDsl(options.updates)
 
-    SqoopEval.evalSql(dsl)
-    new ExportTool().run(dsl.toSqoopOptions)
+    if (!SqoopEval.evalSql(dsl).isDefined)
+      throw new Exception("Failed to run preparatory query for sqoop export job.")
+
+    if (new ExportTool().run(dsl.toSqoopOptions) != 0)
+      throw new Exception("Failed to run sqoop export.")
   }
 }
