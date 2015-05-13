@@ -108,12 +108,13 @@ sealed trait ParlourDsl[+Self <: ParlourDsl[_]] {
   def update(f: SqoopModifier): Self = {
     val nextUpdates = f :: customUpdates
 
-    val nextDsl = this.asInstanceOf[Self] match {
-      case ParlourImportDsl(_) => ParlourImportDsl(nextUpdates)
-      case ParlourExportDsl(_) => ParlourExportDsl(nextUpdates)
+    val nextDsl: ParlourDsl[_] = this.asInstanceOf[Self] match {
+      case ParlourImportDsl(_)         => ParlourImportDsl(nextUpdates)
+      case ParlourExportDsl(_)         => ParlourExportDsl(nextUpdates)
       case TeradataParlourImportDsl(_) => TeradataParlourImportDsl(nextUpdates)
       case TeradataParlourExportDsl(_) => TeradataParlourExportDsl(nextUpdates)
     }
+    
     nextDsl.asInstanceOf[Self]
   }
 
@@ -132,27 +133,27 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
 
   /** Specify JDBC connect string */
   def connectionString(connectionString: String) = update(_.setConnectString(connectionString))
-  addOptional("connection-string", (v: String) => so => so.setConnectString(v))
+  addOptionalS("connection-string", (v: String) => so => so.setConnectString(v))
   def getConnectionString = Option(toSqoopOptions.getConnectString)
 
   /** Specify connection manager class to use */
   def connectionManager(className: String) = update(_.setConnManagerClassName(className))
-  addOptional("connection-manager", (v: String) => so => so.setConnManagerClassName(v))
+  addOptionalS("connection-manager", (v: String) => so => so.setConnManagerClassName(v))
   def getConnectionManager = Option(toSqoopOptions.getConnManagerClassName)
 
   /** Manually specify JDBC driver class to use */
   def driver(className: String) = update(_.setDriverClassName(className))
-  addOptional("driver", (v: String) => so => so.setDriverClassName(v))
+  addOptionalS("driver", (v: String) => so => so.setDriverClassName(v))
   def getDriver = Option(toSqoopOptions.getDriverClassName)
 
   /**Set authentication username*/
   def username(username: String) = update(_.setUsername(username))
-  addOptional("username", (v: String) => so => so.setUsername(v))
+  addOptionalS("username", (v: String) => so => so.setUsername(v))
   def getUsername = Option(toSqoopOptions.getUsername)
 
   /** Set authentication password */
   def password(password: String) = update(_.setPassword(password))
-  addOptional("password", (v: String) => so => so.setPassword(v))
+  addOptionalS("password", (v: String) => so => so.setPassword(v))
   def getPassword = Option(toSqoopOptions.getPassword)
 
   /** Optional properties file that provides connection parameters */
@@ -164,21 +165,21 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   def getNumberOfMappers = Option(toSqoopOptions.getNumMappers)
 
   def tableName(tableName: String) = update(_.setTableName(tableName))
-  addOptional("table-name", (v: String) => so => so.setTableName(v))
+  addOptionalS("table-name", (v: String) => so => so.setTableName(v))
   def getTableName = Option(toSqoopOptions.getTableName)
 
   def sqlQuery(sqlStatement: String) = update(_.setSqlQuery(sqlStatement))
-  addOptional("sql-query", (v: String) => so => so.setSqlQuery(v))
+  addOptionalS("sql-query", (v: String) => so => so.setSqlQuery(v))
   def getSqlQuery = Option(toSqoopOptions.getSqlQuery)
 
   /** The string to be interpreted as null for string columns */
   def nullString(token: String) = update(_.setNullStringValue(token))
-  addOptional("null-string", (v: String) => so => so.setNullStringValue(v))
+  addOptionalS("null-string", (v: String) => so => so.setNullStringValue(v))
   def getNullString = Option(toSqoopOptions.getNullStringValue)
 
   /** The string to be interpreted as null for non-string columns */
   def nullNonString(token: String) = update(_.setNullNonStringValue(token))
-  addOptional("null-non-string", (v: String) => so => so.setNullNonStringValue(v))
+  addOptionalS("null-non-string", (v: String) => so => so.setNullNonStringValue(v))
   def getNullNonString = Option(toSqoopOptions.getNullNonStringValue)
 
   /** Use verbose mode - This doesn't really work */
@@ -188,7 +189,7 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
 
   /** The path to hadoop mapred home - used by tests*/
   def hadoopMapRedHome(home: String) = update(_.setHadoopMapRedHome(home))
-  addOptional("hadoop-mapred-home", (v: String) => so => so.setHadoopMapRedHome(v))
+  addOptionalS("hadoop-mapred-home", (v: String) => so => so.setHadoopMapRedHome(v))
   def getHadoopMapRedHome = Option(toSqoopOptions.getHadoopMapRedHome)
 
   /** Can skip the distributed cache feature of sqoop */
@@ -203,12 +204,12 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
 
   /** Sets the name of the sqoop job. */
   def jobName(name: String) = update(_.setJobName(name))
-  addOptional("job-name", (v: String) => so => so.setJobName(v))
+  addOptionalS("job-name", (v: String) => so => so.setJobName(v))
   def getJobName = Option(toSqoopOptions.getJobName)
 
   /** Sets the class name of the sqoop job. */
   def className(name: String) = update(_.setClassName(name))
-  addOptional("class-name", (v: String) => so => so.setClassName(v))
+  addOptionalS("class-name", (v: String) => so => so.setClassName(v))
   def getClassName = Option(toSqoopOptions.getClassName)
 
   /** Hadoop Configuration */
@@ -249,12 +250,12 @@ trait ParlourExportOptions[+Self <: ParlourExportOptions[_]] extends ParlourOpti
 
   /** The string to be interpreted as null for input string columns */
   def inputNullString(token: String) = update(_.setInNullStringValue(token))
-  addOptional("input-null-string", (v: String) => so => so.setInNullStringValue(v))
+  addOptionalS("input-null-string", (v: String) => so => so.setInNullStringValue(v))
   def getInputNullString = Option(toSqoopOptions.getInNullStringValue)
 
   /** The string to be interpreted as null for input non-string columns */
   def inputNullNonString(token: String) = update(_.setInNullNonStringValue(token))
-  addOptional("input-null-non-string", (v: String) => so => so.setInNullNonStringValue(v))
+  addOptionalS("input-null-non-string", (v: String) => so => so.setInNullNonStringValue(v))
   def getInputNullNonString = Option(toSqoopOptions.getInNullNonStringValue)
 
   /** The string to be interpreted as null for input string and input non-string columns */
@@ -277,7 +278,7 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
 
   /** Column of the table used to split work units */
   def splitBy(splitByColumn: String) = update(_.setSplitByCol(splitByColumn))
-  addOptional("split-by", (v: String) => so => so.setSplitByCol(v))
+  addOptionalS("split-by", (v: String) => so => so.setSplitByCol(v))
   def getSplitBy = Option(toSqoopOptions.getSplitByCol)
 
   /** HDFS destination dir */
@@ -287,7 +288,7 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
 
   /** WHERE clause to use during import */
   def where(conditions: String) = update(_.setWhereClause(conditions))
-  addOptional("where", (v: String) => so => so.setWhereClause(v))
+  addOptionalS("where", (v: String) => so => so.setWhereClause(v))
   def getWhere = Option(toSqoopOptions.getWhereClause)
 
   /** Sets a field enclosing character */
@@ -334,12 +335,12 @@ trait TeradataParlourOptions[+Self <: TeradataParlourOptions[_]] extends Parlour
 
   /** Override default staging table name. Please note that this parameter applies only in case that staging tables are used during the data transfer. */
   def stagingTable(tableName: String) = addExtraArgs(Array(STAGING_TABLE, tableName))
-  addOptional("teradata-staging-table", (v: String) => so => addExtraArgsRaw(Array(STAGING_TABLE, v))(so))
+  addOptionalS("teradata-staging-table", (v: String) => so => addExtraArgsRaw(Array(STAGING_TABLE, v))(so))
   def getStagingTable = getExtraValueArg(STAGING_TABLE)
 
   /** Override default staging database name. Please note that this parameter applies only in case that staging tables are used during the data transfer. */
   def stagingDatabase(databaseName: String) = addExtraArgs(Array(STAGING_DATABASE, databaseName: String))
-  addOptional("teradata-staging-database", (v: String) => so => addExtraArgsRaw(Array(STAGING_DATABASE, v))(so))
+  addOptionalS("teradata-staging-database", (v: String) => so => addExtraArgsRaw(Array(STAGING_DATABASE, v))(so))
   def getStagingDatabase = getExtraValueArg(STAGING_DATABASE)
 
   /** Specifies number of rows that will be procesed together in one batch. */
@@ -357,7 +358,7 @@ trait TeradataParlourOptions[+Self <: TeradataParlourOptions[_]] extends Parlour
    * Note that a final semicolon is required after the last key=value pair as well. For example, Data_Center=XO;Location=Europe;.
    */
   def queryBand(bandPairs: String) = addExtraArgs(Array(QUERY_BAND, bandPairs))
-  addOptional("teradata-query-band", (v: String) => so => addExtraArgsRaw(Array(QUERY_BAND, v))(so))
+  addOptionalS("teradata-query-band", (v: String) => so => addExtraArgsRaw(Array(QUERY_BAND, v))(so))
   def getQueryBand = getExtraValueArg(QUERY_BAND)
 
   /** By default, the connector will use Teradata system views to obtain metadata. Using this parameter the connector will switch to XViews instead. */
@@ -476,7 +477,7 @@ trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] ext
 
   /** Specifies a prefix for created error tables. (only for internal.fastload) */
   def errorTable(tableName: String) = addExtraArgs(Array(ERROR_TABLE, tableName))
-  addOptional("teradata-error-table", (v: String) => so => addExtraArgsRaw(Array(ERROR_TABLE, v))(so))
+  addOptionalS("teradata-error-table", (v: String) => so => addExtraArgsRaw(Array(ERROR_TABLE, v))(so))
   def getErrorTable = getExtraValueArg(ERROR_TABLE)
 
   /**
@@ -484,7 +485,7 @@ trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] ext
    * ability to autodetect the interface. This parameter has been provided to override the autodection routine. (only for internal.fastload)
    */
   def fastloadSocketHostName(hostname: String) = addExtraArgs(Array(FASTLOAD_SOCKET_HOSTNAME, hostname))
-  addOptional("teradata-fastload-socket-hostname", (v: String) => so => addExtraArgsRaw(Array(FASTLOAD_SOCKET_HOSTNAME, v))(so))
+  addOptionalS("teradata-fastload-socket-hostname", (v: String) => so => addExtraArgsRaw(Array(FASTLOAD_SOCKET_HOSTNAME, v))(so))
   def getFastloadSocketHostName = getExtraValueArg(FASTLOAD_SOCKET_HOSTNAME)
 }
 
@@ -517,7 +518,7 @@ trait ConsoleOptions[+Self <: ParlourOptions[_]] {
     this
   }
 
-  def addOptional(name: String, setter: String => SqoopOptions => Unit, default: Option[String] = None): ConsoleOptions[Self] = {
+  def addOptionalS(name: String, setter: String => SqoopOptions => Unit, default: Option[String] = None): ConsoleOptions[Self] = {
     addOptional(name, setter, v => v, default)
     this
   }

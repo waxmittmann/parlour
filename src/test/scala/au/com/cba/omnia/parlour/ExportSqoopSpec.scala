@@ -19,9 +19,6 @@ import scala.util.Failure
 
 import java.util.UUID
 
-import scalaz.{Failure => _, _}, Scalaz._
-import scalaz.\/-
-
 import com.twitter.scalding.{Csv, Execution}
 
 import scalikejdbc.{SQL, AutoSession, ConnectionPool}

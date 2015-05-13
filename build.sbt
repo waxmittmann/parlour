@@ -18,7 +18,7 @@ uniformDependencySettings
 
 strictDependencySettings
 
-val thermometerVersion = "0.7.1-20150326002216-cbeb5fa"
+val thermometerVersion = "1.0.0-20150513002558-a6bcf7f"
 
 libraryDependencies ++=
   depend.hadoopClasspath ++
@@ -40,3 +40,6 @@ uniformAssemblySettings
 uniform.docSettings("https://github.com/CommBank/parlour")
 
 uniform.ghsettings
+
+// No point having deprecation warnings since Sqoop forces us to use deprecated classes.
+scalacOptions := scalacOptions.value.filter(_ != "-deprecation")

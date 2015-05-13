@@ -33,10 +33,11 @@ object ExportSqoopConsoleJob extends ExecutionApp with SqoopConsoleJob {
   /** Configures a Sqoop Job by parsing command line arguments */
   def optionsFromArgs(args: Args): ParlourExportOptions[_] = {
     val scheme = jdbcScheme(args("connection-string"))
-    val dsl = scheme match {
+    val dsl: ParlourExportOptions[_] = scheme match {
       case "teradata" => TeradataParlourExportDsl()
       case _          => ParlourExportDsl()
     }
-    dsl.setOptions(args)
+
+    dsl.setOptions(args).asInstanceOf[ParlourExportOptions[_]]
   }
 }
