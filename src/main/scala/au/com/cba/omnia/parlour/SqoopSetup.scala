@@ -22,39 +22,29 @@ import cascading.scheme.hadoop.TextDelimited
 object SqoopSetup {
   case class Delimiters(quote: Option[Char], fieldDelimiter: Option[Char])
 
-  /** Infers HFS path from tap iff `infer` is True */
-  def inferPathFromTap(infer: Boolean, tapOpt: Option[Tap[_, _, _]]): Option[String] = {
-    if (infer) {
-      tapOpt.flatMap {
-        case hfs: Hfs => Some(hfs.getPath.toString)
-        case tap      => {
-          println(s"Couldn't infer path from tap.\n\tUnknown tap used: $tap (${tap.getClass.getName})")
-          None
-        }
+  /** Infers HFS path from tap. */
+  def inferPathFromTap(tap: Tap[_, _, _]): Option[String] =
+    tap match {
+      case hfs: Hfs => Some(hfs.getPath.toString)
+      case tap      => {
+        println(s"Couldn't infer path from tap.\n\tUnknown tap used: $tap (${tap.getClass.getName})")
+        None
       }
-    } else {
-      None
     }
-  }
 
-  /** Infers quote and field delimeter symbols from tap iff `infer` is True */
-  def inferDelimitersFromTap(infer: Boolean, tapOpt: Option[Tap[_, _, _]]): Delimiters = {
-    if (infer) {
-      tapOpt.map(_.getScheme).map {
-        case delimited: TextDelimited => {
-          val quote     = getSingleCharacter("Quote", Option(delimited.getQuote))
-          val delimiter = getSingleCharacter("Delimiter", Option(delimited.getDelimiter))
+  /** Infers quote and field delimeter symbols from tap. */
+  def inferDelimitersFromTap(tap: Tap[_, _, _]): Delimiters =
+    tap.getScheme match {
+      case delimited: TextDelimited => {
+        val quote     = getSingleCharacter("Quote", Option(delimited.getQuote))
+        val delimiter = getSingleCharacter("Delimiter", Option(delimited.getDelimiter))
 
-          Delimiters(quote, delimiter)
-        }
-        case scheme => {
-          println(s"Couldn't infer delimiters from tap's scheme.\n\tUnknown scheme used by tap: $scheme (${scheme.getClass.getName})")
-          Delimiters(None, None)
-        }
-      } getOrElse(Delimiters(None, None))
-    } else {
-      Delimiters(None, None)
-    }
+        Delimiters(quote, delimiter)
+      }
+      case scheme => {
+        println(s"Couldn't infer delimiters from tap's scheme.\n\tUnknown scheme used by tap: $scheme (${scheme.getClass.getName})")
+        Delimiters(None, None)
+      }
   }
 
   private def getSingleCharacter(name: String, value: Option[String]): Option[Char] =

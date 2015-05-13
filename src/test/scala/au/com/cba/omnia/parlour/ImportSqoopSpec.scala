@@ -20,10 +20,7 @@ import java.util.UUID
 
 import scalaz.{Failure => _, _}, Scalaz._
 
-import cascading.flow.{Flow, FlowListener}
-import cascading.tap.Tap
-
-import com.twitter.scalding.{Args, Csv, Write}
+import com.twitter.scalding.Csv
 
 import scalikejdbc.{AutoSession, ConnectionPool, SQL}
 
@@ -40,49 +37,12 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
   Import Sqoop Flow/Job/Execution Spec
   ==========================
 
-  end to end sqoop flow test        $endToEndFlow
-  end to end sqoop job test         $endToEndJob
   end to end console job test       $endToEndConsole
   end to end sqoop execution test   $endToEndExecution
   sqoop execution test w/ no sink   $endToEndExecutionNoSink
-
-  end to end sqoop flow with SELECT $endToEndFlowWithQuery
-
-  failing sqoop job returns false   $failingJob
-  sqoop job w/ exception throws     $exceptionalJob
+  end to end sqoop with SELECT      $endToEndWithQuery
   failing sqoop execution fails     $failingExecution
 """
-
-  def endToEndFlow = withData(List(
-    ("001", "Micky Mouse",  10,  1000),
-    ("002", "Donald Duck", 100, 10000)
-  ))( dsl => {
-    val source = TableTap(dsl.toSqoopOptions)
-    val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val flow   = new ImportSqoopFlow("endToEndFlow", dsl, Some(source), Some(sink))
-
-    println(s"=========== endToEndFlow test running in $dir ===============")
-
-    flow.complete
-    flow.getFlowStats.isSuccessful must beTrue
-    facts(dir </> "output" </> "part-m-00000" ==> lines(List(
-      "001,Micky Mouse,10,1000",
-      "002,Donald Duck,100,10000"
-    )))
-  })
-
-  def endToEndJob = withData(List(
-    ("003", "Robin Hood", 0, 0),
-    ("004", "Little John", -1, -100)
-  ))( dsl => {
-    val source = TableTap(dsl.toSqoopOptions)
-    val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val job    = new ImportSqoopJob(dsl, source, sink)(scaldingArgs)
-    job.withFacts(dir </> "output" </> "part-m-00000" ==> lines(List(
-      "003,Robin Hood,0,0",
-      "004,Little John,-1,-100"
-    )))
-  })
 
   def endToEndConsole = withData(List(
     ("003", "Robin Hood", 0, 0),
@@ -131,44 +91,20 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     )))
   })
 
-  def endToEndFlowWithQuery = withData(List(
+  def endToEndWithQuery = withData(List(
     ("001", "Micky Mouse",  10,  1000),
     ("002", "Donald Duck", 100, 10000)
   ))( dsl => {
     //In this test we need to know what's the name of the table created automatically in `withData`; luckily it was set on dsl.tableName; we use this name in SELECT query.
     //Then we set dsl.tableName=null, to tell Sqoop to use provided Sql query to fetch data on import.
-    val tableName = dsl.getTableName.get
-    val withQuery = dsl.tableName(null).sqlQuery(s"SELECT id, customer, balance FROM $tableName WHERE balance > 10 AND " + "$CONDITIONS")
+    val tableName     = dsl.getTableName.get
+    val withQuery     = dsl.tableName(null).sqlQuery(s"SELECT id, customer, balance FROM $tableName WHERE balance > 10 AND " + "$CONDITIONS")
+    val withTargetDir = withQuery.targetDir((dir </> "output").toString)
 
-    val source = TableTap(dsl.toSqoopOptions)
-    val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val flow   = new ImportSqoopFlow("endToEndFlow", withQuery, Some(source), Some(sink))
-
-    println(s"=========== endToEndFlow test running in $dir ===============")
-
-    flow.complete
-    flow.getFlowStats.isSuccessful must beTrue
+    executesOk(SqoopExecution.sqoopImport(withTargetDir))
     facts(dir </> "output" </> "part-m-00000" ==> lines(List(
       "002,Donald Duck,100"
     )))
-  })
-
-  def failingJob = withData(List())( dsl => {
-    val withTableName = dsl tableName("INVALID")
-
-    val source = TableTap(withTableName.toSqoopOptions)
-    val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val job    = new SquishExceptionsImportSqoopJob(withTableName, source, sink)(scaldingArgs)
-    (new VerifiableJob(job)).run must_== Some(s"Job failed to run <${job.name}>".left)
-  })
-
-  def exceptionalJob = withData(List())( dsl => {
-    val withTableName = dsl tableName("INVALID")
-
-    val source = TableTap(withTableName.toSqoopOptions)
-    val sink   = Csv((dir </> "output").toString).createTap(Write)
-    val job    = new ImportSqoopJob(withTableName, source, sink)(scaldingArgs)
-    (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
   })
 
   def failingExecution = withData(List())( dsl => {
@@ -224,25 +160,4 @@ case class withData(data: List[(String, String, Int, Int)]) extends Fixture[Parl
       AsResult(test(dsl))
     }
   }
-}
-
-class SquishExceptionsImportSqoopJob(
-  options: ParlourImportOptions[_],
-  source: Tap[_, _, _],
-  sink: Tap[_, _, _])(
-  args: Args
-) extends ImportSqoopJob(options, source, sink)(args) {
-  override def buildFlow = {
-    val flow = super.buildFlow
-    flow.addListener(new SquishExceptionListener)
-    flow
-  }
-}
-
-class SquishExceptionListener extends FlowListener {
-  def onStarting(flow: Flow[_]) {}
-  def onStopping(flow: Flow[_]) {}
-  def onCompleted(flow: Flow[_]) {}
-  // mark all throwables as handled
-  def onThrowable(flow: Flow[_], throwable: Throwable): Boolean = true
 }

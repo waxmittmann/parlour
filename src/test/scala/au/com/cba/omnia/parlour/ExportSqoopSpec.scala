@@ -22,9 +22,7 @@ import java.util.UUID
 import scalaz.{Failure => _, _}, Scalaz._
 import scalaz.\/-
 
-import cascading.tap.Tap
-
-import com.twitter.scalding.{Read, Args, Csv, Job, Execution}
+import com.twitter.scalding.{Csv, Execution}
 
 import scalikejdbc.{SQL, AutoSession, ConnectionPool}
 
@@ -32,23 +30,16 @@ import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
-import au.com.cba.omnia.parlour.flow.SqoopRiffle
 
 class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
   Export Sqoop Flow/Job/Execution Spec
   ==========================
 
-  end to end flow test                    ${flowTest.endToEndFlow}
-  end to end job test                     ${jobTest.endToEndJob}
-  end to end console test                 ${jobTest.endToEndConsole}
-  end to end execution test               ${executionTest.endToEndExecution}
-  execution test w/ no source             ${executionTest.endToEndExecutionNoSource}
-  null strings are correctly handled      ${executionTest.nullExecution}
-
-
-  failing job returns false               ${jobTest.failingJob}
-  job w/ exception throws                 ${jobTest.exceptionalJob}
-  failing execution fails                 ${executionTest.failingExecution}
+  end to end console test                 $endToEndConsole
+  end to end execution test               $endToEndExecution
+  execution test w/ no source             $endToEndExecutionNoSource
+  null strings are correctly handled      $nullExecution
+  failing execution fails                 $failingExecution
 
 """
 
@@ -74,142 +65,58 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
     .inputFieldsTerminatedBy('|')
     .hadoopMapRedHome(System.getProperty("user.home") + "/.ivy2/cache")
 
+  def endToEndConsole = withEnvironment(path(resourceUrl.toString)) {
+    val expected = newData ++ oldData
+    val table    = tableSetup(oldData)
+    val dsl      = createDsl(table)
+    val args     = Map(
+      "connection-string"     -> connectionString,
+      "username"              -> username,
+      "password"              -> password,
+      "table-name"            -> table,
+      "export-dir"            -> exportDir,
+      "mappers"               -> "1",
+      "input-field-delimiter" -> "|",
+      "hadoop-mapred-home"    -> dsl.getHadoopMapRedHome.get
+    )
 
-  object jobTest {
-    def endToEndJob =
-      withEnvironment(path(resourceUrl.toString)) {
-        val expected = newData ++ oldData
+    executesOk(ExportSqoopConsoleJob.job, args.mapValues(List(_)))
+    tableData(table) must containTheSameElementsAs(expected)
+  }
+  def endToEndExecution = withEnvironment(path(resourceUrl.toString)) {
+    val expected = newData ++ oldData
+    val table    = tableSetup(oldData)
+    val dsl      = createDsl(table)
+    val source   = Csv(exportDir, "|")
 
-        val table = tableSetup(oldData)
-        val dsl = createDsl(table)
-
-        val source = Csv(exportDir, "|").createTap(Read)
-        val sink   = TableTap(dsl.toSqoopOptions)
-        val job    = new ExportSqoopJob(dsl, source, sink)(scaldingArgs)
-
-        job.runsOk
-        tableData(table) must containTheSameElementsAs(expected)
-      }
-
-    def endToEndConsole =
-      withEnvironment(path(resourceUrl.toString)) {
-        val expected = newData ++ oldData
-        val table    = tableSetup(oldData)
-        val dsl      = createDsl(table)
-        val args     = Map(
-          "connection-string"     -> connectionString,
-          "username"              -> username,
-          "password"              -> password,
-          "table-name"            -> table,
-          "export-dir"            -> exportDir,
-          "mappers"               -> "1",
-          "input-field-delimiter" -> "|",
-          "hadoop-mapred-home"    -> dsl.getHadoopMapRedHome.get
-        )
-
-        executesOk(ExportSqoopConsoleJob.job, args.mapValues(List(_)))
-        tableData(table) must containTheSameElementsAs(expected)
-      }
-
-    def failingJob =
-      withEnvironment(path(resourceUrl.toString)) {
-        val dsl = createDsl("INVALID")
-
-        val source   = Csv(exportDir).createTap(Read)
-        val sink = TableTap(dsl.toSqoopOptions)
-        val job    = new SquishExceptionsExportSqoopJob(dsl, source, sink)(scaldingArgs)
-        (new VerifiableJob(job)).run must_== Some(s"Job failed to run <${job.name}>".left)
-      }
-
-    def exceptionalJob =
-      withEnvironment(path(resourceUrl.toString)) {
-        val dsl = createDsl("INVALID")
-
-        val source   = Csv(exportDir).createTap(Read)
-        val sink = TableTap(dsl.toSqoopOptions)
-        val job    = new ExportSqoopJob(dsl, source, sink)(scaldingArgs)
-        (new VerifiableJob(job)).run must beLike { case Some(\/-(_)) => ok }
-      }
+    executesOk(SqoopExecution.sqoopExport(dsl, source))
+    tableData(table) must containTheSameElementsAs(expected)
   }
 
-  object flowTest {
-    def endToEndFlow =
-      withEnvironment(path(resourceUrl.toString)) {
-        val expected = newData ++ oldData
-        val table = tableSetup(oldData)
-        val dsl = createDsl(table)
+  def endToEndExecutionNoSource = withEnvironment(path(resourceUrl.toString)) {
+    val expected = newData ++ oldData
+    val table    = tableSetup(oldData)
+    val dsl      = createDsl(table)
 
-        val source = Csv(exportDir, "|").createTap(Read)
-        val sink   = TableTap(dsl.toSqoopOptions)
-        val flow   = new ExportSqoopFlow("endToEndFlow", dsl, Some(source), Some(sink))
-
-        println(s"=========== endToEndFlow test running in $dir ===============")
-
-        flow.complete
-        flow.getFlowStats.isSuccessful must beTrue
-        tableData(table) must containTheSameElementsAs(expected)
-      }
+    executesOk(SqoopExecution.sqoopExport(dsl))
+    tableData(table) must containTheSameElementsAs(expected)
   }
 
-  object executionTest {
-    def endToEndExecution =
-      withEnvironment(path(resourceUrl.toString)) {
-        val expected = newData ++ oldData
+  def failingExecution = withEnvironment(path(resourceUrl.toString)) {
+    val dsl = createDsl("INVALID")
 
-        val table = tableSetup(oldData)
-        val dsl = createDsl(table)
-
-        val source = Csv(exportDir, "|")
-        val execution = SqoopExecution.sqoopExport(dsl, source)
-        executesOk(execution)
-        tableData(table) must containTheSameElementsAs(expected)
-      }
-
-    def endToEndExecutionNoSource =
-      withEnvironment(path(resourceUrl.toString)) {
-        val expected = newData ++ oldData
-
-        val table = tableSetup(oldData)
-        val dsl = createDsl(table)
-
-        val execution = SqoopExecution.sqoopExport(dsl)
-        executesOk(execution)
-        tableData(table) must containTheSameElementsAs(expected)
-      }
-
-    def failingExecution =
-      withEnvironment(path(resourceUrl.toString)) {
-        val dsl = createDsl("INVALID")
-
-        val execution = SqoopExecution.sqoopExport(dsl)
-        execute(execution) must beLike { case Failure(_) => ok }
-      }
-
-    def nullExecution =
-      withEnvironment(path(resourceUrl.toString)) {
-        val nullDataOut = Seq((3, Option.empty[String], "002", "F", "M", 225))
-        val expected   = newData.init ++ oldData ++ nullDataOut
-
-        val table = tableSetup(oldData)
-        val dsl = createDsl(table).inputNull("Bart")
-
-        val execution = SqoopExecution.sqoopExport(dsl)
-        executesOk(execution)
-        tableData(table) must containTheSameElementsAs(expected)
-      }
+    val execution = SqoopExecution.sqoopExport(dsl)
+    execute(execution) must beLike { case Failure(_) => ok }
   }
 
-  class SquishExceptionsExportSqoopJob(
-    options: ParlourExportOptions[_],
-    source: Tap[_, _, _],
-    sink: Tap[_, _, _])(
-    args: Args
-    ) extends ExportSqoopJob(options, source, sink)(args) {
-    override def buildFlow = {
-      val flow = super.buildFlow
-      flow.addListener(new SquishExceptionListener)
-      flow
-    }
+  def nullExecution = withEnvironment(path(resourceUrl.toString)) {
+    val nullDataOut = Seq((3, Option.empty[String], "002", "F", "M", 225))
+    val expected    = newData.init ++ oldData ++ nullDataOut
+    val table       = tableSetup(oldData)
+    val dsl         = createDsl(table).inputNull("Bart")
+
+    executesOk(SqoopExecution.sqoopExport(dsl))
+    tableData(table) must containTheSameElementsAs(expected)
   }
 }
 
@@ -217,9 +124,9 @@ trait ExportDb {
   Class.forName("org.hsqldb.jdbcDriver")
 
   val connectionString = "jdbc:hsqldb:mem:sqoopdb"
-  val username = "sa"
-  val password = ""
-  val userHome = System.getProperty("user.home")
+  val username         = "sa"
+  val password         = ""
+  val userHome         = System.getProperty("user.home")
 
   implicit val session = AutoSession
 

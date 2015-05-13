@@ -16,10 +16,17 @@ package au.com.cba.omnia.parlour
 
 import java.util.UUID
 
+import scalaz.Scalaz._
+
 import org.apache.hadoop.conf.Configuration
 
 import com.twitter.scalding.{Args, Execution, Mode, Read, Source, Write}
 
+import org.apache.sqoop.Sqoop
+import org.apache.sqoop.tool.{EvalSqlTool, ExportTool, ImportTool}
+
+import au.com.cba.omnia.parlour.SqoopSyntax.{ParlourExportDsl, ParlourImportDsl}
+import au.com.cba.omnia.parlour.SqoopSetup.Delimiters
 
 /** Factory for Sqoop Executions */
 object SqoopExecution {
@@ -29,18 +36,24 @@ object SqoopExecution {
     * `options` does not need any information about the destination.
     * We infer that information from `sink`.
     */
-  def sqoopImport(options: ParlourImportOptions[_], sink: Source): Execution[Unit] = {
-    //TODO fix when scalding provides access to the mode
-    val mode = Mode(Args("--hdfs"), new Configuration)
-    val tap  = Some(sink.createTap(Write)(mode))
-    val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, tap) 
-    Execution.fromFuture(_ => Execution.run(flow)).unit
-  }
+  def sqoopImport(options: ParlourImportOptions[_], sink: Source): Execution[Unit] = for {
+    mode                         <- Execution.getMode
+    tap                           = sink.createTap(Write)(mode)
+    sourcePath                    = SqoopSetup.inferPathFromTap(tap)
+    Delimiters(quote, fieldDelim) = SqoopSetup.inferDelimitersFromTap(tap)
+    dsl                           = ParlourImportDsl(options.updates)
+    withTargetDir                 = sourcePath.cata(dsl.targetDir, dsl)
+    withQuote                     = quote.cata(withTargetDir.escapedBy, withTargetDir)
+    withDelim                     = fieldDelim.cata(withQuote.fieldsTerminatedBy, withQuote)
+    withTerminator                = withDelim.linesTerminatedBy('\n')
+    _                            <- sqoopImport(withTerminator)
+  } yield ()
 
   /** An Execution that uses sqoop to import data. */
-  def sqoopImport(options: ParlourImportOptions[_]): Execution[Unit] = {
-    val flow = new ImportSqoopFlow(s"SqoopExecutionImport-${UUID.randomUUID}", options, None, None)
-    Execution.fromFuture(_ => Execution.run(flow)).unit
+  def sqoopImport(options: ParlourImportOptions[_]): Execution[Unit] = Execution.from {
+    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
+    val dsl = ParlourImportDsl(options.updates)
+    new ImportTool().run(dsl.toSqoopOptions)
   }
 
   /**
@@ -49,17 +62,25 @@ object SqoopExecution {
     * `options` does not need any information about the source.
     * We infer that information from `source`.
     */
-  def sqoopExport(options: ParlourExportOptions[_], source: Source): Execution[Unit] = {
-    //TODO fix when scalding provides access to the mode
-    val mode = Mode(Args("--hdfs"), new Configuration)
-    val tap  = Some(source.createTap(Read)(mode))
-    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, tap, None)
-    Execution.fromFuture(_ => Execution.run(flow)).unit
-  }
+  def sqoopExport(options: ParlourExportOptions[_], source: Source): Execution[Unit] = for {
+    mode                         <- Execution.getMode
+    tap                           = source.createTap(Read)(mode)
+    sourcePath                    = SqoopSetup.inferPathFromTap(tap)
+    Delimiters(quote, fieldDelim) = SqoopSetup.inferDelimitersFromTap(tap)
+    dsl                           = ParlourExportDsl(options.updates)
+    withExportDir                 = sourcePath.cata(dsl.exportDir, dsl)
+    withQuote                     = quote.cata(withExportDir.inputEscapedBy, withExportDir)
+    withDelim                     = fieldDelim.cata(withQuote.inputFieldsTerminatedBy, withQuote)
+    withTerminator                = withDelim.inputLinesTerminatedBy('\n')
+    _                            <- sqoopExport(withTerminator)
+  } yield ()
 
   /** An Execution that uses sqoop to export data to a database. */
-  def sqoopExport(options: ParlourExportOptions[_]): Execution[Unit] = {
-    val flow = new ExportSqoopFlow(s"SqoopExecutionExport-${UUID.randomUUID}", options, None, None)
-    Execution.fromFuture(_ => Execution.run(flow)).unit
+  def sqoopExport(options: ParlourExportOptions[_]): Execution[Unit] = Execution.from {
+    System.setProperty(Sqoop.SQOOP_RETHROW_PROPERTY, "true")
+    val dsl = ParlourExportDsl(options.updates)
+
+    SqoopEval.evalSql(dsl)
+    new ExportTool().run(dsl.toSqoopOptions)
   }
 }

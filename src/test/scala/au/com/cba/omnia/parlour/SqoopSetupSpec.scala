@@ -39,7 +39,7 @@ Should be able to infer delimiters for:
       //given
       val tap = TypedPsv[String]("/test/path").createTap(Read)(Hdfs(false, new Configuration()))
       //when
-      val pathOpt = SqoopSetup.inferPathFromTap(true, Some(tap))
+      val pathOpt = SqoopSetup.inferPathFromTap(tap)
       //then
       pathOpt must beEqualTo(Some("/test/path"))
     }
@@ -48,7 +48,7 @@ Should be able to infer delimiters for:
       //given
       val tap = Csv("/test/path").createTap(Read)(Hdfs(false, new Configuration()))
       //when
-      val pathOpt = SqoopSetup.inferPathFromTap(true, Some(tap))
+      val pathOpt = SqoopSetup.inferPathFromTap(tap)
       //then
       pathOpt must beEqualTo(Some("/test/path"))
     }
@@ -59,7 +59,7 @@ Should be able to infer delimiters for:
       //given
       val tap = TypedPsv[String]("test").createTap(Read)(Hdfs(false, new Configuration()))
       //when
-      val delims = SqoopSetup.inferDelimitersFromTap(true, Some(tap))
+      val delims = SqoopSetup.inferDelimitersFromTap(tap)
       //then
       delims match {
         case Delimiters(_, Some(delim)) => delim must beEqualTo('|')
@@ -70,7 +70,7 @@ Should be able to infer delimiters for:
       //given
       val tap = Csv("test").createTap(Read)(Hdfs(false, new Configuration()))
       //when
-      val delims = SqoopSetup.inferDelimitersFromTap(true, Some(tap))
+      val delims = SqoopSetup.inferDelimitersFromTap(tap)
       //then
       delims match {
         case Delimiters(_, Some(delim)) => delim must beEqualTo(',')
