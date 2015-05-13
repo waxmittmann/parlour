@@ -15,7 +15,6 @@
 package au.com.cba.omnia.parlour
 
 import scala.io.Source
-
 import scala.util.Failure
 
 import java.util.UUID
@@ -29,8 +28,8 @@ import com.twitter.scalding.{Read, Args, Csv, Job, Execution}
 
 import scalikejdbc.{SQL, AutoSession, ConnectionPool}
 
-import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.core.Thermometer._
+import au.com.cba.omnia.thermometer.core.ThermometerSpec
 
 import au.com.cba.omnia.parlour.SqoopSyntax.ParlourExportDsl
 import au.com.cba.omnia.parlour.flow.SqoopRiffle
@@ -41,6 +40,7 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
 
   end to end flow test                    ${flowTest.endToEndFlow}
   end to end job test                     ${jobTest.endToEndJob}
+  end to end console test                 ${jobTest.endToEndConsole}
   end to end execution test               ${executionTest.endToEndExecution}
   execution test w/ no source             ${executionTest.endToEndExecutionNoSource}
   null strings are correctly handled      ${executionTest.nullExecution}
@@ -86,6 +86,27 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
         val source = Csv(exportDir, "|").createTap(Read)
         val sink   = TableTap(dsl.toSqoopOptions)
         val job    = new ExportSqoopJob(dsl, source, sink)(scaldingArgs)
+
+        job.runsOk
+        tableData(table) must containTheSameElementsAs(expected)
+      }
+
+    def endToEndConsole =
+      withEnvironment(path(resourceUrl.toString)) {
+        val expected = newData ++ oldData
+        val table    = tableSetup(oldData)
+        val dsl      = createDsl(table)
+        val args     = Map(
+          "connection-string"     -> connectionString,
+          "username"              -> username,
+          "password"              -> password,
+          "table-name"            -> table,
+          "export-dir"            -> exportDir,
+          "mappers"               -> "1",
+          "input-field-delimiter" -> "|",
+          "hadoop-mapred-home"    -> dsl.getHadoopMapRedHome.get
+        )
+        val job = withArgs(args)(new ExportSqoopConsoleJob(_))
 
         job.runsOk
         tableData(table) must containTheSameElementsAs(expected)

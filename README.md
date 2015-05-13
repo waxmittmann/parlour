@@ -67,7 +67,7 @@ Parlour includes a sample job that can be invoked from the command-line:
         com.twitter.scalding.Tool \
         au.com.cba.omnia.parlour.ExportSqoopConsoleJob \
         --hdfs \
-        --input /data/on/hdfs/to/sqoop \
+        --export-dir /data/on/hdfs/to/sqoop \
         --teradata-method internal.fastload \
         --teradata-fastload-socket-hostname myhostname1 \
         --connection-string "jdbc:teradata://database/database=test" \

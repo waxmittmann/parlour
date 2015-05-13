@@ -14,11 +14,9 @@
 
 package au.com.cba.omnia.parlour
 
-import java.util.UUID
-
-import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
-
 import scala.util.Failure
+
+import java.util.UUID
 
 import scalaz.{Failure => _, _}, Scalaz._
 
@@ -29,12 +27,14 @@ import com.twitter.scalding.{Args, Csv, Write}
 
 import scalikejdbc.{AutoSession, ConnectionPool, SQL}
 
+import org.specs2.execute.{AsResult, Result}
+import org.specs2.specification.Fixture
+
 import au.com.cba.omnia.thermometer.core.ThermometerSpec
 import au.com.cba.omnia.thermometer.core.Thermometer._
 import au.com.cba.omnia.thermometer.fact.PathFactoids._
 
-import org.specs2.execute.{AsResult, Result}
-import org.specs2.specification.Fixture
+import au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl
 
 class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
   Import Sqoop Flow/Job/Execution Spec
@@ -42,6 +42,7 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
 
   end to end sqoop flow test        $endToEndFlow
   end to end sqoop job test         $endToEndJob
+  end to end console job test       $endToEndConsole
   end to end sqoop execution test   $endToEndExecution
   sqoop execution test w/ no sink   $endToEndExecutionNoSink
 
@@ -78,6 +79,29 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     val sink   = Csv((dir </> "output").toString).createTap(Write)
     val job    = new ImportSqoopJob(dsl, source, sink)(scaldingArgs)
     job.withFacts(dir </> "output" </> "part-m-00000" ==> lines(List(
+      "003,Robin Hood,0,0",
+      "004,Little John,-1,-100"
+    )))
+  })
+
+  def endToEndConsole = withData(List(
+    ("003", "Robin Hood", 0, 0),
+    ("004", "Little John", -1, -100)
+  ))( dsl => {
+    val dst  = dir </> "output"
+    val args = Map[String, String](
+      "connection-string"    -> dsl.getConnectionString.get,
+      "username"             -> dsl.getUsername.get,
+      "password"             -> dsl.getPassword.get,
+      "table-name"           -> dsl.getTableName.get,
+      "target-dir"           -> dst.toString,
+      "mappers"              -> "1",
+      "fields-terminated-by" -> ",",
+      "hadoop-mapred-home"   -> dsl.getHadoopMapRedHome.get
+    )
+    val job = withArgs(args)(new ImportSqoopConsoleJob(_))
+
+    job.withFacts(dst </> "part-m-00000" ==> lines(List(
       "003,Robin Hood,0,0",
       "004,Little John,-1,-100"
     )))
