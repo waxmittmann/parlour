@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html >
 <html>
         <head>
           <title>ParlourImportDsl - au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl</title>
@@ -9,6 +8,11 @@
           
       <link href="../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
       <link href="../../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../../lib/jquery.js" id="jquery-js"></script>
+      <script type="text/javascript" src="../../../../../lib/jquery-ui.js"></script>
+      <script type="text/javascript" src="../../../../../lib/template.js"></script>
+      <script type="text/javascript" src="../../../../../lib/tools.tooltip.js"></script>
+      
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../index.html';
@@ -24,9 +28,17 @@
         </head>
         <body class="type">
       <div id="definition">
-        <a href="SqoopSyntax$$ParlourImportDsl$.html" title="Go to companion"><img src="../../../../../lib/class_to_object_big.png" /></a>
+        <a href="SqoopSyntax$$ParlourImportDsl$.html" title="See companion object"><img src="../../../../../lib/class_to_object_big.png" /></a>
         <p id="owner"><a href="../../../../package.html" class="extype" name="au">au</a>.<a href="../../../package.html" class="extype" name="au.com">com</a>.<a href="../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.parlour">parlour</a>.<a href="SqoopSyntax$.html" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax">SqoopSyntax</a></p>
-        <h1><a href="SqoopSyntax$$ParlourImportDsl$.html" title="Go to companion">ParlourImportDsl</a></h1>
+        <h1><a href="SqoopSyntax$$ParlourImportDsl$.html" title="See companion object">ParlourImportDsl</a></h1><h3><span class="morelinks"><div>
+            Related Docs:
+            <a href="SqoopSyntax$$ParlourImportDsl$.html" title="See companion object">object ParlourImportDsl</a>
+            | <a href="SqoopSyntax$.html" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax">package SqoopSyntax</a>
+          </div></span></h3><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,13 +47,13 @@
         <span class="kind">case class</span>
       </span>
       <span class="symbol">
-        <span class="name">ParlourImportDsl</span><span class="params">(<span name="customUpdates">customUpdates: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>] = <span class="symbol">immutable.this.Nil</span></span>)</span><span class="result"> extends <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>] with <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>] with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
+        <span class="name">ParlourImportDsl</span><span class="params">(<span name="customUpdates">customUpdates: <span class="extype" name="scala.List">List</span>[<a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a>] = <span class="symbol">List()</span></span>)</span><span class="result"> extends <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>] with <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>] with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a> with <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/4c1f104d0760a5353d986a91b02d3a52299108c9//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/parlour/tree/Dirty(a530fa1cdb19533ae23d5e6f558e307658504c03)//src/main/scala/au/com/cba/omnia/parlour/SqoopSyntax.scala" target="_blank">SqoopSyntax.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></div>
+          <div class="superTypes hiddenContent"><a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a>, <span class="extype" name="java.io.Serializable">Serializable</span>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Equals" class="extype" target="_top">Equals</a>, <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>], <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a>, <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></div>
         </div></div>
         
 
@@ -80,7 +92,7 @@
         <div id="constructors" class="members">
               <h3>Instance Constructors</h3>
               <ol><li name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl#&lt;init&gt;" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="&lt;init&gt;(customUpdates:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]):au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl"></a>
+      <a id="&lt;init&gt;(customUpdates:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]):au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl"></a>
       <a id="&lt;init&gt;:ParlourImportDsl"></a>
       <h4 class="signature">
       <span class="modifier_kind">
@@ -88,9 +100,13 @@
         <span class="kind">new</span>
       </span>
       <span class="symbol">
-        <span class="name">ParlourImportDsl</span><span class="params">(<span name="customUpdates">customUpdates: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>] = <span class="symbol">immutable.this.Nil</span></span>)</span>
+        <span class="name">ParlourImportDsl</span><span class="params">(<span name="customUpdates">customUpdates: <span class="extype" name="scala.List">List</span>[<a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a>] = <span class="symbol">List()</span></span>)</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@&lt;init&gt;(customUpdates:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]):au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       
     </li></ol>
             </div>
@@ -98,17 +114,21 @@
         <div id="types" class="types members">
               <h3>Type Members</h3>
               <ol><li name="au.com.cba.omnia.parlour.ConsoleOptions.ConsoleSqoopModifier" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="ConsoleSqoopModifier=com.twitter.scalding.Args=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit)"></a>
-      <a id="ConsoleSqoopModifier:(Args)⇒(SqoopOptions)⇒Unit"></a>
+      <a id="ConsoleSqoopModifier=com.twitter.scalding.Args=&gt;au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier"></a>
+      <a id="ConsoleSqoopModifier:ConsoleSqoopModifier"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">type</span>
       </span>
       <span class="symbol">
-        <span class="name">ConsoleSqoopModifier</span><span class="result"> = (<span class="extype" name="com.twitter.scalding.Args">Args</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">ConsoleSqoopModifier</span><span class="result"> = (<span class="extype" name="com.twitter.scalding.Args">Args</span>) ⇒ <a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@ConsoleSqoopModifier=com.twitter.scalding.Args=&gt;au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li></ol>
             </div>
@@ -118,19 +138,6 @@
         <div id="values" class="values members">
               <h3>Value Members</h3>
               <ol><li name="scala.AnyRef#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="!=(x$1:AnyRef):Boolean"></a>
-      <a id="!=(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#!=" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="!=(x$1:Any):Boolean"></a>
       <a id="!=(Any):Boolean"></a>
       <h4 class="signature">
@@ -139,10 +146,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@!=(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef###" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="##():Int"></a>
       <a id="##():Int"></a>
@@ -152,24 +163,15 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@##():Int" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="scala.AnyRef#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="==(x$1:AnyRef):Boolean"></a>
-      <a id="==(AnyRef):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier">final </span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
-      </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
-    </li><li name="scala.Any#==" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="==(x$1:Any):Boolean"></a>
       <a id="==(Any):Boolean"></a>
       <h4 class="signature">
@@ -178,10 +180,14 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@==(x$1:Any):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addBoolean" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addBoolean(name:String,setter:()=&gt;com.cloudera.sqoop.SqoopOptions=&gt;Unit):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
       <a id="addBoolean(String,()⇒(SqoopOptions)⇒Unit):ConsoleOptions[ParlourImportDsl]"></a>
@@ -191,9 +197,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addBoolean</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: () ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
+        <span class="name">addBoolean</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: () ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addBoolean(name:String,setter:()=&gt;com.cloudera.sqoop.SqoopOptions=&gt;Unit):au.com.cba.omnia.parlour.ConsoleOptions[Self]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourDsl#addExtraArgs" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addExtraArgs(extraArgs:Array[String]):Self"></a>
@@ -204,9 +214,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addExtraArgs</span><span class="params">(<span name="extraArgs">extraArgs: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">addExtraArgs</span><span class="params">(<span name="extraArgs">extraArgs: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addExtraArgs(extraArgs:Array[String]):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourDsl#addExtraArgsRaw" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addExtraArgsRaw(extraArgs:Array[String])(options:com.cloudera.sqoop.SqoopOptions):Unit"></a>
@@ -217,9 +231,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addExtraArgsRaw</span><span class="params">(<span name="extraArgs">extraArgs: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">addExtraArgsRaw</span><span class="params">(<span name="extraArgs">extraArgs: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="params">(<span name="options">options: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addExtraArgsRaw(extraArgs:Array[String])(options:com.cloudera.sqoop.SqoopOptions):Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd><a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addOptional" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="addOptional[T](name:String,setter:T=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit),converter:String=&gt;T,default:Option[T]):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
@@ -230,48 +248,64 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addOptional</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addOptional.T">T</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>, <span name="converter">converter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addOptional.T">T</span></span>, <span name="default">default: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addOptional.T">T</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
+        <span class="name">addOptional</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addOptional.T">T</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>, <span name="converter">converter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addOptional.T">T</span></span>, <span name="default">default: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addOptional.T">T</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addOptional[T](name:String,setter:T=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit),converter:String=&gt;T,default:Option[T]):au.com.cba.omnia.parlour.ConsoleOptions[Self]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addOptional" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addOptional(name:String,setter:String=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit),default:Option[String]):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
-      <a id="addOptional(String,(String)⇒(SqoopOptions)⇒Unit,Option[String]):ConsoleOptions[ParlourImportDsl]"></a>
+    </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addOptionalS" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addOptionalS(name:String,setter:String=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit),default:Option[String]):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
+      <a id="addOptionalS(String,(String)⇒(SqoopOptions)⇒Unit,Option[String]):ConsoleOptions[ParlourImportDsl]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addOptional</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>, <span name="default">default: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
+        <span class="name">addOptionalS</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>, <span name="default">default: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="scala.Predef.String">String</span>] = <span class="symbol">None</span></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
       </span>
-      </h4>
-      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
-    </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addRequired" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addRequired[T](name:String,setter:T=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit),converter:String=&gt;T):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
-      <a id="addRequired[T](String,(T)⇒(SqoopOptions)⇒Unit,(String)⇒T):ConsoleOptions[ParlourImportDsl]"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">addRequired</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addRequired.T">T</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>, <span name="converter">converter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addRequired.T">T</span></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
-      </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addOptionalS(name:String,setter:String=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit),default:Option[String]):au.com.cba.omnia.parlour.ConsoleOptions[Self]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addRequired" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="addRequired(name:String,setter:String=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit)):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
-      <a id="addRequired(String,(String)⇒(SqoopOptions)⇒Unit):ConsoleOptions[ParlourImportDsl]"></a>
+      <a id="addRequired[T](name:String,setter:T=&gt;au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier,converter:String=&gt;T):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
+      <a id="addRequired[T](String,(T)⇒SqoopModifier,(String)⇒T):ConsoleOptions[ParlourImportDsl]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">addRequired</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
+        <span class="name">addRequired</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addRequired.T">T</span>) ⇒ <a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a></span>, <span name="converter">converter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <span class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions.addRequired.T">T</span></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addRequired[T](name:String,setter:T=&gt;au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier,converter:String=&gt;T):au.com.cba.omnia.parlour.ConsoleOptions[Self]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
+    </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#addRequired" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addRequired(name:String,setter:String=&gt;au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier):au.com.cba.omnia.parlour.ConsoleOptions[Self]"></a>
+      <a id="addRequired(String,(String)⇒SqoopModifier):ConsoleOptions[ParlourImportDsl]"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addRequired</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>, <span name="setter">setter: (<span class="extype" name="scala.Predef.String">String</span>) ⇒ <a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a></span>)</span><span class="result">: <a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</span>
+      </span>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@addRequired(name:String,setter:String=&gt;au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier):au.com.cba.omnia.parlour.ConsoleOptions[Self]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#append" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="append():Self"></a>
@@ -284,7 +318,11 @@
       <span class="symbol">
         <span class="name">append</span><span class="params">()</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@append():Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Append data to an existing dataset in HDFS</p><div class="fullcomment"><div class="comment cmt"><p>Append data to an existing dataset in HDFS</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="scala.Any#asInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="asInstanceOf[T0]:T0"></a>
@@ -297,7 +335,11 @@
       <span class="symbol">
         <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@asInstanceOf[T0]:T0" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#className" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="className(name:String):Self"></a>
@@ -310,7 +352,11 @@
       <span class="symbol">
         <span class="name">className</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@className(name:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Sets the class name of the sqoop job.</p><div class="fullcomment"><div class="comment cmt"><p>Sets the class name of the sqoop job.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
@@ -321,9 +367,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@clone():Object" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -340,9 +390,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">columns</span><span class="params">(<span name="cols">cols: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">columns</span><span class="params">(<span name="cols">cols: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="scala.Predef.String">String</span>]</span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@columns(cols:Array[String]):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Columns to import/export from/to table</p><div class="fullcomment"><div class="comment cmt"><p>Columns to import/export from/to table</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#connectionManager" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="connectionManager(className:String):Self"></a>
@@ -355,7 +409,11 @@
       <span class="symbol">
         <span class="name">connectionManager</span><span class="params">(<span name="className">className: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@connectionManager(className:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Specify connection manager class to use</p><div class="fullcomment"><div class="comment cmt"><p>Specify connection manager class to use</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#connectionParams" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="connectionParams(params:java.util.Properties):Self"></a>
@@ -368,7 +426,11 @@
       <span class="symbol">
         <span class="name">connectionParams</span><span class="params">(<span name="params">params: <span class="extype" name="java.util.Properties">Properties</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@connectionParams(params:java.util.Properties):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Optional properties file that provides connection parameters</p><div class="fullcomment"><div class="comment cmt"><p>Optional properties file that provides connection parameters</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#connectionString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="connectionString(connectionString:String):Self"></a>
@@ -381,33 +443,45 @@
       <span class="symbol">
         <span class="name">connectionString</span><span class="params">(<span name="connectionString">connectionString: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@connectionString(connectionString:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Specify JDBC connect string</p><div class="fullcomment"><div class="comment cmt"><p>Specify JDBC connect string</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl#customUpdates" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="customUpdates:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
-      <a id="customUpdates:List[(SqoopOptions)⇒Unit]"></a>
+      <a id="customUpdates:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]"></a>
+      <a id="customUpdates:List[SqoopModifier]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">customUpdates</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+        <span class="name">customUpdates</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@customUpdates:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a> → <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#defaultOptions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="defaultOptions:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
-      <a id="defaultOptions:List[(SqoopOptions)⇒Unit]"></a>
+      <a id="defaultOptions:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]"></a>
+      <a id="defaultOptions:List[SqoopModifier]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">defaultOptions</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+        <span class="name">defaultOptions</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@defaultOptions:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a> → <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#driver" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="driver(className:String):Self"></a>
@@ -420,7 +494,11 @@
       <span class="symbol">
         <span class="name">driver</span><span class="params">(<span name="className">className: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@driver(className:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Manually specify JDBC driver class to use</p><div class="fullcomment"><div class="comment cmt"><p>Manually specify JDBC driver class to use</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#enclosedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="enclosedBy(c:Char):Self"></a>
@@ -431,9 +509,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">enclosedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">enclosedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@enclosedBy(c:Char):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Sets a field enclosing character</p><div class="fullcomment"><div class="comment cmt"><p>Sets a field enclosing character</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
@@ -444,9 +526,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@eq(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#escapedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="escapedBy(c:Char):Self"></a>
@@ -457,9 +543,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">escapedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">escapedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@escapedBy(c:Char):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Sets the escape character</p><div class="fullcomment"><div class="comment cmt"><p>Sets the escape character</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#fetchSize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fetchSize(size:Int):Self"></a>
@@ -470,9 +560,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fetchSize</span><span class="params">(<span name="size">size: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">fetchSize</span><span class="params">(<span name="size">size: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@fetchSize(size:Int):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Number of entries to read from database at once</p><div class="fullcomment"><div class="comment cmt"><p>Number of entries to read from database at once</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#fieldsTerminatedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="fieldsTerminatedBy(c:Char):Self"></a>
@@ -483,9 +577,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">fieldsTerminatedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">fieldsTerminatedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@fieldsTerminatedBy(c:Char):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Sets the field separator character</p><div class="fullcomment"><div class="comment cmt"><p>Sets the field separator character</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
@@ -496,9 +594,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">finalize</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@finalize():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<a href="../../../../../java$lang.html" class="extype" name="java.lang">java.lang</a>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -515,9 +617,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getAppend</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>
+        <span class="name">getAppend</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getAppend:Option[Boolean]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#getClass" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClass():Class[_]"></a>
@@ -530,7 +636,11 @@
       <span class="symbol">
         <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getClass():Class[_]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getClassName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getClassName:Option[String]"></a>
@@ -541,9 +651,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getClassName</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getClassName</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getClassName:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getColumns" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getColumns:Option[Array[String]]"></a>
@@ -554,9 +668,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getColumns</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.String">String</span>]]</span>
+        <span class="name">getColumns</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Array" class="extype" target="_top">Array</a>[<span class="extype" name="java.lang.String">String</span>]]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getColumns:Option[Array[String]]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getConnectionManager" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getConnectionManager:Option[String]"></a>
@@ -567,9 +685,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getConnectionManager</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getConnectionManager</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getConnectionManager:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getConnectionParams" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getConnectionParams:Option[java.util.Properties]"></a>
@@ -580,9 +702,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getConnectionParams</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.util.Properties">Properties</span>]</span>
+        <span class="name">getConnectionParams</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.util.Properties">Properties</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getConnectionParams:Option[java.util.Properties]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getConnectionString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getConnectionString:Option[String]"></a>
@@ -593,9 +719,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getConnectionString</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getConnectionString</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getConnectionString:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getDriver" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getDriver:Option[String]"></a>
@@ -606,9 +736,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getDriver</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getDriver</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getDriver:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getEnclosedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getEnclosedBy:Option[Char]"></a>
@@ -619,9 +753,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getEnclosedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
+        <span class="name">getEnclosedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getEnclosedBy:Option[Char]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getEscapedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getEscapedBy:Option[Char]"></a>
@@ -632,9 +770,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getEscapedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
+        <span class="name">getEscapedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getEscapedBy:Option[Char]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getFetchSize" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getFetchSize:Option[Integer]"></a>
@@ -645,9 +787,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getFetchSize</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.Integer">Integer</span>]</span>
+        <span class="name">getFetchSize</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.Integer">Integer</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getFetchSize:Option[Integer]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getFieldTerminatedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getFieldTerminatedBy:Option[Char]"></a>
@@ -658,9 +804,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getFieldTerminatedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
+        <span class="name">getFieldTerminatedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getFieldTerminatedBy:Option[Char]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getHadoopMapRedHome" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getHadoopMapRedHome:Option[String]"></a>
@@ -671,9 +821,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getHadoopMapRedHome</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getHadoopMapRedHome</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getHadoopMapRedHome:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getJobName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getJobName:Option[String]"></a>
@@ -684,9 +838,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getJobName</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getJobName</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getJobName:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getLinesTerminatedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getLinesTerminatedBy:Option[Char]"></a>
@@ -697,9 +855,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getLinesTerminatedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
+        <span class="name">getLinesTerminatedBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getLinesTerminatedBy:Option[Char]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getNullNonString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getNullNonString:Option[String]"></a>
@@ -710,9 +872,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getNullNonString</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getNullNonString</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getNullNonString:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getNullString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getNullString:Option[String]"></a>
@@ -723,9 +889,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getNullString</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getNullString</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getNullString:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getNumberOfMappers" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getNumberOfMappers:Option[Int]"></a>
@@ -736,9 +906,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getNumberOfMappers</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a>]</span>
+        <span class="name">getNumberOfMappers</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getNumberOfMappers:Option[Int]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getPassword" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getPassword:Option[String]"></a>
@@ -749,9 +923,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getPassword</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getPassword</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getPassword:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getSkipDistCache" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getSkipDistCache:Option[Boolean]"></a>
@@ -762,9 +940,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getSkipDistCache</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>
+        <span class="name">getSkipDistCache</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getSkipDistCache:Option[Boolean]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getSplitBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getSplitBy:Option[String]"></a>
@@ -775,9 +957,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getSplitBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getSplitBy</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getSplitBy:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getSqlQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getSqlQuery:Option[String]"></a>
@@ -788,9 +974,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getSqlQuery</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getSqlQuery</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getSqlQuery:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getTableName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getTableName:Option[String]"></a>
@@ -801,9 +991,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getTableName</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getTableName</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getTableName:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getTargetDir" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getTargetDir:Option[String]"></a>
@@ -814,9 +1008,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getTargetDir</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getTargetDir</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getTargetDir:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getUsername" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getUsername:Option[String]"></a>
@@ -827,9 +1025,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getUsername</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getUsername</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getUsername:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#getVerbose" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getVerbose:Option[Boolean]"></a>
@@ -840,9 +1042,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getVerbose</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>
+        <span class="name">getVerbose</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getVerbose:Option[Boolean]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#getWhere" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="getWhere:Option[String]"></a>
@@ -853,9 +1059,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">getWhere</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
+        <span class="name">getWhere</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Option" class="extype" target="_top">Option</a>[<span class="extype" name="java.lang.String">String</span>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@getWhere:Option[String]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#hadoopMapRedHome" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hadoopMapRedHome(home:String):Self"></a>
@@ -868,7 +1078,11 @@
       <span class="symbol">
         <span class="name">hadoopMapRedHome</span><span class="params">(<span name="home">home: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@hadoopMapRedHome(home:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The path to hadoop mapred home - used by tests</p><div class="fullcomment"><div class="comment cmt"><p>The path to hadoop mapred home - used by tests</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -879,9 +1093,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@isInstanceOf[T0]:Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#jobName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="jobName(name:String):Self"></a>
@@ -894,7 +1112,11 @@
       <span class="symbol">
         <span class="name">jobName</span><span class="params">(<span name="name">name: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@jobName(name:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Sets the name of the sqoop job.</p><div class="fullcomment"><div class="comment cmt"><p>Sets the name of the sqoop job.</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#linesTerminatedBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="linesTerminatedBy(c:Char):Self"></a>
@@ -905,9 +1127,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">linesTerminatedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">linesTerminatedBy</span><span class="params">(<span name="c">c: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Char" class="extype" target="_top">Char</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@linesTerminatedBy(c:Char):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Sets the end-of-line character</p><div class="fullcomment"><div class="comment cmt"><p>Sets the end-of-line character</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#mods" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="mods:scala.collection.mutable.Map[String,com.twitter.scalding.Args=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit)]"></a>
@@ -918,9 +1144,13 @@
         <span class="kind">val</span>
       </span>
       <span class="symbol">
-        <span class="name">mods</span><span class="result">: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, (<span class="extype" name="com.twitter.scalding.Args">Args</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+        <span class="name">mods</span><span class="result">: <span class="extype" name="scala.collection.mutable.Map">Map</span>[<span class="extype" name="java.lang.String">String</span>, (<span class="extype" name="com.twitter.scalding.Args">Args</span>) ⇒ (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@mods:scala.collection.mutable.Map[String,com.twitter.scalding.Args=&gt;(com.cloudera.sqoop.SqoopOptions=&gt;Unit)]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#ne" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="ne(x$1:AnyRef):Boolean"></a>
@@ -931,9 +1161,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@ne(x$1:AnyRef):Boolean" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notify" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notify():Unit"></a>
@@ -944,9 +1178,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@notify():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="scala.AnyRef#notifyAll" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="notifyAll():Unit"></a>
@@ -957,9 +1195,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@notifyAll():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#nullNonString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nullNonString(token:String):Self"></a>
@@ -972,7 +1214,11 @@
       <span class="symbol">
         <span class="name">nullNonString</span><span class="params">(<span name="token">token: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@nullNonString(token:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The string to be interpreted as null for non-string columns</p><div class="fullcomment"><div class="comment cmt"><p>The string to be interpreted as null for non-string columns</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#nullString" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="nullString(token:String):Self"></a>
@@ -985,7 +1231,11 @@
       <span class="symbol">
         <span class="name">nullString</span><span class="params">(<span name="token">token: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@nullString(token:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">The string to be interpreted as null for string columns</p><div class="fullcomment"><div class="comment cmt"><p>The string to be interpreted as null for string columns</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#numberOfMappers" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="numberOfMappers(count:Int):Self"></a>
@@ -996,9 +1246,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">numberOfMappers</span><span class="params">(<span name="count">count: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">numberOfMappers</span><span class="params">(<span name="count">count: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@numberOfMappers(count:Int):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#password" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="password(password:String):Self"></a>
@@ -1011,7 +1265,11 @@
       <span class="symbol">
         <span class="name">password</span><span class="params">(<span name="password">password: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@password(password:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Set authentication password</p><div class="fullcomment"><div class="comment cmt"><p>Set authentication password</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#setOptions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="setOptions(args:com.twitter.scalding.Args):Self"></a>
@@ -1024,7 +1282,11 @@
       <span class="symbol">
         <span class="name">setOptions</span><span class="params">(<span name="args">args: <span class="extype" name="com.twitter.scalding.Args">Args</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@setOptions(args:com.twitter.scalding.Args):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#skipDistCache" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="skipDistCache():Self"></a>
@@ -1037,7 +1299,11 @@
       <span class="symbol">
         <span class="name">skipDistCache</span><span class="params">()</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@skipDistCache():Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Can skip the distributed cache feature of sqoop</p><div class="fullcomment"><div class="comment cmt"><p>Can skip the distributed cache feature of sqoop</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#splitBy" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="splitBy(splitByColumn:String):Self"></a>
@@ -1050,7 +1316,11 @@
       <span class="symbol">
         <span class="name">splitBy</span><span class="params">(<span name="splitByColumn">splitByColumn: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@splitBy(splitByColumn:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Column of the table used to split work units</p><div class="fullcomment"><div class="comment cmt"><p>Column of the table used to split work units</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#sqlQuery" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="sqlQuery(sqlStatement:String):Self"></a>
@@ -1063,7 +1333,11 @@
       <span class="symbol">
         <span class="name">sqlQuery</span><span class="params">(<span name="sqlStatement">sqlStatement: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@sqlQuery(sqlStatement:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#synchronized" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="synchronized[T0](x$1:=&gt;T0):T0"></a>
@@ -1076,7 +1350,11 @@
       <span class="symbol">
         <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@synchronized[T0](x$1:=&gt;T0):T0" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#tableName" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="tableName(tableName:String):Self"></a>
@@ -1089,7 +1367,11 @@
       <span class="symbol">
         <span class="name">tableName</span><span class="params">(<span name="tableName">tableName: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@tableName(tableName:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourImportOptions#targetDir" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="targetDir(dir:String):Self"></a>
@@ -1102,7 +1384,11 @@
       <span class="symbol">
         <span class="name">targetDir</span><span class="params">(<span name="dir">dir: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@targetDir(dir:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">HDFS destination dir</p><div class="fullcomment"><div class="comment cmt"><p>HDFS destination dir</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourDsl#toSqoopOptions" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="toSqoopOptions:com.cloudera.sqoop.SqoopOptions"></a>
@@ -1115,33 +1401,45 @@
       <span class="symbol">
         <span class="name">toSqoopOptions</span><span class="result">: <span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@toSqoopOptions:com.cloudera.sqoop.SqoopOptions" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourDsl#update" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="update(f:com.cloudera.sqoop.SqoopOptions=&gt;Unit):Self"></a>
-      <a id="update((SqoopOptions)⇒Unit):ParlourImportDsl"></a>
+      <a id="update(f:au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier):Self"></a>
+      <a id="update(SqoopModifier):ParlourImportDsl"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">update</span><span class="params">(<span name="f">f: (<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
+        <span class="name">update</span><span class="params">(<span name="f">f: <a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@update(f:au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourDsl#updates" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
-      <a id="updates:List[com.cloudera.sqoop.SqoopOptions=&gt;Unit]"></a>
-      <a id="updates:List[(SqoopOptions)⇒Unit]"></a>
+      <a id="updates:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]"></a>
+      <a id="updates:List[SqoopModifier]"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">updates</span><span class="result">: <span class="extype" name="scala.List">List</span>[(<span class="extype" name="com.cloudera.sqoop.SqoopOptions">SqoopOptions</span>) ⇒ <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a>]</span>
+        <span class="name">updates</span><span class="result">: <span class="extype" name="scala.List">List</span>[<a href="SqoopSyntax$.html#SqoopModifier=com.cloudera.sqoop.SqoopOptions=&gt;Unit" class="extmbr" name="au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier">SqoopModifier</a>]</span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@updates:List[au.com.cba.omnia.parlour.SqoopSyntax.SqoopModifier]" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ConsoleOptions#usage" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="usage:String"></a>
@@ -1154,7 +1452,11 @@
       <span class="symbol">
         <span class="name">usage</span><span class="result">: <span class="extype" name="scala.Predef.String">String</span></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@usage:String" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ConsoleOptions.html" class="extype" name="au.com.cba.omnia.parlour.ConsoleOptions">ConsoleOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#username" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="username(username:String):Self"></a>
@@ -1167,7 +1469,11 @@
       <span class="symbol">
         <span class="name">username</span><span class="params">(<span name="username">username: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@username(username:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Set authentication username</p><div class="fullcomment"><div class="comment cmt"><p>Set authentication username</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="au.com.cba.omnia.parlour.ParlourOptions#verbose" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="verbose():Self"></a>
@@ -1180,7 +1486,11 @@
       <span class="symbol">
         <span class="name">verbose</span><span class="params">()</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@verbose():Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">Use verbose mode - This doesn't really work</p><div class="fullcomment"><div class="comment cmt"><p>Use verbose mode - This doesn't really work</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourOptions">ParlourOptions</a></dd></dl></div>
     </li><li name="scala.AnyRef#wait" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="wait():Unit"></a>
@@ -1191,9 +1501,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@wait():Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1210,9 +1524,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>, <span name="arg1">arg1: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Int" class="extype" target="_top">Int</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@wait(x$1:Long,x$2:Int):Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1229,9 +1547,13 @@
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Long" class="extype" target="_top">Long</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@wait(x$1:Long):Unit" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
                 <span class="name">@throws</span><span class="args">(<span>
       
@@ -1250,7 +1572,11 @@
       <span class="symbol">
         <span class="name">where</span><span class="params">(<span name="conditions">conditions: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a></span>
       </span>
-      </h4>
+      </h4><span class="permalink">
+      <a href="../../../../../index.html#au.com.cba.omnia.parlour.SqoopSyntax$$ParlourImportDsl@where(conditions:String):Self" title="Permalink" target="_top">
+        <img src="../../../../../lib/permalink.png" />
+      </a>
+    </span>
       <p class="shortcomment cmt">WHERE clause to use during import</p><div class="fullcomment"><div class="comment cmt"><p>WHERE clause to use during import</p></div><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a></dd></dl></div>
     </li></ol>
             </div>
@@ -1262,13 +1588,13 @@
 
         <div id="inheritedMembers">
         <div class="parent" name="scala.Serializable">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Serializable" class="extype" target="_top">Serializable</a></h3>
             </div><div class="parent" name="java.io.Serializable">
               <h3>Inherited from <span class="extype" name="java.io.Serializable">Serializable</span></h3>
             </div><div class="parent" name="scala.Product">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Product" class="extype" target="_top">Product</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Product" class="extype" target="_top">Product</a></h3>
             </div><div class="parent" name="scala.Equals">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Equals" class="extype" target="_top">Equals</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Equals" class="extype" target="_top">Equals</a></h3>
             </div><div class="parent" name="au.com.cba.omnia.parlour.ParlourImportOptions">
               <h3>Inherited from <a href="ParlourImportOptions.html" class="extype" name="au.com.cba.omnia.parlour.ParlourImportOptions">ParlourImportOptions</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</h3>
             </div><div class="parent" name="au.com.cba.omnia.parlour.ParlourOptions">
@@ -1278,9 +1604,9 @@
             </div><div class="parent" name="au.com.cba.omnia.parlour.ParlourDsl">
               <h3>Inherited from <a href="ParlourDsl.html" class="extype" name="au.com.cba.omnia.parlour.ParlourDsl">ParlourDsl</a>[<a href="" class="extype" name="au.com.cba.omnia.parlour.SqoopSyntax.ParlourImportDsl">ParlourImportDsl</a>]</h3>
             </div><div class="parent" name="scala.AnyRef">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.AnyRef" class="extype" target="_top">AnyRef</a></h3>
             </div><div class="parent" name="scala.Any">
-              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
+              <h3>Inherited from <a href="http://www.scala-lang.org/api/2.11.6/index.html#scala.Any" class="extype" target="_top">Any</a></h3>
             </div>
         
         </div>
@@ -1297,6 +1623,7 @@
       <div id="tooltip"></div>
 
       <div id="footer">  </div>
-      <script defer="defer" type="text/javascript" id="jquery-js" src="../../../../../lib/jquery.js"></script><script defer="defer" type="text/javascript" id="jquery-ui-js" src="../../../../../lib/jquery-ui.js"></script><script defer="defer" type="text/javascript" id="tools-tooltip-js" src="../../../../../lib/tools.tooltip.js"></script><script defer="defer" type="text/javascript" id="template-js" src="../../../../../lib/template.js"></script>
+
+
     </body>
       </html>
