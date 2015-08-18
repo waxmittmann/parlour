@@ -35,11 +35,12 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
   Import Sqoop Flow/Job/Execution Spec
   ==========================
 
-  end to end console job test       $endToEndConsole
-  end to end sqoop execution test   $endToEndExecution
-  sqoop execution test w/ no sink   $endToEndExecutionNoSink
-  end to end sqoop with SELECT      $endToEndWithQuery
-  failing sqoop execution fails     $failingExecution
+  end to end console job test        endToEndConsole
+  end to end sqoop execution test    endToEndExecution
+  sqoop execution test w/ no sink    endToEndExecutionNoSink
+  sqoop execution test using Parquet $endToEndExecutionParquet
+  end to end sqoop with SELECT       endToEndWithQuery
+  failing sqoop execution fails      failingExecution
 """
 
   def endToEndConsole = withData(List(
@@ -76,6 +77,19 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     )))
   })
 
+  def endToEndExecutionParquet = withData(List(
+    ("abc", "Batman", 100000, 10000000)
+  ))( dsl => {
+    println(dir)
+    val withDelimiter = dsl.asParquet
+    val withTargetDir = withDelimiter targetDir((dir </> "output").toString)
+
+    val execution = SqoopExecution.sqoopImport(withTargetDir)
+    executesOk(execution)
+    import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
+    facts(dir </> "output" </> "*.parquet" ==> records(ParquetThermometerRecordReader[Customer], List(Customer("abc", "Batman", 100000, 10000003))))
+  })
+
   def endToEndExecutionNoSink = withData(List(
     ("abc", "Batman", 100000, 10000000)
   ))( dsl => {
@@ -88,6 +102,7 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
       "abc|Batman|100000|10000000"
     )))
   })
+
 
   def endToEndWithQuery = withData(List(
     ("001", "Micky Mouse",  10,  1000),

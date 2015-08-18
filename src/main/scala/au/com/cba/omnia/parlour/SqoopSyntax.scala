@@ -19,6 +19,7 @@ import java.util.Properties
 import scalaz.Monoid
 
 import com.cloudera.sqoop.SqoopOptions
+import com.cloudera.sqoop.SqoopOptions.FileLayout.ParquetFile
 
 import com.twitter.scalding._
 
@@ -310,6 +311,11 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
   def linesTerminatedBy(c: Char) = update(_.setLinesTerminatedBy(c))
   addOptional("lines-terminated-by", (v: Char) => so => so.setLinesTerminatedBy(v), _.head, Some('\n'))
   def getLinesTerminatedBy = Option(toSqoopOptions.getOutputRecordDelim)
+
+
+  def asParquet = update(_.setFileLayout(ParquetFile))
+  addBoolean("as-parquetfile", () => so => so.setFileLayout(ParquetFile))
+  def isParquet = Option(toSqoopOptions.getFileLayout).filter(_ == ParquetFile)
 }
 
 /**

@@ -23,17 +23,22 @@ val thermometerVersion = "1.0.2-20150724061242-6a77919"
 libraryDependencies ++=
   depend.hadoopClasspath ++
   depend.scaldingproject() ++
-    depend.scalaz() ++ Seq(
-      "au.com.cba.omnia"          %% "thermometer" % thermometerVersion % "test",
-      noHadoop("org.scalikejdbc"  %% "scalikejdbc" % "2.1.2"            % "test"),
-      noHadoop("org.apache.sqoop"  % "sqoop"       % "1.4.5-cdh5.2.4")
+  depend.omnia("ebenezer-test", "0.18.4-20150724063316-827415b", "test") ++
+  depend.parquet() ++
+  depend.scalaz() ++ Seq(
+      "au.com.cba.omnia"          %% "thermometer"         % thermometerVersion % "test",
+      noHadoop("org.scalikejdbc"  %% "scalikejdbc"         % "2.1.2"            % "test"),
+      noHadoop("org.apache.sqoop"  % "sqoop"               % "1.4.5-cdh5.2.4"),
+      noHadoop("org.kitesdk"       % "kite-data-mapreduce" % "0.15.0-cdh5.2.4"),
+      "com.thoughtworks.paranamer" % "paranamer"           % "2.3"//,
+      //"org.xerial.snappy"            % "snappy-java"               % "1.0.4.1"
     )
 
 uniformThriftSettings
 
 parallelExecution in Test := false
 
-updateOptions := updateOptions.value.withCachedResolution(true)
+//updateOptions := updateOptions.value.withCachedResolution(true)
 
 uniformAssemblySettings
 
