@@ -1,0 +1,27 @@
+{
+  "type" : "record",
+  "name" : "sqoop_import_table_c55cef29_cab2_4623_ad0f_7dd6ce9f6d95",
+  "doc" : "Sqoop import of table_c55cef29_cab2_4623_ad0f_7dd6ce9f6d95",
+  "fields" : [ {
+    "name" : "ID",
+    "type" : [ "string", "null" ],
+    "columnName" : "ID",
+    "sqlType" : "12"
+  }, {
+    "name" : "CUSTOMER",
+    "type" : [ "string", "null" ],
+    "columnName" : "CUSTOMER",
+    "sqlType" : "12"
+  }, {
+    "name" : "BALANCE",
+    "type" : [ "string", "null" ],
+    "columnName" : "BALANCE",
+    "sqlType" : "3"
+  }, {
+    "name" : "BALANCE_CENTS",
+    "type" : [ "long", "null" ],
+    "columnName" : "BALANCE_CENTS",
+    "sqlType" : "91"
+  } ],
+  "tableName" : "table_c55cef29_cab2_4623_ad0f_7dd6ce9f6d95"
+}

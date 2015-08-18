@@ -38,12 +38,12 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
   end to end console job test        endToEndConsole
   end to end sqoop execution test    endToEndExecution
   sqoop execution test w/ no sink    endToEndExecutionNoSink
-  sqoop execution test using Parquet $endToEndExecutionParquet
+  sqoop execution test using Parquet $test endToEndExecutionParquet
   end to end sqoop with SELECT       endToEndWithQuery
   failing sqoop execution fails      failingExecution
 """
 
-  def endToEndConsole = withData(List(
+  /*def endToEndConsole = withData(List(
     ("003", "Robin Hood", 0, 0),
     ("004", "Little John", -1, -100)
   ))( dsl => {
@@ -75,10 +75,20 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     facts(dir </> "output" </> "part-m-00000" ==> lines(List(
       "abc,Batman,100000,10000000"
     )))
-  })
+  })*/
+
+  import com.twitter.scalding.typed.IterablePipe
+  import au.com.cba.omnia.ebenezer.scrooge.ParquetScroogeSource
+  def test = {
+    val x = IterablePipe(List(Customer("abc", "Batman", "100000", 1440252000000l)))
+      .writeExecution(ParquetScroogeSource[Customer]("output"))
+
+    executesOk(x)
+    true
+  }
 
   def endToEndExecutionParquet = withData(List(
-    ("abc", "Batman", 100000, 10000000)
+    ("abc", "Batman", 100000, "2015-08-23")
   ))( dsl => {
     println(dir)
     val withDelimiter = dsl.asParquet
@@ -87,10 +97,10 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     val execution = SqoopExecution.sqoopImport(withTargetDir)
     executesOk(execution)
     import au.com.cba.omnia.ebenezer.test.ParquetThermometerRecordReader
-    facts(dir </> "output" </> "*.parquet" ==> records(ParquetThermometerRecordReader[Customer], List(Customer("abc", "Batman", 100000, 10000003))))
+    facts(dir </> "output" </> "*.parquet" ==> records(ParquetThermometerRecordReader[Customer], List(Customer("abc", "Batman", "100000", 1440252000000l))))
   })
 
-  def endToEndExecutionNoSink = withData(List(
+  /*def endToEndExecutionNoSink = withData(List(
     ("abc", "Batman", 100000, 10000000)
   ))( dsl => {
     val withDelimiter = dsl fieldsTerminatedBy('|')
@@ -126,11 +136,11 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     val sink      = Csv((dir </> "output").toString)
     val execution = SqoopExecution.sqoopImport(withTableName, sink)
     execute(execution) must beLike { case Failure(_) => ok }
-  })
+  })*/
 }
 
 /** Provides a temporary dummy table for sqoop iport tests */
-case class withData(data: List[(String, String, Int, Int)]) extends Fixture[ParlourImportDsl] {
+case class withData(data: List[(String, String, Int, String)]) extends Fixture[ParlourImportDsl] {
   Class.forName("org.hsqldb.jdbcDriver")
 
   def apply[R: AsResult](test: ParlourImportDsl => R): Result = {
@@ -146,8 +156,8 @@ case class withData(data: List[(String, String, Int, Int)]) extends Fixture[Parl
       create table $table (
         id varchar(20),
         customer varchar(20),
-        balance integer,
-        balance_cents integer
+        balance decimal,
+        balance_cents date
       )
     """).execute.apply()
 

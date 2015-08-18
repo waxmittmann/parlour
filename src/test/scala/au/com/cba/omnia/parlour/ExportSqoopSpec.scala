@@ -18,6 +18,8 @@ import scala.io.Source
 import scala.util.Failure
 
 import java.util.UUID
+import java.sql.Date
+import java.math.BigDecimal
 
 import com.twitter.scalding.{Csv, Execution}
 
@@ -32,16 +34,17 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
   Export Sqoop Flow/Job/Execution Spec
   ==========================
 
-  end to end console test                 $endToEndConsole
-  end to end execution test               $endToEndExecution
-  execution test w/ no source             $endToEndExecutionNoSource
-  null strings are correctly handled      $nullExecution
-  failing execution fails                 $failingExecution
+  end to end console test                 endToEndConsole
+  end to end execution test               endToEndExecution
+  execution test w/ no source             endToEndExecutionNoSource
+  execution test using Parquet            $endToEndExecutionParquet
+  null strings are correctly handled      nullExecution
+  failing execution fails                 failingExecution
 
 """
 
   val resourceUrl = getClass.getResource("/sqoop")
-  val exportDir = s"$dir/user/sales/books/customers"
+  val exportDir = s"/Users/shoermann/workspace/parlour/src/test/resources/parquet/output"
 
   val oldData = Seq((1, Option("Hugo"), "abc_accr", "Fish", "Tuna", 200))
   val newData = Source.fromFile(s"${resourceUrl.getPath}/sales/books/customers/customer.txt").getLines()
@@ -62,7 +65,7 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
     .inputFieldsTerminatedBy('|')
     .hadoopMapRedHome(System.getProperty("user.home") + "/.ivy2/cache")
 
-  def endToEndConsole = withEnvironment(path(resourceUrl.toString)) {
+  /*def endToEndConsole = withEnvironment(path(resourceUrl.toString)) {
     val expected = newData ++ oldData
     val table    = tableSetup(oldData)
     val dsl      = createDsl(table)
@@ -88,8 +91,19 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
 
     executesOk(SqoopExecution.sqoopExport(dsl, source))
     tableData(table) must containTheSameElementsAs(expected)
+  }*/
+
+  def endToEndExecutionParquet = {
+    val expected = List(("abc", "Batman", "100000", 1440252000000l))
+    val table    = tableSetup()
+    val dsl      = createDsl(table)
+
+    executesOk(SqoopExecution.sqoopExport(dsl))
+    tableData(table) must containTheSameElementsAs(expected)
   }
 
+
+  /*
   def endToEndExecutionNoSource = withEnvironment(path(resourceUrl.toString)) {
     val expected = newData ++ oldData
     val table    = tableSetup(oldData)
@@ -114,7 +128,7 @@ class ExportSqoopSpec  extends ThermometerSpec with ExportDb { def is = s2"""
 
     executesOk(SqoopExecution.sqoopExport(dsl))
     tableData(table) must containTheSameElementsAs(expected)
-  }
+  }*/
 }
 
 trait ExportDb {
@@ -129,40 +143,27 @@ trait ExportDb {
 
   type Customer = (Int, Option[String], String, String, String, Int)
 
-  def tableSetup(data: Seq[Customer]): String = {
+  def tableSetup(): String = {
     val table = s"table_${UUID.randomUUID.toString.replace('-', '_')}"
 
     ConnectionPool.singleton(connectionString, username, password)
 
     SQL(s"""
       create table $table (
-        id integer,
-        name varchar(20),
-        accr varchar(20),
-        cat varchar(20),
-        sub_cat varchar(20),
-        balance integer
+        id varchar(20),
+        customer varchar(20),
+        balance decimal,
+        balance_cents date
       )
     """).execute.apply()
-
-    tableInsert(table, data)
 
     table
   }
 
-  def tableInsert(table: String, data: Seq[Customer]) = {
-    data.map { case (id, name, accr, cat, sub_cat, balance) =>
-      SQL(s"""
-        insert into $table
-        values (?, ?, ?, ?, ?, ?)
-      """).bind(id, name, accr, cat, sub_cat, balance).update.apply()
-    }
-  }
-
-  def tableData(table: String): List[Customer] = {
+  def tableData(table: String): List[(String, String, BigDecimal, Date)] = {
     ConnectionPool.singleton(connectionString, username, password)
     implicit val session = AutoSession
-    SQL(s"select * from $table").map(rs => (rs.int("id"), rs.stringOpt("name"), rs.string("accr"),
-      rs.string("cat"), rs.string("sub_cat"), rs.int("balance"))).list.apply()
+    SQL(s"select * from $table").map(rs => (rs.string("id"), rs.string("customer"), rs.bigDecimal("balance"),
+      rs.date("balance_cents"))).list.apply()
   }
 }
