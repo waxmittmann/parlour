@@ -14,7 +14,7 @@
 
 resolvers += Resolver.url("commbank-releases-ivy", new URL("http://commbank.artifactoryonline.com/commbank/ext-releases-local-ivy"))(Patterns("[organization]/[module]_[scalaVersion]_[sbtVersion]/[revision]/[artifact](-[classifier])-[revision].[ext]"))
 
-val uniformVersion = "1.2.3-20150512045744-cef95d6"
+val uniformVersion = "1.2.7-20151007231119-4b82c69"
 
 addSbtPlugin("au.com.cba.omnia" % "uniform-core"       % uniformVersion)
 
