@@ -310,6 +310,16 @@ trait ParlourImportOptions[+Self <: ParlourImportOptions[_]] extends ParlourOpti
   def linesTerminatedBy(c: Char) = update(_.setLinesTerminatedBy(c))
   addOptional("lines-terminated-by", (v: Char) => so => so.setLinesTerminatedBy(v), _.head, Some('\n'))
   def getLinesTerminatedBy = Option(toSqoopOptions.getOutputRecordDelim)
+
+  /** Remove \n, \r and \01 from String columns */
+  def hiveDropImportDelims() = update(_.setHiveDropDelims(true))
+  addBoolean("hive-drop-import-delims", () => so => so.setHiveDropDelims(true))
+  def getHiveDropImportDelims = Option(toSqoopOptions.doHiveDropDelims)
+
+  /** Replace \n, \r and \01 with a given string `replacement` from String columns */
+  def hiveImportDelimsReplacement(replacement: String) = update(_.setHiveDelimsReplacement(replacement))
+  addOptionalS("hive-delims-replacement", (v: String) => so => so.setHiveDelimsReplacement(v))
+  def getHiveImportDelimsReplacement = Option(toSqoopOptions.getHiveDelimsReplacement)
 }
 
 /**

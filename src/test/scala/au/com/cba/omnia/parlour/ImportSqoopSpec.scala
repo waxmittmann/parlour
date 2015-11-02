@@ -35,11 +35,13 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
   Import Sqoop Flow/Job/Execution Spec
   ==========================
 
-  end to end console job test       $endToEndConsole
-  end to end sqoop execution test   $endToEndExecution
-  sqoop execution test w/ no sink   $endToEndExecutionNoSink
-  end to end sqoop with SELECT      $endToEndWithQuery
-  failing sqoop execution fails     $failingExecution
+  end to end console job test         $endToEndConsole
+  end to end sqoop execution test     $endToEndExecution
+  sqoop execution test w/ no sink     $endToEndExecutionNoSink
+  end to end sqoop with SELECT        $endToEndWithQuery
+  end to end sqoop with drop delim    $endToEndExecutionWithDropImportDelim
+  end to end sqoop with replace delim $endToEndExecutionWithReplaceImportDelim
+  failing sqoop execution fails       $failingExecution
 """
 
   def endToEndConsole = withData(List(
@@ -111,6 +113,32 @@ class ImportSqoopSpec extends ThermometerSpec { def is = s2"""
     val sink      = Csv((dir </> "output").toString)
     val execution = SqoopExecution.sqoopImport(withTableName, sink)
     execute(execution) must beLike { case Failure(_) => ok }
+  })
+
+  def endToEndExecutionWithDropImportDelim = withData(List(
+    ("abc", "Batman\n", 100000, 10000000)
+  ))( dsl => {
+    val withDelimiter       = dsl fieldsTerminatedBy('|')
+    val withDropImportDelim = withDelimiter targetDir((dir </> "output").toString) hiveDropImportDelims
+
+    val execution = SqoopExecution.sqoopImport(withDropImportDelim)
+    executesOk(execution)
+    facts(dir </> "output" </> "part-m-00000" ==> lines(List(
+      "abc|Batman|100000|10000000"
+    )))
+  })
+
+  def endToEndExecutionWithReplaceImportDelim = withData(List(
+    ("abc", "Batman\n", 100000, 10000000)
+  ))( dsl => {
+    val withDelimiter       = dsl fieldsTerminatedBy('|')
+    val withReplaceImportDelim = withDelimiter targetDir((dir </> "output").toString) hiveImportDelimsReplacement("newLine")
+
+    val execution = SqoopExecution.sqoopImport(withReplaceImportDelim)
+    executesOk(execution)
+    facts(dir </> "output" </> "part-m-00000" ==> lines(List(
+      "abc|BatmannewLine|100000|10000000"
+    )))
   })
 }
 
