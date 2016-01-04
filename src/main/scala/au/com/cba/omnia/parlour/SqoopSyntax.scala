@@ -212,6 +212,11 @@ trait ParlourOptions[+Self <: ParlourOptions[_]] extends ParlourDsl[Self] with C
   addOptionalS("class-name", (v: String) => so => so.setClassName(v))
   def getClassName = Option(toSqoopOptions.getClassName)
 
+  /** Enable the Sqoop job to utilize database specific native features if applicable */
+  def directMode(v: Boolean) = update(_.setDirectMode(v))
+  addBoolean("direct", () => so => so.setDirectMode(true))
+  def isDirectMode = Option(toSqoopOptions.isDirect)
+
   /** Hadoop Configuration */
   private[parlour] def config(config: Configuration) = update(_.setConf(config))
   private[parlour] def getConfig = Option(toSqoopOptions.getConf)
