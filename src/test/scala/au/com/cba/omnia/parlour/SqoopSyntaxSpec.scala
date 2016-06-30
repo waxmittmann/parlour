@@ -193,6 +193,7 @@ Should build proper SqoopOptions:
       val username = "some username"
       val password = "some password"
       val tableName = "some table"
+      val errorDb = "errorDB"
 
       //when
       val sqoopOpts = TeradataParlourExportDsl()
@@ -201,10 +202,11 @@ Should build proper SqoopOptions:
         .username(username)
         .password(password)
         .tableName(tableName)
+        .errorDatabase(errorDb)
         .toSqoopOptions
 
       //then
-      sqoopOpts.getExtraArgs must beEqualTo(Array("--output-method", "batch.insert"))
+      sqoopOpts.getExtraArgs must beEqualTo(Array("--output-method", "batch.insert", "--error-database", "errorDB"))
       sqoopOpts.getConnectString must beEqualTo(connString)
       sqoopOpts.getUsername must beEqualTo(username)
       sqoopOpts.getPassword must beEqualTo(password)

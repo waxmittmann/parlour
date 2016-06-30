@@ -502,12 +502,18 @@ trait TeradataParlourExportOptions[+Self <: TeradataParlourExportOptions[_]] ext
   def fastloadSocketHostName(hostname: String) = addExtraArgs(Array(FASTLOAD_SOCKET_HOSTNAME, hostname))
   addOptionalS("teradata-fastload-socket-hostname", (v: String) => so => addExtraArgsRaw(Array(FASTLOAD_SOCKET_HOSTNAME, v))(so))
   def getFastloadSocketHostName = getExtraValueArg(FASTLOAD_SOCKET_HOSTNAME)
+
+  /** Specifies database for creating error tables. (only for internal.fastload and supported only from teradata connector 1.4c5) */
+  def errorDatabase(dbName: String) = addExtraArgs(Array(ERROR_DATABASE, dbName))
+  addOptionalS("teradata-error-database", (v: String) => so => addExtraArgsRaw(Array(ERROR_DATABASE, v))(so))
+  def getErrorDatabase = getExtraValueArg(ERROR_DATABASE)
 }
 
 object TeradataParlourExportOptions {
   val OUTPUT_METHOD             = "--output-method"
   val ERROR_TABLE               = "--error-table"
   val FASTLOAD_SOCKET_HOSTNAME  = "--fastload-socket-hostname"
+  val ERROR_DATABASE            = "--error-database"
 }
 
 trait ConsoleOptions[+Self <: ParlourOptions[_]] {
