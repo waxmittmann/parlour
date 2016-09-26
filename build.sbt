@@ -26,7 +26,7 @@ libraryDependencies ++=
     depend.scalaz() ++ Seq(
       "au.com.cba.omnia"          %% "thermometer" % thermometerVersion % "test",
       noHadoop("org.scalikejdbc"  %% "scalikejdbc" % "2.1.2"            % "test"),
-      noHadoop("org.apache.sqoop" %% "sqoop"       % "1.4.6-cdh5.9.0")
+      noHadoop("org.apache.sqoop" % "sqoop"       % "1.4.6-cdh5.9.0")
     )
 
 uniformThriftSettings
